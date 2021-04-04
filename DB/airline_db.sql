@@ -44,10 +44,14 @@ create table schedules (id number not null, day varchar(30),
                         departure_time date, arrival_time date) tablespace system;
 
 
---create table routes (id varchar(20), duration date,  )
+create table routes (id varchar(20), duration date, origin varchar(5), destination varchar(5),
+                     airplane varchar(20), schedule number ) tablespace system;
+
+
 --==================== Sequences =====================                  
 create sequence seq_id_users start with 1 increment by 1 cache 2;
 create sequence seq_id_airplanes start with 1 increment by 1 cache 2;
+create sequence seq_id_schedules start with 1 increment by 1 cache 2;
 
 
 --==================== PKs =====================    
@@ -57,10 +61,16 @@ alter table airplanes add constraint airplane_pk primary key(id) using index tab
 alter table countries add constraint countries_pk primary key(id) using index tablespace system;
 alter table cities add constraint cities_pk primary key(id) using index tablespace system;
 alter table schedules add constraint schedules_pk primary key(id) using index tablespace system;
+alter table routes add constraint routes_pk primary key(id) using index tablespace system;
 
 --==================== FKs =====================
 alter table airplanes add constraint type_fk foreign key (airplane_type) references airplane_types;  
 alter table cities add constraint country_fk foreign key (country) references countries;
+alter table routes add constraint origin_fk foreign key (origin) references cities;
+alter table routes add constraint destination_fk foreign key (destination) references cities;
+alter table routes add constraint airplane_fk foreign key (airplane) references airplanes;
+alter table routes add constraint schedule_fk foreign key (schedule) references schedules;
+
 --==================== Inserts =====================    
 
 insert into users values (123456789, 'kike00', 'chico500', 'Enrique',

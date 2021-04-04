@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/adminStyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Muli:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <title>Administration</title>
+</head>
+<body>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+        <div class="sidebar-header" style="background: white;">
+            <h3 style="color: black;">Restaurant </h3>
+            <!-- <img src="logo1.png" alt="logo"> -->
+        </div>
+
+        <ul class="list-unstyled components">
+            <li>
+                <a href="#">Dashboard</a>
+            </li>
+            <li>
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Menu</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li>
+                        <a href="#" id="category">Categorias</a>
+                    </li>
+                    <li>
+                        <a href="#" id="dishes">Platillos</a>
+                    </li>
+                    <li>
+                        <a href="#" id="adicionales">Adicionales</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li>
+                <a href="#" id="users">Usuarios</a>
+
+            </li>
+            <li>
+                <a href="#" id="orders">Ordenes</a>
+            </li>
+            <li>
+                <a href="#"><span id="userName"></span></a>
+
+            </li>
+            <li>
+
+                <a href="#" id="logout">Logout</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Page Content  -->
+
+</div>
+</body>
+</html>
