@@ -1,4 +1,4 @@
-package com.ast.airlinesystem.model;
+package com.ast.airlinesystem.logic;
 
 public class User {
 
@@ -96,8 +96,5 @@ public class User {
     public void setIsAdmin(int isAdmin) {
         this.isAdmin = isAdmin;
     }
-
-
-
 
 }
