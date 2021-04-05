@@ -1,6 +1,6 @@
 
 body {
-    background: #47748b;
+    background-color: #219ebc !important;
 }
 input[type="text"]:valid.focus {box-shadow: 0 0 1px 1px #e77600;}
 input[type="text"]:valid.nofocus {box-shadow:none;}
@@ -146,8 +146,8 @@ ul ul a {
     background:#ffffff;
     top:50px;
     bottom:10px;
-    width: 800px;
-    height: 800px;
+    width: 1200px;
+    height: 900px;
     padding: 10px;
 }
 
