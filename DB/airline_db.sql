@@ -2,31 +2,33 @@
 PROMPT ==========================
 PROMPT DROPS 
 PROMPT ==========================
-drop table users cascade constraints;
 drop sequence seq_id_users;
-
-drop table airplane_types cascade constraints;
-
-
-drop table airplanes cascade constraints;
 drop sequence seq_id_airplanes;
-
-drop table countries cascade constraints;
-drop table cities cascade constraints;
-
-drop table schedules cascade constraints;
 drop sequence seq_id_schedules;
-
-drop table routes cascade constraints;
-
-drop table reserva;
-drop table ticket;
-
 drop sequence seq_id_reserva;
 drop sequence seq_id_ticket;
 
+
 drop procedure prc_ins_user;
 drop procedure prc_upd_user;
+
+--
+drop table users cascade constraints;
+drop table airplane_types cascade constraints;
+drop table airplanes cascade constraints;
+drop table countries cascade constraints;
+drop table cities cascade constraints;
+drop table schedules cascade constraints;
+drop table routes cascade constraints;
+drop table reserva cascade constraints;
+drop table ticket cascade constraints;
+
+
+
+
+
+
+
 
 --=================== Objects ===================== 
 PROMPT ==========================
@@ -103,9 +105,11 @@ insert into cities values ('SJO', 'San Jose', 'CR');
 
 commit;
 
+PROMPT          Procedimientos USER
+PROMPT =====================================
 create or replace procedure prc_ins_user(Pid in number, PUser in varchar2, Ppassword in varchar2,
 Pname in varchar2, Papellido in varchar2, Pemail in varchar2, Pdireccion in varchar2,
-Pnumber in varchar2, Padmin in varchar2)is
+Pnumber in varchar2, Padmin in varchar2) is 
 begin
   insert into users (id, username, password, name, last_name, email, address, phone, is_admin)
   values (Pid, PUser, Ppassword, Pname, Papellido, Pemail, Pdireccion, Pnumber, Padmin);
@@ -118,25 +122,33 @@ end prc_ins_user;
 /
 show error
 
--- create or replace procedure prc_upd_user(Pid in number, PUser in varchar2, Ppassword in varchar2,
--- Pname in varchar2, Papellido in varchar2, Pemail in varchar2, Pdireccion in varchar2,
--- Pnumber in varchar2, Padmin in varchar2)
--- begin
--- update users
---    set 
---     id = Pid,
---     username = PUser,
---     password = Ppassword,
---     name = Pname,
---     last_name = Papellido,
---     email = Pemail,
---     address = Pdireccion,
---     phone = Pnumber,
---     is_admin = Padmin
---  where 
---  id = Pid;
--- end prc_upd_user;
--- /
--- show error
+create or replace procedure prc_upd_user(Pid in number, PUser in varchar2, Ppassword in varchar2,
+Pname in varchar2, Papellido in varchar2, Pemail in varchar2, Pdireccion in varchar2,
+Pnumber in varchar2, Padmin in varchar2) is
+begin
+update users
+   set 
+    id = Pid,
+    username = PUser,
+    password = Ppassword,
+    name = Pname,
+    last_name = Papellido,
+    email = Pemail,
+    address = Pdireccion,
+    phone = Pnumber,
+    is_admin = Padmin
+ where 
+ id = Pid;
+end prc_upd_user;
+/
+show error
+
+create or replace procedure prc_upd_user(Pid in number) is
+begin
+update users
+
+end prc_upd_user;
+/
+show error
 
 
