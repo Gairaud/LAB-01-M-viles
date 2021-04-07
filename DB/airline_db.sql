@@ -143,12 +143,87 @@ end prc_upd_user;
 /
 show error
 
-create or replace procedure prc_upd_user(Pid in number) is
-begin
-update users
 
-end prc_upd_user;
+create or replace procedure prc_ins_aviontype(Pid in varchar2, Pyear in number, 
+Pmodel in varchar2, Pbrand in varchar2, Ppassengers_quantity in number, 
+Prows_number in number, Pcolumns_number in number) is 
+begin
+  insert into airplane_types (id, year, model, brand, passengers_quantity, rows_number, columns_number)
+  values (Pid, Pyear, Pmodel, Pbrand, Ppassengers_quantity, Prows_number, Pcolumns_number);
+  commit;
+  exception
+--UK o PK
+    when dup_val_on_index then
+    null;
+end prc_ins_aviontype;
 /
 show error
 
+create or replace procedure prc_upd_aviontype(Pid in varchar2, Pyear in number, 
+Pmodel in varchar2, Pbrand in varchar2, Ppassengers_quantity in number, 
+Prows_number in number, Pcolumns_number in number) is
+begin
+update airplane_types
+   set 
+    id = Pid ,
+    year = Pyear ,
+    model = Pmodel ,
+    brand = Pbrand ,
+    passengers_quantity = Ppassengers_quantity ,
+    rows_number = Prows_number ,
+    columns_number = Pcolumns_number
+ where 
+ id = Pid;
+end prc_upd_aviontype;
+/
+show error
 
+create or replace procedure prc_ins_avion(Pid in varchar2, Pairplane_type in varchar2) is 
+begin
+  insert into airplanes (id, airplane_type)
+  values (Pid, Pairplane_type);
+  commit;
+  exception
+--UK o PK
+    when dup_val_on_index then
+    null;
+end prc_ins_avion;
+/
+show error
+
+create or replace procedure prc_upd_avion(Pid in varchar2, Pairplane_type in varchar2) is
+begin
+update airplanes
+   set 
+    id = Pid,
+    airplane_type = Pairplane_type
+ where 
+ id = Pid;
+end prc_upd_avion;
+/
+show error
+
+create or replace procedure prc_ins_country(Pid in varchar2, Pname in varchar2) is 
+begin
+  insert into countries (id, name)
+  values (Pid, Pname);
+  commit;
+  exception
+--UK o PK
+    when dup_val_on_index then
+    null;
+end prc_ins_country;
+/
+show error
+
+create or replace procedure prc_upd_country(Pid in varchar2, Pname in varchar2) is
+begin
+update countries
+   set 
+    id = Pid,
+    name = Pname
+ where 
+ id = Pid;
+end prc_upd_country;
+/
+show error
