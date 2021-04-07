@@ -227,3 +227,143 @@ update countries
 end prc_upd_country;
 /
 show error
+
+create or replace procedure prc_ins_city(Pid in varchar2, Pname in varchar2, Pcountry in varchar2) is 
+begin
+  insert into cities (id, name, country)
+  values (Pid, Pname, Pcountry);
+  commit;
+  exception
+--UK o PK
+    when dup_val_on_index then
+    null;
+end prc_ins_city;
+/
+show error
+
+create or replace procedure prc_upd_city(Pid in varchar2, Pname in varchar2, Pcountry in varchar2) is
+begin
+update cities
+   set 
+    id = Pid,
+    name = Pname,
+    country = Pcountry
+ where id = Pid;
+end prc_upd_city;
+/
+show error
+
+
+create or replace procedure prc_ins_schedule(Pday in varchar2, 
+                                            Pdeparture_time in date, Parrival_time in date) is 
+begin
+  insert into schedules (id, day, departure_time, arrival_time)
+  values (seq_id_schedules.nextval, Pday, Pdeparture_time, Parrival_time);
+  commit;
+  exception
+--UK o PK
+    when dup_val_on_index then
+    null;
+end prc_ins_schedule;
+/
+show error
+
+create or replace procedure prc_upd_schedule(Pid in number, Pday in varchar2, 
+                                            Pdeparture_time in date, Parrival_time in date) is
+begin
+update schedules
+   set
+    day = Pday, 
+    departure_time = Pdeparture_time, 
+    arrival_time = Parrival_time
+
+ where 
+ id = Pid;
+end prc_upd_schedule;
+/
+show error
+
+create or replace procedure prc_ins_route(Pid in varchar2, Pduration in date, Porigin in varchar2, 
+                                Pdestination in varchar2, Pairplane in varchar2, Pschedule in number ) is 
+begin
+  insert into routes (id, duration, origin, destination, airplane, schedule)
+  values (Pid, Pduration, Porigin, Pdestination, Pairplane, Pschedule);
+  commit;
+  exception
+--UK o PK
+    when dup_val_on_index then
+    null;
+end prc_ins_route;
+/
+show error
+
+create or replace procedure prc_upd_route(Pid in varchar2, Pduration in date, Porigin in varchar2, 
+                                Pdestination in varchar2, Pairplane in varchar2, Pschedule in number) is
+begin
+update routes
+   set 
+    duration = Pduration,
+    origin = Porigin,
+    destination = Pdestination,
+    airplane = Pairplane,
+    schedule = Pschedule
+ where 
+ id = Pid;
+end prc_upd_route;
+/
+show error
+
+create or replace procedure prc_ins_ticket(Pfila in number, 
+                                            Pcol in number, Pruta in varchar2) is 
+begin
+  insert into ticket (id, fila, col, ruta )
+  values (seq_id_ticket.nextval, Pfila, Pcol, Pruta);
+  commit;
+  exception
+--UK o PK
+    when dup_val_on_index then
+    null;
+end prc_ins_ticket;
+/
+show error
+
+create or replace procedure prc_upd_ticket(Pid in number, Pfila in number, 
+                                            Pcol in number, Pruta in varchar2) is
+begin
+update ticket
+   set 
+    fila = Pfila,
+    col = Pcol,
+    ruta = Pruta
+ where 
+ id = Pid;
+end prc_upd_ticket;
+/
+show error
+
+
+create or replace procedure prc_ins_reserva(Pticket in number, Puserid in number) is 
+begin
+  insert into reserva (id, ticket, userid)
+  values (seq_id_reserva.nextval, Pticket, Puserid);
+  commit;
+  exception
+--UK o PK
+    when dup_val_on_index then
+    null;
+end prc_ins_reserva;
+/
+show error
+
+create or replace procedure prc_upd_reserva(Pid in number, Pticket in number, Puserid in number) is
+begin
+update reserva
+   set 
+    ticket = Pticket,
+    userid = Puserid
+ where 
+ id = Pid;
+end prc_upd_reserva;
+/
+show error
+
