@@ -1,6 +1,6 @@
 
 body {
-    background: #dbdbdb;
+    background-color: #219ebc !important;
 }
 input[type="text"]:valid.focus {box-shadow: 0 0 1px 1px #e77600;}
 input[type="text"]:valid.nofocus {box-shadow:none;}
@@ -15,11 +15,11 @@ p {
     color: #999;
 }
 
-a,
-a:hover,
-a:focus {
-    color: inherit;
+
+
+a,a:focus, a:active, a:visited, a:link, a:hover {
     text-decoration: none;
+    color: inherit;
     transition: all 0.3s;
 }
 
@@ -59,7 +59,7 @@ a:focus {
     left: 0;
     height: 100vh;
     z-index: 999;
-    background: #00508B;
+    background: #023047;
     color: #fff;
     transition: all 0.3s;
 }
@@ -91,12 +91,14 @@ a:focus {
 #sidebar ul li a:hover {
     color: white;
     background:#0092D1;
+    text-decoration: none;
 }
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #fff;
     background: #0092D1;
+    
 }
 
 a[data-toggle="collapse"] {
@@ -144,8 +146,8 @@ ul ul a {
     background:#ffffff;
     top:50px;
     bottom:10px;
-    width: 800px;
-    height: 800px;
+    width: 1200px;
+    height: 600px;
     padding: 10px;
 }
 
