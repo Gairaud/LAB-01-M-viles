@@ -10,6 +10,9 @@ public class AirplaneType {
     private int rowsNumber;
     private int columnsNumber;
 
+    public AirplaneType() {
+    }
+
     public AirplaneType(String id, int year, String model, String brand, int passengersQuantity,
                         int rowsNumber, int columnsNumber) {
         this.id = id;

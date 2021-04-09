@@ -19,6 +19,18 @@
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/get-user</url-pattern>
-        <url-pattern>/hello-servlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AirplaneTypeServlet</servlet-name>
+        <servlet-class>com.ast.airlinesystem.controller.airplaneTypeServlet</servlet-class>
+    </servlet>
+
+    <!-- Note: All <servlet> elements MUST be grouped together and
+          placed IN FRONT of the <servlet-mapping> elements -->
+
+
+    <servlet-mapping>
+        <servlet-name>AirplaneTypeServlet</servlet-name>
+        <url-pattern>/get-types</url-pattern>
     </servlet-mapping>
 </web-app>
