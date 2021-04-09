@@ -35,7 +35,7 @@ PROMPT ==========================
 PROMPT OBJECTS 
 PROMPT ==========================
 --==================== Tables ===================== 
-create table users (id number not null, username varchar2(40),
+create table users (id varchar2 not null, username varchar2(40),
                     password varchar2(40), name varchar2(25),
                     last_name varchar2(40), email varchar2(30),
                     address varchar2(200), phone varchar2(15),
@@ -107,7 +107,7 @@ commit;
 
 PROMPT          Procedimientos USER
 PROMPT =====================================
-create or replace procedure prc_ins_user(Pid in number, PUser in varchar2, Ppassword in varchar2,
+create or replace procedure prc_ins_user(Pid in varchar2, PUser in varchar2, Ppassword in varchar2,
 Pname in varchar2, Papellido in varchar2, Pemail in varchar2, Pdireccion in varchar2,
 Pnumber in varchar2, Padmin in varchar2) is 
 begin
@@ -122,7 +122,7 @@ end prc_ins_user;
 /
 show error
 
-create or replace procedure prc_upd_user(Pid in number, PUser in varchar2, Ppassword in varchar2,
+create or replace procedure prc_upd_user(Pid in varchar2, PUser in varchar2, Ppassword in varchar2,
 Pname in varchar2, Papellido in varchar2, Pemail in varchar2, Pdireccion in varchar2,
 Pnumber in varchar2, Padmin in varchar2) is
 begin
