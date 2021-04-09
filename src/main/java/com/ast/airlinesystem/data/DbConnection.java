@@ -10,7 +10,7 @@ public class DbConnection {
     public static Statement stmt;
 
     public  Connection Connect (){
-        String url = "jdbc:oracle:thin:@//localhost:1521/XE";
+        String url = "jdbc:oracle:thin:@//localhost:1521/xe";
         String user = "system";
         String password = "root";
         try {

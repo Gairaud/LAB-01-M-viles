@@ -16,7 +16,11 @@ public class Model {
     }
 
     UserDao user;
+    public Model(){
 
+        user = new UserDao();
+
+    }
     public User getUser(String userName, String password) throws SQLException {
         return user.getUser(userName, password);
     }
