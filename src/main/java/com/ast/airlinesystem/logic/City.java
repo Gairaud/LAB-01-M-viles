@@ -6,7 +6,9 @@ public class City {
     private String name;
     private Country country;
 
+    public City(){
 
+    }
     public City(String id, String name, Country country) {
         this.id = id;
         this.name = name;
