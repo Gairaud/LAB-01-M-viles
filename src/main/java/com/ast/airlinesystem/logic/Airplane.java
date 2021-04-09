@@ -9,6 +9,8 @@ public class Airplane {
         this.id = id;
         this.type = type;
     }
+    public Airplane() {
+    }
     public String getId() {
         return id;
     }

@@ -20,6 +20,8 @@
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/get-user</url-pattern>
     </servlet-mapping>
+
+
     <servlet>
         <servlet-name>AirplaneTypeServlet</servlet-name>
         <servlet-class>com.ast.airlinesystem.controller.airplaneTypeServlet</servlet-class>
