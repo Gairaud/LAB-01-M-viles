@@ -6,4 +6,19 @@
     <welcome-file-list>
         <welcome-file>presentation/login.html</welcome-file>
     </welcome-file-list>
+
+
+    <servlet>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>com.ast.airlinesystem.controller.userServlet</servlet-class>
+    </servlet>
+
+    <!-- Note: All <servlet> elements MUST be grouped together and
+          placed IN FRONT of the <servlet-mapping> elements -->
+
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/get-user</url-pattern>
+        <url-pattern>/hello-servlet</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -55,7 +55,7 @@ public class UserDao {
 
    public User getUser(String userName, String password){
        User user = new User();
-       String getStatement = "implementation needed";
+       String getStatement = "SELECT * FROM USERS WHERE ID ="+userName;
        try{
            con = db.Connect();
            ps = con.prepareStatement(getStatement);
