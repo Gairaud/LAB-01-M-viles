@@ -31,10 +31,10 @@
             <!-- Country Servlet -->
     <servlet>
         <servlet-name>CountryServlet</servlet-name>
-        <servlet-class>com.ast.airlinesystem.controller.CountryServlet</servlet-class>
+        <servlet-class>com.ast.airlinesystem.controller.countryServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AirplaneTypeServlet</servlet-name>
+        <servlet-name>CountryServlet</servlet-name>
         <url-pattern>/get-countries</url-pattern>
     </servlet-mapping>
             <!-- City Servlet -->
