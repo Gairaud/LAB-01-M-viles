@@ -20,7 +20,8 @@ public class countryServlet extends HttpServlet {
         //String action = request.getParameter("action");
         switch (request.getServletPath()) {
 
-            case "/get-countries":
+            case "/get-countries":{
+
                 try {
                     List<Country> countryList = Model.instance().getCountries();
                     String allCountries = gsonObject.toJson(countryList);
@@ -34,8 +35,11 @@ public class countryServlet extends HttpServlet {
                     break;
 
                 }
+            }
 
+            case "/get-country":{
 
+            }
         }
     }
 }

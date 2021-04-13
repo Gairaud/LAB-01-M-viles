@@ -40,4 +40,8 @@ public class Model {
     public  List<Country> getCountries() throws Exception{
         return country.countryList();
     }
+
+    public Country getCountry(String id) throws Exception{
+        return country.getCountry(id);
+    }
 }
