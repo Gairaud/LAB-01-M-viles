@@ -11,7 +11,7 @@ public class Routes {
     private Airplane airplane;
     private Schedule schedule;
 
-
+    public Routes(){}
     public Routes(String id, String duration, City origin, City destination, Airplane airplane, Schedule schedule) {
         this.id = id;
         this.duration = duration;

@@ -36,9 +36,24 @@
     <servlet-mapping>
         <servlet-name>CountryServlet</servlet-name>
         <url-pattern>/get-countries</url-pattern>
+        <url-pattern>/get-country</url-pattern>
+        <url-pattern>/add-country</url-pattern>
+        <url-pattern>/upd-country</url-pattern>
+
     </servlet-mapping>
             <!-- City Servlet -->
-                <!-- ........ -->
+    <servlet>
+        <servlet-name>CityServlet</servlet-name>
+        <servlet-class>com.ast.airlinesystem.controller.cityServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CityServlet</servlet-name>
+        <url-pattern>/get-cities</url-pattern>
+        <url-pattern>/get-city</url-pattern>
+        <url-pattern>/add-city</url-pattern>
+        <url-pattern>/upd-city</url-pattern>
+
+    </servlet-mapping>
 
             <!-- Reservation Servlet -->
                 <!-- ........ -->
@@ -47,7 +62,18 @@
                 <!-- ........ -->
 
             <!-- Schedule Servlet -->
-                <!-- ........ -->
+    <servlet>
+        <servlet-name>ScheduleServlet</servlet-name>
+        <servlet-class>com.ast.airlinesystem.controller.scheduleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ScheduleServlet</servlet-name>
+        <url-pattern>/get-schedules</url-pattern>
+        <url-pattern>/get-schedule</url-pattern>
+        <url-pattern>/add-schedule</url-pattern>
+        <url-pattern>/upd-schedule</url-pattern>
+
+    </servlet-mapping>
 
             <!-- Ticket Servlet -->
                 <!-- ........ -->

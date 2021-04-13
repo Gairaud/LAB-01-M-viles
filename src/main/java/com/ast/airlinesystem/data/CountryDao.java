@@ -19,7 +19,7 @@ public class CountryDao {
 
 
     public int addCountry (Country country) throws  Exception{
-        String insertStatement = "EXECUTE PRC_INS_COUNTRY (?,?)";
+        String insertStatement = "CALL PRC_INS_COUNTRY(?,?)";
         int count = 0;
         try{
             con = db.Connect();
@@ -41,7 +41,7 @@ public class CountryDao {
 
     public Country getCountry(String id){
         Country country = new Country();
-        String getStatement = "SELECT * FROM COUNTRIES WHERE ID ="+id;
+        String getStatement = "SELECT * FROM COUNTRIES WHERE ID =\'"+id+"\'";
         try{
             con = db.Connect();
             ps = con.prepareStatement(getStatement);
@@ -76,4 +76,21 @@ public class CountryDao {
         return list;
     }
 
+    public void updateCountry(Country country){
+
+        String updateStatement = "CALL prc_upd_country(?,?)";
+        try{
+            con = db.Connect();
+            ps = con.prepareStatement(updateStatement);
+            ps.setString(1, country.getId());
+            ps.setString(2, country.getName());
+
+            ps.executeUpdate(updateStatement);
+
+        }
+        catch (Exception e){
+
+        }
+
+    }
 }

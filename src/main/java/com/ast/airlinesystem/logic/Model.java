@@ -1,9 +1,6 @@
 package com.ast.airlinesystem.logic;
 
-import com.ast.airlinesystem.data.AirplaneTypeDao;
-import com.ast.airlinesystem.data.CityDao;
-import com.ast.airlinesystem.data.CountryDao;
-import com.ast.airlinesystem.data.UserDao;
+import com.ast.airlinesystem.data.*;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -23,12 +20,14 @@ public class Model {
     AirplaneTypeDao type;
     CityDao city;
     CountryDao country;
-
+    ScheduleDao schedule;
     public Model(){
 
         user = new UserDao();
         type  = new AirplaneTypeDao();
         country = new CountryDao();
+        city = new CityDao();
+        schedule = new ScheduleDao();
     }
     public User getUser(String userName, String password) throws SQLException {
         return user.getUser(userName, password);
@@ -37,11 +36,45 @@ public class Model {
         return type.typesList();
     }
 
+    // Country
     public  List<Country> getCountries() throws Exception{
         return country.countryList();
     }
-
     public Country getCountry(String id) throws Exception{
         return country.getCountry(id);
+    }
+    public void addCountry(Country pais) throws Exception{
+        country.addCountry(pais);
+    }
+    public void updateCountry(Country pais) throws Exception{
+        country.updateCountry(pais);
+    }
+
+    //City
+    public  List<City> getCities() throws Exception{
+        return city.cityList();
+    }
+    public City getCity(String id) throws Exception{
+        return city.getCity(id);
+    }
+    public void addCity(City Pcity) throws Exception{
+        city.addCity(Pcity);
+    }
+    public void updateCity(City Pcity) throws Exception{
+        city.updateCity(Pcity);
+    }
+
+    //Schedule
+    public  List<Schedule> getSchedules() throws Exception{
+        return schedule.ScheduleList();
+    }
+    public Schedule getSchedule(String id) throws Exception{
+        return schedule.getSchedule(id);
+    }
+    public void addSchedule(Schedule Pschedule) throws Exception{
+        schedule.addSchedule(Pschedule);
+    }
+    public void updateSchedule(Schedule Pschedule) throws Exception{
+        schedule.updateSchedule(Pschedule);
     }
 }

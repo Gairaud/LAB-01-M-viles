@@ -1,5 +1,6 @@
 package com.ast.airlinesystem.data;
 
+import com.ast.airlinesystem.logic.AirplaneType;
 import com.ast.airlinesystem.logic.City;
 import com.ast.airlinesystem.logic.Country;
 
@@ -19,8 +20,21 @@ public class CityDao {
 
     public List cityList(){
         List<City> list = new ArrayList<>();
+        String sql = "SELECT * FROM CITIES c, COUNTRIES p where c.COUNTRY=p.ID";
         try{
-
+            con = db.Connect();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                City at = new City();
+                Country Co = new Country();
+                at.setId(rs.getString(1));
+                at.setName(rs.getString(2));
+                Co.setId(rs.getString(3));
+                Co.setName(rs.getString(5));
+                at.setCountry(Co);
+                list.add(at);
+            }
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -50,12 +64,14 @@ public class CityDao {
 
     public City getCity(String id){
         City city = new City();
-        String getStatement = "SELECT * FROM CITIES WHERE ID ="+id +" INNER join COUNTRIES on CITIES.COUNTRY = COUNTRIES.ID;";
+        String getStatement = "SELECT * FROM CITIES c, COUNTRIES p" +
+                "where c.ID=\'"+id+"\' and c.COUNTRY=p.ID";
         try{
             con = db.Connect();
             ps = con.prepareStatement(getStatement);
             rs = ps.executeQuery();
             while (rs.next()){
+                city.setId(rs.getString(1));
                 city.setName(rs.getString(2));
                 city.setCountry(new Country(rs.getString(4),rs.getString(5)));
             }
@@ -63,6 +79,25 @@ public class CityDao {
 
         }
         return city;
+    }
+
+    public void updateCity(City city){
+
+        String updateStatement = "CALL prc_upd_city(?,?,?)";
+        try{
+            con = db.Connect();
+            ps = con.prepareStatement(updateStatement);
+            ps.setString(1, city.getId());
+            ps.setString(2, city.getName());
+            ps.setString(3,city.getCountry().getId());
+
+            ps.executeUpdate(updateStatement);
+
+        }
+        catch (Exception e){
+
+        }
+
     }
 
 }

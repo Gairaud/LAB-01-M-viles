@@ -4,27 +4,30 @@ import java.io.*;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.ast.airlinesystem.logic.City;
 import com.ast.airlinesystem.logic.Country;
 import com.ast.airlinesystem.logic.Model;
-import com.ast.airlinesystem.logic.User;
+
 import jakarta.servlet.http.*;
 import com.google.gson.*;
 
 
-public class countryServlet extends HttpServlet {
+public class cityServlet extends HttpServlet{
     private String message;
     private final Gson gsonObject = new Gson();
+
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         //String action = request.getParameter("action");
         switch (request.getServletPath()) {
 
-            case "/get-countries":{
+            case "/get-cities":{
 
                 try {
-                    List<Country> countryList = Model.instance().getCountries();
-                    String allCountries = gsonObject.toJson(countryList);
+                    List<City> citiesList = Model.instance().getCities();
+                    String allCountries = gsonObject.toJson(citiesList);
                     PrintWriter out = response.getWriter();
                     out.print(allCountries);
                     out.flush();
@@ -38,13 +41,13 @@ public class countryServlet extends HttpServlet {
                 break;
             }
 
-            case "/get-country":{
+            case "/get-city":{
                 try {
-                    String param = request.getParameter("countryid");
-                    Country country = Model.instance().getCountry(param);
-                    String Country = gsonObject.toJson(country);
+                    String param = request.getParameter("cityid");
+                    City city = Model.instance().getCity(param);
+                    String City = gsonObject.toJson(city);
                     PrintWriter out = response.getWriter();
-                    out.print(Country);
+                    out.print(City);
                     out.flush();
                 }catch (SQLException throwables) {
                     throwables.printStackTrace();
@@ -56,13 +59,15 @@ public class countryServlet extends HttpServlet {
                 break;
             }
 
-            case "/add-country":{
+            case "/add-city":{
                 try {
-                Country country = new Country();
-                country.setId(request.getParameter("id"));
-                country.setName(request.getParameter("name"));
-
-                Model.instance().addCountry(country);
+                    City city = new City();
+                    Country country = new Country();
+                    city.setId(request.getParameter("id"));
+                    city.setName(request.getParameter("name"));
+                    country.setId(request.getParameter("country"));
+                    city.setCountry(country);
+                    Model.instance().addCity(city);
                 }catch (SQLException throwables) {
                     throwables.printStackTrace();
                 } catch (Exception e) {
@@ -72,16 +77,19 @@ public class countryServlet extends HttpServlet {
                 }
                 break;
             }
-            case "/upd-country":{
+            case "/upd-city":{
                 try {
-                Country country = new Country();
-                country.setId(request.getParameter("id"));
-                country.setName(request.getParameter("name"));
-
+                    City city = new City();
+                    Country country = new Country();
+                    city.setId(request.getParameter("id"));
+                    city.setName(request.getParameter("name"));
+                    country.setId(request.getParameter("country"));
+                    city.setCountry(country);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
             }
         }
     }
+
 }

@@ -7,6 +7,7 @@ public class Schedule {
     private String departureTime;
     private String arrivalTime;
 
+    public Schedule(){}
     public Schedule(int id, String day, String departureTime, String arrivalTime) {
         this.id = id;
         this.day = day;
