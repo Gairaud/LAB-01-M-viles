@@ -21,7 +21,7 @@ public class TicketDao {
 
     public List ticketList(){
         List<Ticket> list = new ArrayList<>();
-        String sql = "select * from ticket t, routes r";
+        String sql = "select * from ticket t, reservation r";
         try{
             con = db.Connect();
             ps = con.prepareStatement(sql);
@@ -33,7 +33,7 @@ public class TicketDao {
                 t.setId(Integer.parseInt(rs.getString(1)));
                 t.setRow(Integer.parseInt(rs.getString(2)));
                 t.setCol(Integer.parseInt(rs.getString(3)));
-                t.setRoute(Model.instance().getRoute(rs.getString(4)));
+               
 
                 
             }

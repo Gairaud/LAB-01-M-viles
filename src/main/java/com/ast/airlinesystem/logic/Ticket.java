@@ -4,17 +4,17 @@ public class Ticket {
 
     private int row;
     private int col;
-    private Routes route;
+    private Reservation reservation;
 
-    public Ticket(int id, int row, int col, Routes route) {
+    public Ticket(int id, int row, int col, Reservation reservation) {
         this.id = id;
         this.row = row;
         this.col = col;
-        this.route = route;
+        this.reservation = reservation;
     }
 
     public Ticket(){
-        
+
     }
     private int id;
 
@@ -42,12 +42,12 @@ public class Ticket {
         this.col = col;
     }
 
-    public Routes getRoute() {
-        return route;
+    public Reservation getReservation() {
+        return reservation;
     }
 
-    public void setRoute(Routes route) {
-        this.route = route;
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
     }
 
 

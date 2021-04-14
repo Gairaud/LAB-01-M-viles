@@ -23,6 +23,7 @@ public class Model {
     ScheduleDao schedule;
     RoutesDao route;
     TicketDao ticket;
+    ReservationDao reservation;
     public Model(){
 
         user = new UserDao();
@@ -32,6 +33,7 @@ public class Model {
         schedule = new ScheduleDao();
         route = new RoutesDao();
         ticket = new TicketDao();
+        reservation = new ReservationDao();
     }
     //User
     public User getUser(String userName, String password) throws SQLException {
