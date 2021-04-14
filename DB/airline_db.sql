@@ -5,7 +5,7 @@ PROMPT ==========================
 drop sequence seq_id_users;
 drop sequence seq_id_airplanes;
 drop sequence seq_id_schedules;
-drop sequence seq_id_reserva;
+drop sequence seq_id_reservation;
 drop sequence seq_id_ticket;
 
 
@@ -20,7 +20,7 @@ drop table countries cascade constraints;
 drop table cities cascade constraints;
 drop table schedules cascade constraints;
 drop table routes cascade constraints;
-drop table reserva cascade constraints;
+drop table reservation cascade constraints;
 drop table ticket cascade constraints;
 
 
@@ -35,7 +35,7 @@ PROMPT ==========================
 PROMPT OBJECTS 
 PROMPT ==========================
 --==================== Tables ===================== 
-create table users (id varchar2 not null, username varchar2(40),
+create table users (id number not null, username varchar2(40),
                     password varchar2(40), name varchar2(25),
                     last_name varchar2(40), email varchar2(30),
                     address varchar2(200), phone varchar2(15),
@@ -59,13 +59,13 @@ create table routes (id varchar2(20), duration date, origin varchar2(5), destina
 
 create table ticket(id number not null, fila number, col number, ruta varchar2(20)) tablespace system;
 
-create table reserva(id number not null, ticket number not null, userid number) tablespace system; 
+create table reservation(id number not null, ticket number not null, userid number) tablespace system; 
 
 --==================== Sequences =====================                  
 create sequence seq_id_users start with 1 increment by 1 cache 2;
 create sequence seq_id_airplanes start with 1 increment by 1 cache 2;
 create sequence seq_id_schedules start with 1 increment by 1 cache 2;
-create sequence seq_id_reserva start with 1 increment by 1 cache 2;
+create sequence seq_id_reservation start with 1 increment by 1 cache 2;
 create sequence seq_id_ticket start with 1 increment by 1 cache 2;
 
 
@@ -78,7 +78,7 @@ alter table cities add constraint cities_pk primary key(id) using index tablespa
 alter table schedules add constraint schedules_pk primary key(id) using index tablespace system;
 alter table routes add constraint routes_pk primary key(id) using index tablespace system;
 alter table ticket add constraint ticket_pk primary key(id) using index tablespace system;
-alter table reserva add constraint reserva_pk primary key(id, ticket) using index tablespace system;
+alter table reservation add constraint reservation_pk primary key(id, ticket) using index tablespace system;
 
 --==================== FKs =====================
 alter table airplanes add constraint type_fk foreign key (airplane_type) references airplane_types;  
@@ -87,7 +87,7 @@ alter table routes add constraint origin_fk foreign key (origin) references citi
 alter table routes add constraint destination_fk foreign key (destination) references cities;
 alter table routes add constraint airplane_fk foreign key (airplane) references airplanes;
 alter table routes add constraint schedule_fk foreign key (schedule) references schedules;
-alter table reserva add constraint ticket_fk foreign key (ticket) references ticket;
+alter table reservation add constraint ticket_fk foreign key (ticket) references ticket;
 alter table ticket add constraint route_fk foreign key (ruta) references routes;
 
 
@@ -107,7 +107,7 @@ commit;
 
 PROMPT          Procedimientos USER
 PROMPT =====================================
-create or replace procedure prc_ins_user(Pid in varchar2, PUser in varchar2, Ppassword in varchar2,
+create or replace procedure prc_ins_user(Pid in number, PUser in varchar2, Ppassword in varchar2,
 Pname in varchar2, Papellido in varchar2, Pemail in varchar2, Pdireccion in varchar2,
 Pnumber in varchar2, Padmin in varchar2) is 
 begin
@@ -122,7 +122,7 @@ end prc_ins_user;
 /
 show error
 
-create or replace procedure prc_upd_user(Pid in varchar2, PUser in varchar2, Ppassword in varchar2,
+create or replace procedure prc_upd_user(Pid in number, PUser in varchar2, Ppassword in varchar2,
 Pname in varchar2, Papellido in varchar2, Pemail in varchar2, Pdireccion in varchar2,
 Pnumber in varchar2, Padmin in varchar2) is
 begin
@@ -342,28 +342,28 @@ end prc_upd_ticket;
 show error
 
 
-create or replace procedure prc_ins_reserva(Pticket in number, Puserid in number) is 
+create or replace procedure prc_ins_reservation(Pticket in number, Puserid in number) is 
 begin
-  insert into reserva (id, ticket, userid)
-  values (seq_id_reserva.nextval, Pticket, Puserid);
+  insert into reservation (id, ticket, userid)
+  values (seq_id_reservation.nextval, Pticket, Puserid);
   commit;
   exception
 --UK o PK
     when dup_val_on_index then
     null;
-end prc_ins_reserva;
+end prc_ins_reservation;
 /
 show error
 
-create or replace procedure prc_upd_reserva(Pid in number, Pticket in number, Puserid in number) is
+create or replace procedure prc_upd_reservation(Pid in number, Pticket in number, Puserid in number) is
 begin
-update reserva
+update reservation
    set 
     ticket = Pticket,
     userid = Puserid
  where 
  id = Pid;
-end prc_upd_reserva;
+end prc_upd_reservation;
 /
 show error
 
