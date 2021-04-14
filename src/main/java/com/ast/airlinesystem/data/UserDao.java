@@ -27,7 +27,7 @@ public class UserDao {
        return list;
    }
    public int addUser (User user) throws  Exception{
-        String insertStatement = "EXECUTE PRC_INS_USER (?,?,?,?,?,?,?,?,?)";
+        String insertStatement = "CALL PRC_INS_USER (?,?,?,?,?,?,?,?,?)";
         int count = 0;
             try{
                 con = db.Connect();

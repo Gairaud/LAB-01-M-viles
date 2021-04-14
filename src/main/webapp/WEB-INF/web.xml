@@ -15,6 +15,7 @@
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/get-user</url-pattern>
+        <url-pattern>/add-user</url-pattern>
     </servlet-mapping>
 
             <!-- Airplane Servlet -->

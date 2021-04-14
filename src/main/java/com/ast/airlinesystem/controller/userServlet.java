@@ -21,8 +21,8 @@ public class userServlet extends HttpServlet {
         //String action = request.getParameter("action");
         switch(request.getServletPath()){
 
-            case "/get-user":
-                String userId = request.getParameter(("id"));
+            case "/get-user": {
+                String userId = request.getParameter("id");
 
                 User user = null;
                 try {
@@ -32,7 +32,24 @@ public class userServlet extends HttpServlet {
                 }
                 String userString = gsonObject.toJson(user);
                 break;
+            }
+            case "/add-user":{
+                User user = new User();
 
+                user.setPassword(request.getParameter("pswrd"));
+                user.setId(Integer.parseInt(request.getParameter("id")));
+                user.setName(request.getParameter("name"));
+                user.setUserName(request.getParameter("user"));
+                user.setLastName(request.getParameter("lastname"));
+                user.setAddress(request.getParameter("address"));
+                user.setPhone(request.getParameter("phone"));
+                user.setEmail(request.getParameter("email"));
+                try {
+                    Model.instance().addUser(user);
+                }catch (Exception e){
+
+                }
+            }
         }
 
 

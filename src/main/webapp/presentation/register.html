@@ -12,15 +12,16 @@
 <div class="center">
     <div class="header">
         Registro</div>
-    <form action="" method="POST">
+    <form action="../add-user" method="POST">
         <input type="text" placeholder="Cedula" name="id">
+        <input type="text" placeholder="username" name="user">
         <input type="text" placeholder="Nombre" name="name">
         <input type="text" placeholder="Apellidos" name="lastname">
         <input type="text" placeholder="Direccion" name="address">
         <input type="text" placeholder="Telefono" name="phone">
         <input type="text" placeholder="Correo electrónico" name="email">
         <i class="far fa-envelope"></i>
-        <input id="pswrd" type="password" placeholder="Contraseña">
+        <input name="pswrd" type="password" placeholder="Contraseña">
         <i class="fas fa-lock" onclick="show()"></i>
         <input type="submit" value="Entrar">
 

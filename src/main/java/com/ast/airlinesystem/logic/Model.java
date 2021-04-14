@@ -31,9 +31,14 @@ public class Model {
         schedule = new ScheduleDao();
         route = new RoutesDao();
     }
+    //User
     public User getUser(String userName, String password) throws SQLException {
         return user.getUser(userName, password);
     }
+    public void addUser(User puser) throws Exception{
+        user.addUser(puser);
+    }
+
     public List<AirplaneType> getTypes() throws Exception {
         return type.typesList();
     }
