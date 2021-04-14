@@ -111,6 +111,10 @@ insert into schedules values (seq_id_schedules.nextval, TO_DATE('2021/12/19', 'y
                                 TO_DATE('2021/12/25', 'yyyy/mm/dd'));
 insert into routes values ('SJO-ATL', '12 HORAS', 'SJO', 'ATL', 'Avion 1', 1);
 
+insert into ticket values (seq_id_ticket.nextval, 5,7,'SJO-ATL');
+insert into ticket values (seq_id_ticket.nextval, 5,6,'SJO-ATL');
+insert into ticket values (seq_id_ticket.nextval, 5,5,'SJO-ATL');
+
 
 
 commit;

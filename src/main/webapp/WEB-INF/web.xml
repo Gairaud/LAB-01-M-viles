@@ -87,4 +87,12 @@
 
             <!-- Ticket Servlet -->
                 <!-- ........ -->
+    <servlet>
+        <servlet-name>TicketServlet</servlet-name>
+        <servlet-class>com.ast.airlinesystem.controller.ticketServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TicketServlet</servlet-name>
+        <url-pattern>/get-tickets</url-pattern>
+    </servlet-mapping>
 </web-app>

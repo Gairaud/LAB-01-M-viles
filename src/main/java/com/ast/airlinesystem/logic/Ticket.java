@@ -13,6 +13,9 @@ public class Ticket {
         this.route = route;
     }
 
+    public Ticket(){
+        
+    }
     private int id;
 
     public int getId() {
