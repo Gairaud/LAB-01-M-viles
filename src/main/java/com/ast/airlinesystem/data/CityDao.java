@@ -64,7 +64,7 @@ public class CityDao {
 
     public City getCity(String id){
         City city = new City();
-        String getStatement = "SELECT * FROM CITIES c, COUNTRIES p" +
+        String getStatement = "SELECT * FROM CITIES c, COUNTRIES p " +
                 "where c.ID=\'"+id+"\' and c.COUNTRY=p.ID";
         try{
             con = db.Connect();

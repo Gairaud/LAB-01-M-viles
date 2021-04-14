@@ -43,7 +43,7 @@ public class cityServlet extends HttpServlet{
 
             case "/get-city":{
                 try {
-                    String param = request.getParameter("cityid");
+                    String param = request.getParameter("id");
                     City city = Model.instance().getCity(param);
                     String City = gsonObject.toJson(city);
                     PrintWriter out = response.getWriter();

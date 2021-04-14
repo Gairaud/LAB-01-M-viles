@@ -61,11 +61,11 @@
 
             <!-- Routes Servlet -->
     <servlet>
-        <servlet-name>RoutesServlet</servlet-name>
+        <servlet-name>RouteServlet</servlet-name>
         <servlet-class>com.ast.airlinesystem.controller.routesServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>RoutesServlet</servlet-name>
+        <servlet-name>RouteServlet</servlet-name>
         <url-pattern>/get-routes</url-pattern>
         <url-pattern>/get-route</url-pattern>
         <url-pattern>/add-route</url-pattern>

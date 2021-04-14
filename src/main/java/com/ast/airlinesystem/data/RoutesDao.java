@@ -19,7 +19,7 @@ public class RoutesDao {
 
     public List RouteList(){
         List<Routes> list = new ArrayList<>();
-        String sql = "SELECT * FROM Routes";
+        String sql = "SELECT * FROM ROUTES";
         try{
             con = db.Connect();
             ps = con.prepareStatement(sql);
