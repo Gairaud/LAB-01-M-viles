@@ -50,11 +50,11 @@ create table airplanes (id varchar2(20), airplane_type varchar2(45)) tablespace 
 create table countries (id varchar2(5), name varchar2(20)) tablespace system;
 create table cities (id varchar2(5), name varchar2(20), country varchar2(5)) tablespace system;
 
-create table schedules (id number not null, day varchar2(30),
+create table schedules (id number not null,
                         departure_time date, arrival_time date) tablespace system;
 
 
-create table routes (id varchar2(20), duration date, origin varchar2(5), destination varchar2(5),
+create table routes (id varchar2(20), duration varchar2(25), origin varchar2(5), destination varchar2(5),
                      airplane varchar2(20), schedule number ) tablespace system;
 
 create table ticket(id number not null, fila number, col number, ruta varchar2(20)) tablespace system;
@@ -99,9 +99,19 @@ insert into users values (123456789, 'kike00', 'chico500', 'Enrique',
 
 insert into airplane_types values ('Super airplane', 2000, 'Model 0',
                                   'Brand 0', 330, 6, 55);
+insert into airplanes values ('Avion 1', 'Super airplane');
 
 insert into countries values ('CR', 'Costa Rica');
 insert into cities values ('SJO', 'San Jose', 'CR');
+
+insert into countries values ('USA', 'Estados Unidos');
+insert into cities values ('ATL', 'ATLANTA', 'USA');
+
+insert into schedules values (seq_id_schedules.nextval, TO_DATE('2021/12/19', 'yyyy/mm/dd'), 
+                                TO_DATE('2021/12/25', 'yyyy/mm/dd'));
+insert into routes values ('SJO-ATL', '12 HORAS', 'SJO', 'ATL', 'Avion 1', 1);
+
+
 
 commit;
 
@@ -254,11 +264,10 @@ end prc_upd_city;
 show error
 
 
-create or replace procedure prc_ins_schedule(Pday in varchar2, 
-                                            Pdeparture_time in date, Parrival_time in date) is 
+create or replace procedure prc_ins_schedule(Pdeparture_time in date, Parrival_time in date) is 
 begin
-  insert into schedules (id, day, departure_time, arrival_time)
-  values (seq_id_schedules.nextval, Pday, Pdeparture_time, Parrival_time);
+  insert into schedules (id, departure_time, arrival_time)
+  values (seq_id_schedules.nextval, Pdeparture_time, Parrival_time);
   commit;
   exception
 --UK o PK
@@ -268,12 +277,11 @@ end prc_ins_schedule;
 /
 show error
 
-create or replace procedure prc_upd_schedule(Pid in number, Pday in varchar2, 
+create or replace procedure prc_upd_schedule(Pid in number,
                                             Pdeparture_time in date, Parrival_time in date) is
 begin
 update schedules
    set
-    day = Pday, 
     departure_time = Pdeparture_time, 
     arrival_time = Parrival_time
 
