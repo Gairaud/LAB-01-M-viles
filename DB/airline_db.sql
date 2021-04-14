@@ -7,6 +7,7 @@ drop sequence seq_id_airplanes;
 drop sequence seq_id_schedules;
 drop sequence seq_id_reservation;
 drop sequence seq_id_ticket;
+drop sequence seq_id_flights;
 
 
 drop procedure prc_ins_user;
@@ -22,6 +23,7 @@ drop table schedules cascade constraints;
 drop table routes cascade constraints;
 drop table reservation cascade constraints;
 drop table ticket cascade constraints;
+drop table flights cascade constraints;
 
 
 
@@ -57,9 +59,11 @@ create table schedules (id number not null,
 create table routes (id varchar2(20), duration varchar2(25), origin varchar2(5), destination varchar2(5),
                      airplane varchar2(20), schedule number ) tablespace system;
 
-create table ticket(id number not null, fila number, col number, ruta varchar2(20)) tablespace system;
+create table ticket(id number not null, fila number, col number, reservation number) tablespace system;
 
-create table reservation(id number not null, ticket number not null, userid number) tablespace system; 
+create table reservation(id number not null, userid number, totalPrice number, seatQuantity number) tablespace system; 
+
+create table flights(id number not null);
 
 --==================== Sequences =====================                  
 create sequence seq_id_users start with 1 increment by 1 cache 2;
@@ -67,6 +71,7 @@ create sequence seq_id_airplanes start with 1 increment by 1 cache 2;
 create sequence seq_id_schedules start with 1 increment by 1 cache 2;
 create sequence seq_id_reservation start with 1 increment by 1 cache 2;
 create sequence seq_id_ticket start with 1 increment by 1 cache 2;
+create sequence seq_id_flights start with 1 increment by 1 cache 2;
 
 
 --==================== PKs =====================    
@@ -78,7 +83,8 @@ alter table cities add constraint cities_pk primary key(id) using index tablespa
 alter table schedules add constraint schedules_pk primary key(id) using index tablespace system;
 alter table routes add constraint routes_pk primary key(id) using index tablespace system;
 alter table ticket add constraint ticket_pk primary key(id) using index tablespace system;
-alter table reservation add constraint reservation_pk primary key(id, ticket) using index tablespace system;
+alter table reservation add constraint reservation_pk primary key(id) using index tablespace system;
+alter table flights add constraint flights_pk primary key(id) using index tablespace system;
 
 --==================== FKs =====================
 alter table airplanes add constraint type_fk foreign key (airplane_type) references airplane_types;  
@@ -87,8 +93,7 @@ alter table routes add constraint origin_fk foreign key (origin) references citi
 alter table routes add constraint destination_fk foreign key (destination) references cities;
 alter table routes add constraint airplane_fk foreign key (airplane) references airplanes;
 alter table routes add constraint schedule_fk foreign key (schedule) references schedules;
-alter table reservation add constraint ticket_fk foreign key (ticket) references ticket;
-alter table ticket add constraint route_fk foreign key (ruta) references routes;
+alter table ticket add constraint reservation_fk foreign key (reservation) references reservation;
 
 
 --==================== Inserts =====================    
@@ -111,9 +116,11 @@ insert into schedules values (seq_id_schedules.nextval, TO_DATE('2021/12/19', 'y
                                 TO_DATE('2021/12/25', 'yyyy/mm/dd'));
 insert into routes values ('SJO-ATL', '12 HORAS', 'SJO', 'ATL', 'Avion 1', 1);
 
-insert into ticket values (seq_id_ticket.nextval, 5,7,'SJO-ATL');
-insert into ticket values (seq_id_ticket.nextval, 5,6,'SJO-ATL');
-insert into ticket values (seq_id_ticket.nextval, 5,5,'SJO-ATL');
+insert into reservation values(seq_id_reservation.nextval, 123456789, 1000, 3);
+
+insert into ticket values (seq_id_ticket.nextval, 5,7,1);
+insert into ticket values (seq_id_ticket.nextval, 5,6,1);
+insert into ticket values (seq_id_ticket.nextval, 5,5,1);
 
 
 
@@ -326,10 +333,10 @@ end prc_upd_route;
 show error
 
 create or replace procedure prc_ins_ticket(Pfila in number, 
-                                            Pcol in number, Pruta in varchar2) is 
+                                            Pcol in number, Preservation in varchar2) is 
 begin
-  insert into ticket (id, fila, col, ruta )
-  values (seq_id_ticket.nextval, Pfila, Pcol, Pruta);
+  insert into ticket (id, fila, col, reservation )
+  values (seq_id_ticket.nextval, Pfila, Pcol, Preservation);
   commit;
   exception
 --UK o PK
@@ -340,13 +347,13 @@ end prc_ins_ticket;
 show error
 
 create or replace procedure prc_upd_ticket(Pid in number, Pfila in number, 
-                                            Pcol in number, Pruta in varchar2) is
+                                            Pcol in number, Preservation in varchar2) is
 begin
 update ticket
    set 
     fila = Pfila,
     col = Pcol,
-    ruta = Pruta
+    reservation = Preservation
  where 
  id = Pid;
 end prc_upd_ticket;
@@ -354,10 +361,11 @@ end prc_upd_ticket;
 show error
 
 
-create or replace procedure prc_ins_reservation(Pticket in number, Puserid in number) is 
+create or replace procedure prc_ins_reservation( Puserid in number, Ptotalprice in number,
+PseatQuantity in number) is 
 begin
-  insert into reservation (id, ticket, userid)
-  values (seq_id_reservation.nextval, Pticket, Puserid);
+  insert into reservation (id, userid, totalPrice, seatQuantity)
+  values (seq_id_reservation.nextval, Puserid, Ptotalprice, PseatQuantity);
   commit;
   exception
 --UK o PK
@@ -367,12 +375,14 @@ end prc_ins_reservation;
 /
 show error
 
-create or replace procedure prc_upd_reservation(Pid in number, Pticket in number, Puserid in number) is
+create or replace procedure prc_upd_reservation(Pid in number, Puserid in number, Ptotalprice in number,
+PseatQuantity in number) is
 begin
 update reservation
    set 
-    ticket = Pticket,
-    userid = Puserid
+    userid = Puserid,
+    totalPrice = Ptotalprice,
+    seatQuantity = PseatQuantity
  where 
  id = Pid;
 end prc_upd_reservation;
