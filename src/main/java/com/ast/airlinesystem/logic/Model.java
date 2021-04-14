@@ -22,6 +22,7 @@ public class Model {
     CountryDao country;
     ScheduleDao schedule;
     RoutesDao route;
+    TicketDao ticket;
     public Model(){
 
         user = new UserDao();
@@ -30,6 +31,7 @@ public class Model {
         city = new CityDao();
         schedule = new ScheduleDao();
         route = new RoutesDao();
+        ticket = new TicketDao();
     }
     //User
     public User getUser(String userName, String password) throws SQLException {
@@ -39,6 +41,9 @@ public class Model {
         user.addUser(puser);
     }
 
+    public List<Ticket> getTickets(){
+        return ticket.ticketList();
+    }
     public List<AirplaneType> getTypes() throws Exception {
         return type.typesList();
     }
