@@ -62,7 +62,18 @@
                 <!-- ........ -->
 
             <!-- Schedule Servlet -->
-                <!-- ........ -->
+    <servlet>
+        <servlet-name>ScheduleServlet</servlet-name>
+        <servlet-class>com.ast.airlinesystem.controller.scheduleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ScheduleServlet</servlet-name>
+        <url-pattern>/get-schedules</url-pattern>
+        <url-pattern>/get-schedule</url-pattern>
+        <url-pattern>/add-schedule</url-pattern>
+        <url-pattern>/upd-schedule</url-pattern>
+
+    </servlet-mapping>
 
             <!-- Ticket Servlet -->
                 <!-- ........ -->

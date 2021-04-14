@@ -59,7 +59,17 @@
                 <!-- ........ -->
 
             <!-- Routes Servlet -->
-                <!-- ........ -->
+    <servlet>
+        <servlet-name>RoutesServlet</servlet-name>
+        <servlet-class>com.ast.airlinesystem.controller.routesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RoutesServlet</servlet-name>
+        <url-pattern>/get-routes</url-pattern>
+        <url-pattern>/get-route</url-pattern>
+        <url-pattern>/add-route</url-pattern>
+        <url-pattern>/upd-route</url-pattern>
+    </servlet-mapping>
 
             <!-- Schedule Servlet -->
     <servlet>
@@ -72,7 +82,6 @@
         <url-pattern>/get-schedule</url-pattern>
         <url-pattern>/add-schedule</url-pattern>
         <url-pattern>/upd-schedule</url-pattern>
-
     </servlet-mapping>
 
             <!-- Ticket Servlet -->

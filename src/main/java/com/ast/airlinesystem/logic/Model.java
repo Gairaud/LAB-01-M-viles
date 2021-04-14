@@ -21,6 +21,7 @@ public class Model {
     CityDao city;
     CountryDao country;
     ScheduleDao schedule;
+    RoutesDao route;
     public Model(){
 
         user = new UserDao();
@@ -28,6 +29,7 @@ public class Model {
         country = new CountryDao();
         city = new CityDao();
         schedule = new ScheduleDao();
+        route = new RoutesDao();
     }
     public User getUser(String userName, String password) throws SQLException {
         return user.getUser(userName, password);
@@ -76,5 +78,19 @@ public class Model {
     }
     public void updateSchedule(Schedule Pschedule) throws Exception{
         schedule.updateSchedule(Pschedule);
+    }
+
+    //Routes
+    public  List<Routes> getRoutes() throws Exception{
+        return route.RouteList();
+    }
+    public Routes getRoute(String id) throws Exception{
+        return route.getRoute(id);
+    }
+    public void addRoute(Routes Proute) throws Exception{
+        route.addRoute(Proute);
+    }
+    public void updateRoute(Routes Proute) throws Exception{
+        route.updateRoute(Proute);
     }
 }
