@@ -63,7 +63,8 @@ create table ticket(ticket_id number not null, fila number, col number, reservat
 
 create table reservation(res_id number not null, userid number, totalPrice number, seatQuantity number) tablespace system; 
 
-create table flights(id number not null);
+create table flights(f_id number not null, ruta varchar2(20), departure_date date, 
+                      return_date date, price number, available_seats number);
 
 --==================== Sequences =====================                  
 create sequence seq_id_users start with 1 increment by 1 cache 2;
@@ -84,7 +85,7 @@ alter table schedules add constraint schedules_pk primary key(id) using index ta
 alter table routes add constraint routes_pk primary key(id) using index tablespace system;
 alter table ticket add constraint ticket_pk primary key(ticket_id) using index tablespace system;
 alter table reservation add constraint reservation_pk primary key(res_id) using index tablespace system;
-alter table flights add constraint flights_pk primary key(id) using index tablespace system;
+alter table flights add constraint flights_pk primary key(f_id) using index tablespace system;
 
 --==================== FKs =====================
 alter table airplanes add constraint type_fk foreign key (airplane_type) references airplane_types;  
@@ -94,7 +95,7 @@ alter table routes add constraint destination_fk foreign key (destination) refer
 alter table routes add constraint airplane_fk foreign key (airplane) references airplanes;
 alter table routes add constraint schedule_fk foreign key (schedule) references schedules;
 alter table ticket add constraint reservation_fk foreign key (reservation) references reservation;
-
+alter table flights add constraint route_fk foreign key (ruta) references routes;
 
 --==================== Inserts =====================    
 
@@ -121,6 +122,9 @@ insert into reservation values(seq_id_reservation.nextval, 123456789, 1000, 3);
 insert into ticket values (seq_id_ticket.nextval, 5,7,1);
 insert into ticket values (seq_id_ticket.nextval, 5,6,1);
 insert into ticket values (seq_id_ticket.nextval, 5,5,1);
+
+insert into flights values (seq_id_flights.nextval, 'SJO-ATL', TO_DATE('2021/12/19', 'yyyy/mm/dd'),
+                            TO_DATE('2021/12/19', 'yyyy/mm/dd'), 300,   120);
 
 
 

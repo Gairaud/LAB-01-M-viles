@@ -105,5 +105,6 @@
     <servlet-mapping>
         <servlet-name>ReservationServlet</servlet-name>
         <url-pattern>/get-reservations</url-pattern>
+        <url-pattern>/add-reservation</url-pattern>
     </servlet-mapping>
 </web-app>

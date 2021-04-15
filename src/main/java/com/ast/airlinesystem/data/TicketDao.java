@@ -45,4 +45,25 @@ public class TicketDao {
         }
         return list;
     }
+
+    public int addTicket(Ticket ticket){
+        String insertStatement = "CALL PRC_INS_TICKET(?,?,?)";
+        int count = 0;
+        try{
+            con = db.Connect();
+            ps = con.prepareStatement(insertStatement);
+            ps.setString(1, String.valueOf(ticket.getRow()));
+            ps.setString(2, String.valueOf(ticket.getCol()));
+            ps.setString(3, String.valueOf(ticket.getReservation().getId()));
+            count = ps.executeUpdate();
+            if(count == 0){
+                throw new Exception("El ticket ya existe");
+            }
+
+        }
+        catch (Exception e){
+
+        }
+        return count;
+    }
 }

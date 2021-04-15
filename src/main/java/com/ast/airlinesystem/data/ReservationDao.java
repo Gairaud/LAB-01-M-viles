@@ -42,15 +42,14 @@ public class ReservationDao {
     }
 
     public int addReservation(Reservation reservation){
-        String insertStatement = "CALL PRC_INS_TICKET(?,?,?)";
+        String insertStatement = "CALL PRC_INS_RESERVATION(?,?,?)";
         int count = 0;
         try{
             con = db.Connect();
             ps = con.prepareStatement(insertStatement);
-            ps.setString(1, String.valueOf(reservation.getId()));
-            ps.setString(2, String.valueOf(reservation.getUser().getId()));
-            ps.setString(3, String.valueOf(reservation.getTotalPrice()));
-            ps.setString(4, String.valueOf(reservation.getSeatQuantity()));
+            ps.setString(1, String.valueOf(reservation.getUser().getId()));
+            ps.setString(2, String.valueOf(reservation.getTotalPrice()));
+            ps.setString(3, String.valueOf(reservation.getSeatQuantity()));
             count = ps.executeUpdate();
             if(count == 0){
                 throw new Exception("La reservacion ya existe");

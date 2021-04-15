@@ -42,6 +42,9 @@ public class Model {
     public void addUser(User puser) throws Exception{
         user.addUser(puser);
     }
+    public User getUserById(String id){
+        return user.getUserById(id);
+    }
 
     public List<Ticket> getTickets(){
         return ticket.ticketList();
@@ -109,5 +112,8 @@ public class Model {
     //Reservations 
     public List<Reservation> getReservationsByUser(String id){
         return reservation.getReservationsByUser(id);
+    }
+    public void addReservation(Reservation res) throws Exception{
+        reservation.addReservation(res);
     }
 }
