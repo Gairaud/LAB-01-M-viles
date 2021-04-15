@@ -46,12 +46,7 @@ public class Model {
         return user.getUserById(id);
     }
 
-    public List<Ticket> getTickets(){
-        return ticket.ticketList();
-    }
-    public List<AirplaneType> getTypes() throws Exception {
-        return type.typesList();
-    }
+   
 
     // Country
     public  List<Country> getCountries() throws Exception{
@@ -115,5 +110,20 @@ public class Model {
     }
     public void addReservation(Reservation res) throws Exception{
         reservation.addReservation(res);
+    }
+    public Reservation getReservationById(String id){
+        return reservation.getReservationsById(id);
+    }
+
+    //Ticket 
+    public void addTicket(Ticket t){
+        ticket.addTicket(t);
+    }
+
+    public List<Ticket> getTickets(){
+        return ticket.ticketList();
+    }
+    public List<AirplaneType> getTypes() throws Exception {
+        return type.typesList();
     }
 }

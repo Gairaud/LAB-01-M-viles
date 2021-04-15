@@ -36,6 +36,23 @@ public class ticketServlet extends HttpServlet{
 
                 }
             }
+
+            case "/add-ticket":{
+
+                try {
+                   Ticket ticket = new Ticket();
+                   ticket.setId(Integer.parseInt(request.getParameter("id")));
+                   ticket.setCol(Integer.parseInt(request.getParameter("col")));
+                   ticket.setRow(Integer.parseInt(request.getParameter("row")));
+                   ticket.setReservation(Model.instance().getReservationById(request.getParameter("reservation")));
+                   Model.instance().addTicket(ticket);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    
+
+                }
+                break;
+            }
             
            
     }

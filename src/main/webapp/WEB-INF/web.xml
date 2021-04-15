@@ -94,6 +94,7 @@
     <servlet-mapping>
         <servlet-name>TicketServlet</servlet-name>
         <url-pattern>/get-tickets</url-pattern>
+        <url-pattern>/add-ticket</url-pattern>
     </servlet-mapping>
 
     <!-- Reservation Servlet -->

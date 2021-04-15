@@ -41,6 +41,26 @@ public class ReservationDao {
         return list;
     }
 
+    public Reservation getReservationsById(String id){
+        Reservation r = new Reservation();
+        String sql = "SELECT * FROM RESERVATION R, USERS U WHERE R.res_id = \'"+id+"\'";
+        try{
+            con = db.Connect();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                r.setId(Integer.parseInt(rs.getString(1)));
+                r.setTotalPrice(Float.parseFloat(rs.getString(3)));
+                r.setSeatQuantity(Integer.parseInt(rs.getString(4)));
+                r.setUser(toUser(rs));
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return r;
+    }
+
     public int addReservation(Reservation reservation){
         String insertStatement = "CALL PRC_INS_RESERVATION(?,?,?)";
         int count = 0;
