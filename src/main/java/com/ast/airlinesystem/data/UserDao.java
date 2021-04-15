@@ -76,15 +76,15 @@ public class UserDao {
     try{
         User user = new User();
         
-            user.setId(Integer.parseInt(rs.getString(1)));
-            user.setUserName(rs.getString(2));
-            user.setPassword(rs.getString(3));
-            user.setName(rs.getString(4));
-            user.setLastName(rs.getString(5));
-            user.setEmail(rs.getString(6));
-            user.setAddress(rs.getString(7));
-            user.setPhone(rs.getString(8));
-            user.setIsAdmin(Integer.parseInt(rs.getString(9)));
+            user.setId(Integer.parseInt(rs.getString("user_id")));
+            user.setUserName(rs.getString("username"));
+            user.setPassword(rs.getString("password"));
+            user.setName(rs.getString("name"));
+            user.setLastName(rs.getString("last_name"));
+            user.setEmail(rs.getString("email"));
+            user.setAddress(rs.getString("address"));
+            user.setPhone(rs.getString("phone"));
+            user.setIsAdmin(Integer.parseInt(rs.getString("is_admin")));
             return user;
         
     } catch (SQLException ex) {

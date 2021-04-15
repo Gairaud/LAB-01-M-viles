@@ -105,4 +105,9 @@ public class Model {
     public void updateRoute(Routes Proute) throws Exception{
         route.updateRoute(Proute);
     }
+
+    //Reservations 
+    public List<Reservation> getReservationsByUser(String id){
+        return reservation.getReservationsByUser(id);
+    }
 }

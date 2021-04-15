@@ -37,7 +37,7 @@ PROMPT ==========================
 PROMPT OBJECTS 
 PROMPT ==========================
 --==================== Tables ===================== 
-create table users (id number not null, username varchar2(40),
+create table users (user_id number not null, username varchar2(40),
                     password varchar2(40), name varchar2(25),
                     last_name varchar2(40), email varchar2(30),
                     address varchar2(200), phone varchar2(15),
@@ -59,9 +59,9 @@ create table schedules (id number not null,
 create table routes (id varchar2(20), duration varchar2(25), origin varchar2(5), destination varchar2(5),
                      airplane varchar2(20), schedule number ) tablespace system;
 
-create table ticket(id number not null, fila number, col number, reservation number) tablespace system;
+create table ticket(ticket_id number not null, fila number, col number, reservation number) tablespace system;
 
-create table reservation(id number not null, userid number, totalPrice number, seatQuantity number) tablespace system; 
+create table reservation(res_id number not null, userid number, totalPrice number, seatQuantity number) tablespace system; 
 
 create table flights(id number not null);
 
@@ -75,15 +75,15 @@ create sequence seq_id_flights start with 1 increment by 1 cache 2;
 
 
 --==================== PKs =====================    
-alter table users add constraint users_pk primary key(id) using index tablespace system;  
+alter table users add constraint users_pk primary key(user_id) using index tablespace system;  
 alter table airplane_types add constraint airplane_types_pk primary key(id) using index tablespace system;
 alter table airplanes add constraint airplane_pk primary key(id) using index tablespace system;
 alter table countries add constraint countries_pk primary key(id) using index tablespace system;
 alter table cities add constraint cities_pk primary key(id) using index tablespace system;
 alter table schedules add constraint schedules_pk primary key(id) using index tablespace system;
 alter table routes add constraint routes_pk primary key(id) using index tablespace system;
-alter table ticket add constraint ticket_pk primary key(id) using index tablespace system;
-alter table reservation add constraint reservation_pk primary key(id) using index tablespace system;
+alter table ticket add constraint ticket_pk primary key(ticket_id) using index tablespace system;
+alter table reservation add constraint reservation_pk primary key(res_id) using index tablespace system;
 alter table flights add constraint flights_pk primary key(id) using index tablespace system;
 
 --==================== FKs =====================
@@ -132,7 +132,7 @@ create or replace procedure prc_ins_user(Pid in number, PUser in varchar2, Ppass
 Pname in varchar2, Papellido in varchar2, Pemail in varchar2, Pdireccion in varchar2,
 Pnumber in varchar2, Padmin in varchar2) is 
 begin
-  insert into users (id, username, password, name, last_name, email, address, phone, is_admin)
+  insert into users (user_id, username, password, name, last_name, email, address, phone, is_admin)
   values (Pid, PUser, Ppassword, Pname, Papellido, Pemail, Pdireccion, Pnumber, Padmin);
   commit;
   exception
@@ -149,7 +149,7 @@ Pnumber in varchar2, Padmin in varchar2) is
 begin
 update users
    set 
-    id = Pid,
+    user_id = Pid,
     username = PUser,
     password = Ppassword,
     name = Pname,
@@ -159,7 +159,7 @@ update users
     phone = Pnumber,
     is_admin = Padmin
  where 
- id = Pid;
+ user_id = Pid;
 end prc_upd_user;
 /
 show error
@@ -335,7 +335,7 @@ show error
 create or replace procedure prc_ins_ticket(Pfila in number, 
                                             Pcol in number, Preservation in varchar2) is 
 begin
-  insert into ticket (id, fila, col, reservation )
+  insert into ticket (ticket_id, fila, col, reservation )
   values (seq_id_ticket.nextval, Pfila, Pcol, Preservation);
   commit;
   exception
@@ -355,7 +355,7 @@ update ticket
     col = Pcol,
     reservation = Preservation
  where 
- id = Pid;
+ ticket_id = Pid;
 end prc_upd_ticket;
 /
 show error
@@ -364,7 +364,7 @@ show error
 create or replace procedure prc_ins_reservation( Puserid in number, Ptotalprice in number,
 PseatQuantity in number) is 
 begin
-  insert into reservation (id, userid, totalPrice, seatQuantity)
+  insert into reservation (res_id, userid, totalPrice, seatQuantity)
   values (seq_id_reservation.nextval, Puserid, Ptotalprice, PseatQuantity);
   commit;
   exception
@@ -384,7 +384,7 @@ update reservation
     totalPrice = Ptotalprice,
     seatQuantity = PseatQuantity
  where 
- id = Pid;
+ res_id = Pid;
 end prc_upd_reservation;
 /
 show error
