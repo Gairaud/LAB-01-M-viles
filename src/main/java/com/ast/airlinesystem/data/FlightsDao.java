@@ -42,7 +42,7 @@ public class FlightsDao {
     }
 
     public int addFlight (Flight flight) throws Exception{
-        String insertStatement = "EXECUTE PRC_INS_FLIGHTS(?,?,?,?,?)";
+        String insertStatement = "CALL PRC_INS_FLIGHTS(?,?,?,?,?)";
         int count = 0;
         try{
             con = db.Connect();

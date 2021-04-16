@@ -19,9 +19,9 @@ public class AirplaneDao {
     ResultSet rs;
     Connection con;
 
-    public List AirplanesList() {
+    public List getAirplanesList() {
         List<Airplane> list = new ArrayList<>();
-        String sql = "select * from airplanes a, airplane_types at";
+        String sql = "select * from airplanes a, airplane_types x where x.at_id = a.airplane_type ";
 
         try{
             con = db.Connect();
@@ -38,5 +38,23 @@ public class AirplaneDao {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public int addAirplane(Airplane airplane) throws Exception{
+        String insertStatement = "CALL PROCEDURE PRC_INS_AVION(?,?)";
+        int count = 0;
+        try{
+            con = db.Connect();
+            ps = con.prepareStatement(insertStatement);
+            ps.setString(1, airplane.getId());
+            ps.setString(2, airplane.getType().getId());
+            count = ps.executeUpdate();
+            if(count == 0){
+                throw new Exception("El tipo ya existe");
+            }
+        }catch (Exception e){
+
+        }
+        return count;
     }
 }

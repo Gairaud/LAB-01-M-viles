@@ -70,18 +70,41 @@ public class AirplaneTypeDao {
     public static AirplaneType toType(ResultSet rs) throws Exception{
         try{
             AirplaneType at = new AirplaneType();
-            at.setId(rs.getString("at.id"));
-            at.setYear(Integer.parseInt(rs.getString("at.year")));
-            at.setModel(rs.getString("at.model"));
-            at.setBrand(rs.getString("at.brand"));
-            at.setPassengersQuantity(Integer.parseInt(rs.getString("at.passengers_quantity")));
-            at.setRowsNumber(Integer.parseInt(rs.getString("at.rows_number")));
-            at.setColumnsNumber(Integer.parseInt(rs.getString("at.columns_number")));
+            at.setId(rs.getString("at_id"));
+            at.setYear(Integer.parseInt(rs.getString("year")));
+            at.setModel(rs.getString("model"));
+            at.setBrand(rs.getString("brand"));
+            at.setPassengersQuantity(Integer.parseInt(rs.getString("passengers_quantity")));
+            at.setRowsNumber(Integer.parseInt(rs.getString("rows_number")));
+            at.setColumnsNumber(Integer.parseInt(rs.getString("columns_number")));
             return at;
         }
         catch (Exception e){
             return null;
         }
+    }
+
+    public AirplaneType getTypeById(String id) throws Exception{
+        AirplaneType at = new AirplaneType();
+        String sql = "SELECT * FROM AIRPLANE_TYPES  WHERE AT_ID = \'"+id+"\'";
+        try{
+            con = db.Connect();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                at.setId(rs.getString("at.at_id"));
+                at.setYear(Integer.parseInt(rs.getString("at.year")));
+                at.setModel(rs.getString("at.model"));
+                at.setBrand(rs.getString("at.brand"));
+                at.setPassengersQuantity(Integer.parseInt(rs.getString("at.passengers_quantity")));
+                at.setRowsNumber(Integer.parseInt(rs.getString("at.rows_number")));
+                at.setColumnsNumber(Integer.parseInt(rs.getString("at.columns_number")));
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return at;
     }
 
 }

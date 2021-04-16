@@ -25,10 +25,12 @@ public class Model {
     TicketDao ticket;
     ReservationDao reservation;
     FlightsDao flight;
+    AirplaneDao airplane;
     public Model(){
 
         user = new UserDao();
         type  = new AirplaneTypeDao();
+        airplane = new AirplaneDao();
         country = new CountryDao();
         city = new CityDao();
         schedule = new ScheduleDao();
@@ -48,7 +50,13 @@ public class Model {
         return user.getUserById(id);
     }
 
-   
+    //Airplanes 
+    public List<Airplane> getAirplanes() throws Exception{
+        return airplane.getAirplanesList();
+    }
+    public void addAirplane(Airplane a) throws Exception{
+        airplane.addAirplane(a);
+    }
 
     // Country
     public  List<Country> getCountries() throws Exception{
@@ -125,10 +133,14 @@ public class Model {
     public List<Ticket> getTickets(){
         return ticket.ticketList();
     }
+
+    //Airplane Types 
     public List<AirplaneType> getTypes() throws Exception {
         return type.typesList();
     }
-
+    public AirplaneType getTypeById(String id)  throws Exception{
+        return type.getTypeById(id);
+    }
     //Flight
 
     public List<Flight> getFlights() throws Exception {

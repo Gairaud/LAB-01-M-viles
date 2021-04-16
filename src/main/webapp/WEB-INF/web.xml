@@ -19,6 +19,15 @@
     </servlet-mapping>
 
             <!-- Airplane Servlet -->
+    <servlet>
+        <servlet-name>AirplaneServlet</servlet-name>
+        <servlet-class>com.ast.airlinesystem.controller.airplaneServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AirplaneServlet</servlet-name>
+        <url-pattern>/get-planes</url-pattern>
+        <url-pattern>/add-planes</url-pattern>
+    </servlet-mapping>
                 <!-- ........ -->
             <!-- Airplanetype Servlet -->
     <servlet>

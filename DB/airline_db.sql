@@ -43,7 +43,7 @@ create table users (user_id number not null, username varchar2(40),
                     address varchar2(200), phone varchar2(15),
                     is_admin varchar2(1)) tablespace system;
 
-create table airplane_types (id varchar2(45), year number, model varchar2(20),
+create table airplane_types (at_id varchar2(45), year number, model varchar2(20),
                             brand varchar2(20), passengers_quantity number,
                             rows_number number, columns_number number) tablespace system;
 
@@ -77,7 +77,7 @@ create sequence seq_id_flights start with 1 increment by 1 cache 2;
 
 --==================== PKs =====================    
 alter table users add constraint users_pk primary key(user_id) using index tablespace system;  
-alter table airplane_types add constraint airplane_types_pk primary key(id) using index tablespace system;
+alter table airplane_types add constraint airplane_types_pk primary key(at_id) using index tablespace system;
 alter table airplanes add constraint airplane_pk primary key(id) using index tablespace system;
 alter table countries add constraint countries_pk primary key(id) using index tablespace system;
 alter table cities add constraint cities_pk primary key(id) using index tablespace system;
@@ -173,7 +173,7 @@ create or replace procedure prc_ins_aviontype(Pid in varchar2, Pyear in number,
 Pmodel in varchar2, Pbrand in varchar2, Ppassengers_quantity in number, 
 Prows_number in number, Pcolumns_number in number) is 
 begin
-  insert into airplane_types (id, year, model, brand, passengers_quantity, rows_number, columns_number)
+  insert into airplane_types (at_id, year, model, brand, passengers_quantity, rows_number, columns_number)
   values (Pid, Pyear, Pmodel, Pbrand, Ppassengers_quantity, Prows_number, Pcolumns_number);
   commit;
   exception
@@ -190,7 +190,7 @@ Prows_number in number, Pcolumns_number in number) is
 begin
 update airplane_types
    set 
-    id = Pid ,
+    at_id = Pid ,
     year = Pyear ,
     model = Pmodel ,
     brand = Pbrand ,
@@ -198,7 +198,7 @@ update airplane_types
     rows_number = Prows_number ,
     columns_number = Pcolumns_number
  where 
- id = Pid;
+ at_id = Pid;
 end prc_upd_aviontype;
 /
 show error
@@ -393,11 +393,11 @@ end prc_upd_reservation;
 /
 show error
 
-create or replace procedure PRC_INS_FLIGHTS( Pruta in varchar2, Pdeparture_time in date,
+create or replace procedure PRC_INS_FLIGHTS( Pruta in varchar2, Pdeparture_date in date,
 Preturn_date in date, Pprice in number, Pavailable_seats in number) is 
 begin
-  insert into flights (f_id, ruta, departure_time, return_date, price, available_seats)
-  values (seq_id_flights.nextval, Pruta, Pdeparture_time, Preturn_date, Pprice, Pavailable_seats);
+  insert into flights (f_id, ruta, departure_date, return_date, price, available_seats)
+  values (seq_id_flights.nextval, Pruta, Pdeparture_date, Preturn_date, Pprice, Pavailable_seats);
   commit;
   exception
 --UK o PK

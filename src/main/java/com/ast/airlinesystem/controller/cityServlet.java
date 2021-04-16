@@ -66,6 +66,7 @@ public class cityServlet extends HttpServlet{
                     city.setId(request.getParameter("id"));
                     city.setName(request.getParameter("name"));
                     country.setId(request.getParameter("country"));
+                    //Arreglar aqui 
                     city.setCountry(country);
                     Model.instance().addCity(city);
                 }catch (SQLException throwables) {
