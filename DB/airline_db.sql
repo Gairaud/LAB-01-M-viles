@@ -397,7 +397,11 @@ create or replace procedure PRC_INS_FLIGHTS( Pruta in varchar2, Pdeparture_date 
 Preturn_date in date, Pprice in number, Pavailable_seats in number) is 
 begin
   insert into flights (f_id, ruta, departure_date, return_date, price, available_seats)
+<<<<<<< HEAD
   values (seq_id_flights.nextval, Pruta, Pdeparture_date, Preturn_date, Pprice, Pavailable_seats);
+=======
+  values (seq_id_flights.nextval, Pruta, Pdeparture_time, Preturn_date, Pprice, Pavailable_seats);
+>>>>>>> 7a4682e58a3b016310c0cdc3c69c3896d88de6e0
   commit;
   exception
 --UK o PK
