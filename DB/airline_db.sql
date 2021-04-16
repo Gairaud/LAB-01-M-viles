@@ -396,7 +396,7 @@ show error
 create or replace procedure PRC_INS_FLIGHTS( Pruta in varchar2, Pdeparture_time in date,
 Preturn_date in date, Pprice in number, Pavailable_seats in number) is 
 begin
-  insert into flights (f_id, ruta, departure_time, return_date, price, available_seats)
+  insert into flights (f_id, ruta, departure_date, return_date, price, available_seats)
   values (seq_id_flights.nextval, Pruta, Pdeparture_time, Preturn_date, Pprice, Pavailable_seats);
   commit;
   exception
