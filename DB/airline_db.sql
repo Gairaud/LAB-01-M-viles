@@ -56,7 +56,7 @@ create table schedules (id number not null,
                         departure_time date, arrival_time date) tablespace system;
 
 
-create table routes (id varchar2(20), duration varchar2(25), origin varchar2(5), destination varchar2(5),
+create table routes (r_id varchar2(20), duration varchar2(25), origin varchar2(5), destination varchar2(5),
                      airplane varchar2(20), schedule number ) tablespace system;
 
 create table ticket(ticket_id number not null, fila number, col number, reservation number) tablespace system;
@@ -82,7 +82,7 @@ alter table airplanes add constraint airplane_pk primary key(id) using index tab
 alter table countries add constraint countries_pk primary key(id) using index tablespace system;
 alter table cities add constraint cities_pk primary key(id) using index tablespace system;
 alter table schedules add constraint schedules_pk primary key(id) using index tablespace system;
-alter table routes add constraint routes_pk primary key(id) using index tablespace system;
+alter table routes add constraint routes_pk primary key(r_id) using index tablespace system;
 alter table ticket add constraint ticket_pk primary key(ticket_id) using index tablespace system;
 alter table reservation add constraint reservation_pk primary key(res_id) using index tablespace system;
 alter table flights add constraint flights_pk primary key(f_id) using index tablespace system;
@@ -309,7 +309,7 @@ show error
 create or replace procedure prc_ins_route(Pid in varchar2, Pduration in date, Porigin in varchar2, 
                                 Pdestination in varchar2, Pairplane in varchar2, Pschedule in number ) is 
 begin
-  insert into routes (id, duration, origin, destination, airplane, schedule)
+  insert into routes (r_id, duration, origin, destination, airplane, schedule)
   values (Pid, Pduration, Porigin, Pdestination, Pairplane, Pschedule);
   commit;
   exception
@@ -331,7 +331,7 @@ update routes
     airplane = Pairplane,
     schedule = Pschedule
  where 
- id = Pid;
+ r_id = Pid;
 end prc_upd_route;
 /
 show error
