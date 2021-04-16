@@ -108,4 +108,16 @@
         <url-pattern>/get-reservations</url-pattern>
         <url-pattern>/add-reservation</url-pattern>
     </servlet-mapping>
+
+    <!-- Reservation Servlet -->
+    <!-- ........ -->
+    <servlet>
+        <servlet-name>FlightServlet</servlet-name>
+        <servlet-class>com.ast.airlinesystem.controller.flightServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FlightServlet</servlet-name>
+        <url-pattern>/get-flights</url-pattern>
+        <url-pattern>/add-flight</url-pattern>
+    </servlet-mapping>
 </web-app>

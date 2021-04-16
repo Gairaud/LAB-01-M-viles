@@ -24,6 +24,7 @@ public class Model {
     RoutesDao route;
     TicketDao ticket;
     ReservationDao reservation;
+    FlightsDao flight;
     public Model(){
 
         user = new UserDao();
@@ -34,6 +35,7 @@ public class Model {
         route = new RoutesDao();
         ticket = new TicketDao();
         reservation = new ReservationDao();
+        flight = new FlightsDao();
     }
     //User
     public User getUser(String userName, String password) throws SQLException {
@@ -125,5 +127,14 @@ public class Model {
     }
     public List<AirplaneType> getTypes() throws Exception {
         return type.typesList();
+    }
+
+    //Flight
+
+    public List<Flight> getFlights() throws Exception {
+        return flight.flightsList();
+    }
+    public void addFlight(Flight f) throws Exception {
+        flight.addFlight(f);
     }
 }

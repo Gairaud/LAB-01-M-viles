@@ -2,15 +2,15 @@ package com.ast.airlinesystem.logic;
 
 public class Flight {
 
-    public Flights(int id, Routes route, String departureDate, String returnDate, float number, int availableSeats) {
+    public Flight(int id, Routes route, String departureDate, String returnDate, float price, int availableSeats) {
         this.id = id;
         this.route = route;
         this.departureDate = departureDate;
         this.returnDate = returnDate;
-        this.number = number;
+        this.price = price;
         this.availableSeats = availableSeats;
     }
-    public Flights() {
+    public Flight() {
     }
 
     public int getId() {
@@ -45,12 +45,12 @@ public class Flight {
         this.returnDate = returnDate;
     }
 
-    public float getNumber() {
-        return number;
+    public float getprice() {
+        return price;
     }
 
-    public void setNumber(float number) {
-        this.number = number;
+    public void setprice(float price) {
+        this.price = price;
     }
 
     public int getAvailableSeats() {
@@ -65,7 +65,7 @@ public class Flight {
     private Routes route; 
     private String departureDate;
     private String returnDate;
-    private float number;
+    private float price;
     private int availableSeats;
 
     

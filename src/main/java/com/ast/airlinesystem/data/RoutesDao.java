@@ -66,7 +66,7 @@ public class RoutesDao {
 
     public Routes getRoute(String id){
         Routes route = new Routes();
-        String getStatement = "SELECT * FROM routes where id =\'"+id+"\'";
+        String getStatement = "SELECT * FROM routes where r_id =\'"+id+"\'";
         try{
             con = db.Connect();
             ps = con.prepareStatement(getStatement);

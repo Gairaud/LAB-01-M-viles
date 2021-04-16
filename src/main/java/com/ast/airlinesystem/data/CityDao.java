@@ -52,7 +52,7 @@ public class CityDao {
             ps.setString(3, city.getCountry().getId());
             count = ps.executeUpdate();
             if(count == 0){
-                throw new Exception("El usuario ya existe");
+                throw new Exception("La ciudad ya existe");
             }
 
         }
