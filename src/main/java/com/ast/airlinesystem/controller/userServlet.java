@@ -33,6 +33,18 @@ public class userServlet extends HttpServlet {
                 String userString = gsonObject.toJson(user);
                 break;
             }
+            case "/login": {
+                BufferedReader reader = request.getReader();
+                User user = gsonObject.fromJson(reader, User.class);
+                Boolean exist = Model.instance().verify(user.getEmail(), user.getPassword());
+                String logSuccess = gsonObject.toJson(exist);
+                PrintWriter out = response.getWriter();
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                out.print(logSuccess);
+                out.flush();
+                break;
+            }
             case "/add-user":{
                 User user = new User();
 

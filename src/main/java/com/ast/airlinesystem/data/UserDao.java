@@ -54,7 +54,8 @@ public class UserDao {
 
     public User getUser(String userName, String password) {
         User user = new User();
-        String getStatement = "SELECT * FROM USERS WHERE ID =" + userName;
+        String getStatement = "SELECT * FROM USERS WHERE USERNAME =" + userName
+                + "AND PASSWORD ="+ password;
         try {
             con = db.Connect();
             ps = con.prepareStatement(getStatement);
@@ -69,6 +70,26 @@ public class UserDao {
         return user;
     }
 
+    public boolean verify(String userName, String password){
+        User user = new User();
+        String getStatement = "SELECT * FROM USERS WHERE EMAIL = \'"+userName+"\'"
+                + " AND PASSWORD =  \'"+password+"\'";
+        try {
+            con = db.Connect();
+            ps = con.prepareStatement(getStatement);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+            }
+            if(user.getEmail().equals(userName) && user.getPassword().equals(password))
+                return true;
+        } catch (SQLException ex) {
+
+        }
+        return false;
+
+    }
     public static User toUser(ResultSet rs) {
 
         try {

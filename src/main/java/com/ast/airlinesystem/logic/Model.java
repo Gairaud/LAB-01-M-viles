@@ -46,6 +46,9 @@ public class Model {
     public void addUser(User puser) throws Exception{
         user.addUser(puser);
     }
+    public Boolean verify(String email, String pass){
+        return user.verify(email,pass);
+    }
     public User getUserById(String id){
         return user.getUserById(id);
     }

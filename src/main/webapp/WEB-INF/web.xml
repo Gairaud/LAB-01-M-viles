@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
     <welcome-file-list>
-        <welcome-file>presentation/login.html</welcome-file>
+        <welcome-file>presentation/index.html</welcome-file>
     </welcome-file-list>
 
             <!-- User Servlet -->
@@ -16,6 +16,7 @@
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/get-user</url-pattern>
         <url-pattern>/add-user</url-pattern>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
             <!-- Airplane Servlet -->
