@@ -52,26 +52,36 @@ public class UserDao {
         return count;
     }
 
-    public User getUser(String userName, String password) {
+    public User getUser(String userName) {
         User user = new User();
-        String getStatement = "SELECT * FROM USERS WHERE USERNAME =" + userName
-                + "AND PASSWORD ="+ password;
+        String getStatement = "SELECT * FROM USERS WHERE EMAIL = \'"+userName+"\'";
+              
         try {
             con = db.Connect();
             ps = con.prepareStatement(getStatement);
             rs = ps.executeQuery();
             while (rs.next()) {
+
+
+                user.setId(Integer.parseInt(rs.getString("user_id")));
                 user.setUserName(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
+                user.setName(rs.getString("name"));
+                user.setLastName(rs.getString("last_name"));
+                user.setEmail(rs.getString("email"));
+                user.setAddress(rs.getString("address"));
+                user.setPhone(rs.getString("phone"));
+                user.setIsAdmin(Integer.parseInt(rs.getString("is_admin")));
+                return user;
+ 
             }
         } catch (SQLException ex) {
 
         }
-        return user;
+        return null;
     }
 
     public boolean verify(String userName, String password){
-        User user = new User();
         String getStatement = "SELECT * FROM USERS WHERE EMAIL = \'"+userName+"\'"
                 + " AND PASSWORD =  \'"+password+"\'";
         try {

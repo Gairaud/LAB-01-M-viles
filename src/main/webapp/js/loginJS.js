@@ -17,11 +17,17 @@ async function loginService(){
 
     response = await fetch("http://localhost:9393/login", requestBody);
     let logSuccess = await response.json();
-    logSuccess?getUserData():loginError();
+    logSuccess?getUserData(requestBody):loginError();
 
 }
-function getUserData(x){
-    alert("Entra");
+async function getUserData(requestBody){
+
+    response = await fetch("http://localhost:9393/get-user", requestBody);
+    let user = await response.json();
+    sessionStorage.setItem("logedUser", user.userName);
+    sessionStorage.setItem("isAdmin", user.isAdmin);
+    console.log(user);
+    location.href="userMenu.html";
 }
 function loginError(){
     $("#loginErrorModal").modal('show');

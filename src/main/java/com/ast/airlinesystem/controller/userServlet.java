@@ -22,15 +22,20 @@ public class userServlet extends HttpServlet {
         switch(request.getServletPath()){
 
             case "/get-user": {
-                String userId = request.getParameter("id");
-
-                User user = null;
+                BufferedReader reader = request.getReader();
+                User user = gsonObject.fromJson(reader, User.class);
+                User finalUser = null;
                 try {
-                    user = Model.instance().getUser("123456789", "kike00");
+                    finalUser = Model.instance().getUser(user.getEmail());
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
-                String userString = gsonObject.toJson(user);
+                String userData = gsonObject.toJson(finalUser);
+                PrintWriter out = response.getWriter();
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                out.print(userData);
+                out.flush();
                 break;
             }
             case "/login": {

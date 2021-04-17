@@ -103,6 +103,10 @@ insert into users values (123456789, 'kike00', 'chico500', 'Enrique',
                         'Mendez Cabezas', 'kike@gmail.com', 'Arriba de la UNA',
                         '9090-0909', 1);
 
+insert into users values (117290193, 'gairaud00', 'chico600', 'Philippe',
+                        'Gairaud Quesada', 'gairaud@gmail.com', 'Abajo de la UNA',
+                        '8080-0808', 0);
+
 insert into airplane_types values ('Super airplane', 2000, 'Model 0',
                                   'Brand 0', 330, 6, 55);
 insert into airplanes values ('Avion 1', 'Super airplane');

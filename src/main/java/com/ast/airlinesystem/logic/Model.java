@@ -40,8 +40,8 @@ public class Model {
         flight = new FlightsDao();
     }
     //User
-    public User getUser(String userName, String password) throws SQLException {
-        return user.getUser(userName, password);
+    public User getUser(String userName) throws SQLException {
+        return user.getUser(userName);
     }
     public void addUser(User puser) throws Exception{
         user.addUser(puser);
