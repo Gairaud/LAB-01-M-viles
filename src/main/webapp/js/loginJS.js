@@ -1,9 +1,9 @@
 function loaded(){
     show();
-    $("#loginForm").submit(loginService);
+    $("#btn").on("click", ()=>{loginService();});
 }
+
 async function loginService(){
-    alert("eNTRA");
     let response;
     let user = {
         email: $("#email").val(),
@@ -15,15 +15,16 @@ async function loginService(){
         headers: {'Content-Type': 'application/json'}
     }
 
-    response = await fetch("http://localhost:9393//login", requestBody);
-    console.log("HOLA")
-    alert("1");
+    response = await fetch("http://localhost:9393/login", requestBody);
     let logSuccess = await response.json();
-    logSuccess?getUserData():$("#loginErrorModal").modal("show");
+    logSuccess?getUserData():loginError();
 
 }
 function getUserData(x){
-    alert("Se pudo iniciar");
+    alert("Entra");
+}
+function loginError(){
+    $("#loginErrorModal").modal('show');
 }
 function show(){
     var pswrd = document.getElementById('pswrd');

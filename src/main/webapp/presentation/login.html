@@ -4,10 +4,29 @@
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../css/loginStyle.css" type="text/css">
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+
     <script src="../js/loginJS.js"></script>
+    <style>
+        input[type="button"]{
+            margin-top: 40px;
+            margin-bottom: 40px;
+            width: 130px;
+            height: 45px;
+            color: white;
+            cursor: pointer;
+            line-height: 45px;
+            border-radius: 45px;
+            border-radius: 5px;
+            background: #fb8500;
+        }
+        input[type="button"]:hover{
+            background: #fb8500;
+            transition: .5s;
+        }
+    </style>
 </head>
 <body>
 <div class="center">
@@ -18,24 +37,23 @@
         <i class="far fa-envelope"></i>
         <input id="pswrd" type="password" placeholder="Contraseña" name="pswrd">
         <i class="fas fa-lock" onclick="show()"></i>
-        <input type="submit" value="Entrar">
-
+        <input id ="btn" type="button"  value="Entrar" >
     </form>
 </div>
-<div id="loginErrorModal" class="modal fade">
-    <div class="modal-dialog modal-dialog-centered modal-delete">
+<div id = "loginErrorModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="icon-box">
-                    <i class="material-icons">&#xE5CD;</i>
-                </div>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Correo o contraseña invalida</h4>
+                <h5 class="modal-title">Error de inicio de sesion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div id="errorModalBody" class="modal-body">
+            <div class="modal-body">
+                <p>Usuario o contraseña invalido</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal">Aceptar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

@@ -78,12 +78,10 @@ public class UserDao {
             con = db.Connect();
             ps = con.prepareStatement(getStatement);
             rs = ps.executeQuery();
-            while (rs.next()) {
-                user.setEmail(rs.getString("email"));
-                user.setPassword(rs.getString("password"));
-            }
-            if(user.getEmail().equals(userName) && user.getPassword().equals(password))
+            if (rs.next()) {
                 return true;
+            }
+
         } catch (SQLException ex) {
 
         }
