@@ -59,7 +59,7 @@ create table schedules (id number not null,
 create table routes (r_id varchar2(20), duration varchar2(25), origin varchar2(5), destination varchar2(5),
                      airplane varchar2(20), schedule number ) tablespace system;
 
-create table ticket(ticket_id number not null, fila number, col number, reservation number) tablespace system;
+create table ticket(ticket_id number not null, fila number, col number, reservation number, flight number) tablespace system;
 
 create table reservation(res_id number not null, userid number, totalPrice number, seatQuantity number) tablespace system; 
 
@@ -95,6 +95,7 @@ alter table routes add constraint destination_fk foreign key (destination) refer
 alter table routes add constraint airplane_fk foreign key (airplane) references airplanes;
 alter table routes add constraint schedule_fk foreign key (schedule) references schedules;
 alter table ticket add constraint reservation_fk foreign key (reservation) references reservation;
+alter table ticket add constraint fligth_fk foreign key (flight) references flights;
 alter table flights add constraint route_fk foreign key (ruta) references routes;
 
 --==================== Inserts =====================    
@@ -122,15 +123,16 @@ insert into schedules values (seq_id_schedules.nextval, TO_DATE('2021/12/19', 'y
 insert into routes values ('SJO-ATL', '12 HORAS', 'SJO', 'ATL', 'Avion 1', 1);
 
 insert into reservation values(seq_id_reservation.nextval, 123456789, 1000, 3);
+insert into reservation values(seq_id_reservation.nextval, 117290193, 1000, 3);
 
-insert into ticket values (seq_id_ticket.nextval, 5,7,1);
-insert into ticket values (seq_id_ticket.nextval, 5,6,1);
-insert into ticket values (seq_id_ticket.nextval, 5,5,1);
 
 insert into flights values (seq_id_flights.nextval, 'SJO-ATL', TO_DATE('2021/12/19', 'yyyy/mm/dd'),
                             TO_DATE('2021/12/19', 'yyyy/mm/dd'), 300,   120);
 
-
+insert into ticket values (seq_id_ticket.nextval, 5,7,1,1);
+insert into ticket values (seq_id_ticket.nextval, 5,6,1,1);
+insert into ticket values (seq_id_ticket.nextval, 5,5,1,1);
+insert into ticket values (seq_id_ticket.nextval, 1000,1000,2,1);
 
 commit;
 

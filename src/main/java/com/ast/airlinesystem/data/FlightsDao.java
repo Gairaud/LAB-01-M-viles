@@ -64,5 +64,23 @@ public class FlightsDao {
         return count;
     }
 
+    public static Flight toFlight(ResultSet rs) throws Exception {
+
+        try{
+            Flight f = new Flight();
+
+                f.setId(Integer.parseInt(rs.getString("f_id")));
+                f.setRoute(Model.instance().getRoute(rs.getString("ruta")));
+                f.setDepartureDate(rs.getString("departure_date"));
+                f.setReturnDate(rs.getString("return_date"));
+                f.setprice(Float.parseFloat(rs.getString("price")));
+                f.setAvailableSeats(Integer.parseInt(rs.getString("available_seats")));
+     
+                return f;
+            
+        } catch (SQLException ex) {
+                return null;
+        }
+    }
 }
 

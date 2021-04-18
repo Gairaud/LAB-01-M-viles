@@ -133,8 +133,8 @@ public class Model {
         ticket.addTicket(t);
     }
 
-    public List<Ticket> getTickets(){
-        return ticket.ticketList();
+    public List<Ticket> getTickets(String resId){
+        return ticket.ticketList(resId);
     }
 
     //Airplane Types 

@@ -26,8 +26,9 @@ public class reservationServlet extends HttpServlet{
             case "/get-reservations":{
 
                 try {
-                    String userId = request.getParameter("id");
-                    List<Reservation> reservationsList = Model.instance().getReservationsByUser(userId);
+                    BufferedReader reader = request.getReader();
+                    User user = gsonObject.fromJson(reader, User.class);
+                    List<Reservation> reservationsList = Model.instance().getReservationsByUser(String.valueOf(user.getId()));
                     String reservations = gsonObject.toJson(reservationsList);
                     PrintWriter out = response.getWriter();
                     out.print(reservations);

@@ -23,12 +23,8 @@
         <ul class="list-unstyled components">
 
             <li>
-                <a href="#" id="types">Tipos de aviones</a>
-
-            </li>
-            <li>
-                <a href="#" id="reservations">Mis reservas</a>
-                <a href="#" id="search">Buscar viajes</a>
+                <a href="#" id="showTrips">Mis viajes</a>
+                <a href="#" id="showSearch">Buscar viajes</a>
                 <a href="adminMenu.html" id="admin" style="visibility: hidden">Administracion</a>
                 <a href="#" id="logout">Logout</a>
             </li>
@@ -38,45 +34,21 @@
     <!-- Page Content  -->
   <div class="d-flex justify-content-center">
   <!-- Types table  -->
-            <div class = "box" id="airplaneTypes">
-                <div class="title container-fluid">Tipos de aviones</div>
+            <div class = "box" id="trips">
+                <div class="title container-fluid">Mis Tickets</div>
                 <div class="table-responsive " style="max-height: 600px; overflow: auto">
                 <table class="table tableHeader" id="contentTable">
                     <thead>
            
                         <tr class="tableTitle d-flex">
-                            <th scope="col" class="col-2">Año</th>
-                            <th scope="col" class="col-2">Marca</th>
-                            <th scope="col" class="col-2">Modelo</th>
-                            <th scope="col" class="col-2">Filas</th>
-                            <th scope="col" class="col-2">Columnas</th>
-                            <th scope="col" class="col-1">Pasajeros</th>
-                            <th scope="col" class="col-1"></th>
+                            <th scope="col" class="col-1">N.Reserva</th>
+                            <th scope="col" class="col-2">Ruta</th>
+                            <th scope="col" class="col-3">Fecha de salida</th>
+                            <th scope="col" class="col-3">Fecha de llegada</th>
+                            <th scope="col" class="col-1">Precio</th>
+                            <th scope="col" class="col-1">Detalles</th>
+                            <th scope="col" class="col-1">Eliminar</th>
                       
-                        </tr>
-                        <tr class="d-flex">
-                            <th scope="col" class="col-2">
-                                <input class="form-control" type="text" id="idSearch">
-                            </th>
-                            <th scope="col" class="col-2">
-                                <input class="form-control" type="text" id="nameSearch">
-                            </th>
-                            <th scope="col" class="col-2">
-                                <input class="form-control" type="text" id="codeSearch">
-                            </th>
-                            <th scope="col" class="col-2">
-                                <input class="form-control" type="text" id="codeSearch">
-                            </th>
-                            <th scope="col" class="col-2">
-                                <input class="form-control" type="text" id="codeSearch">
-                            </th>
-                            <th scope="col" class="col-1">
-                                <input class="form-control" type="text" id="codeSearch">
-                            </th>
-                            <th scope="col" class="col-1">
-                                <button type="button" class="btn btn-success">Agregar</button>
-                            </th>
-                            
                         </tr>
                     </thead>
                 </table>
@@ -84,50 +56,15 @@
                 <!-- Table Content -->
                 <div class="tableContent">
                     <table class="table table-hover table-bordered">
-                        <tbody class="tableBody" id="officerList">
-                            <tr class="d-flex">
-                                <th  scope="col" class="col-2">2000</th>
-                                <th  scope="col" class="col-2">XXXX</th>
-                                <th  scope="col" class="col-2">YYYY</th>
-                                <th  scope="col" class="col-2">YYYY</th>
-                                <th  scope="col" class="col-2">YYYY</th>
-                                <th  scope="col" class="col-1">YYYY</th>
-                                <th  scope="col" class="col-1">DEL</th>
-                            </tr>
-                            <tr class="d-flex">
-                                <th  scope="col" class="col-2">2000</th>
-                                <th  scope="col" class="col-2">XXXX</th>
-                                <th  scope="col" class="col-2">YYYY</th>
-                                <th  scope="col" class="col-2">YYYY</th>
-                                <th  scope="col" class="col-2">YYYY</th>
-                                <th  scope="col" class="col-1">YYYY</th>
-                                <th  scope="col" class="col-1">DEL</th>
-                            </tr>
-                            <tr class="d-flex">
-                                <th  scope="col" class="col-2">2000</th>
-                                <th  scope="col" class="col-2">XXXX</th>
-                                <th  scope="col" class="col-2">YYYY</th>
-                                <th  scope="col" class="col-2">YYYY</th>
-                                <th  scope="col" class="col-2">YYYY</th>
-                                <th  scope="col" class="col-1">YYYY</th>
-                                <th  scope="col" class="col-1">DEL</th>
-                            </tr>
-                            <tr class="d-flex">
-                                <th  scope="col" class="col-2">2000</th>
-                                <th  scope="col" class="col-2">XXXX</th>
-                                <th  scope="col" class="col-2">YYYY</th>
-                                <th  scope="col" class="col-2">YYYY</th>
-                                <th  scope="col" class="col-2">YYYY</th>
-                                <th  scope="col" class="col-1">YYYY</th>
-                                <th  scope="col" class="col-1">DEL</th>
-                            </tr>
+                        <tbody class="tableBody" id="tList">
+               
                         </tbody>
                     </table>
                 </div>
             </div>
               <!-- Planes table  -->
-              <div class = "box" id="planes">
-                <div class="title container-fluid">Aviones</div>
+              <div class = "box" id="searchTrips">
+                <div class="title container-fluid">Buscar viajes</div>
                 <div class="table-responsive " style="max-height: 600px; overflow: auto">
                 <table class="table tableHeader" id="contentTable">
                     <thead>

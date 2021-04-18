@@ -11,7 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.ast.airlinesystem.data.ReservationDao.toReservation;;
+import static com.ast.airlinesystem.data.ReservationDao.toReservation;
+import static com.ast.airlinesystem.data.FlightsDao.toFlight;;;
 
 public class TicketDao {
 
@@ -20,10 +21,10 @@ public class TicketDao {
     ResultSet rs;
     Connection con;
 
-    public List ticketList(){
+    public List ticketList(String res){
         List<Ticket> list = new ArrayList<>();
-        String sql = "select * from ticket t, reservation r, users u where" 
-         +" t.reservation = r.res_id and r.userid = u.user_id";
+        String sql = "select * from ticket t, reservation r, flights f, users u where" 
+         +" t.reservation = r.res_id and r.userid = u.user_id and f.f_id = t.flight and u.user_id = \'"+res+"\'";
         try{
             con = db.Connect();
             ps = con.prepareStatement(sql);
@@ -35,6 +36,7 @@ public class TicketDao {
                 t.setRow(Integer.parseInt(rs.getString(2)));
                 t.setCol(Integer.parseInt(rs.getString(3)));
                 t.setReservation(toReservation(rs));
+                t.setFlight(toFlight(rs));
                 list.add(t);
 
                 

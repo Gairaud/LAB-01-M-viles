@@ -5,12 +5,14 @@ public class Ticket {
     private int row;
     private int col;
     private Reservation reservation;
+    private Flight flight;
 
-    public Ticket(int id, int row, int col, Reservation reservation) {
+    public Ticket(int id, int row, int col, Reservation reservation, Flight flight) {
         this.id = id;
         this.row = row;
         this.col = col;
         this.reservation = reservation;
+        this.flight = flight;
     }
 
     public Ticket(){
@@ -50,5 +52,11 @@ public class Ticket {
         this.reservation = reservation;
     }
 
+    public Flight getFlight(){
+        return flight;
+    }
+    public void setFlight(Flight flight){
+        this.flight = flight;
+    }
 
 }

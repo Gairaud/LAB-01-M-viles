@@ -6,7 +6,8 @@ import java.util.List;
 
 import com.ast.airlinesystem.logic.Ticket;
 import com.ast.airlinesystem.logic.Model;
-
+import com.ast.airlinesystem.logic.Reservation;
+import com.ast.airlinesystem.logic.User;
 import jakarta.servlet.http.*;
 import com.google.gson.*;
 
@@ -25,7 +26,9 @@ public class ticketServlet extends HttpServlet{
             case "/get-tickets":{
 
                 try {
-                    List<Ticket> ticketsList = Model.instance().getTickets();
+                    BufferedReader reader = request.getReader();
+                    User u = gsonObject.fromJson(reader, User.class);
+                    List<Ticket> ticketsList = Model.instance().getTickets(String.valueOf(u.getId()));
                     String allTickets = gsonObject.toJson(ticketsList);
                     PrintWriter out = response.getWriter();
                     out.print(allTickets);

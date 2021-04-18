@@ -26,6 +26,7 @@ async function getUserData(requestBody){
     let user = await response.json();
     sessionStorage.setItem("logedUser", user.userName);
     sessionStorage.setItem("isAdmin", user.isAdmin);
+    sessionStorage.setItem("userId", user.id);
     console.log(user);
     location.href="userMenu.html";
 }
