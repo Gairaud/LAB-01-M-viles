@@ -15,6 +15,7 @@ async function loadTypes(){
     let response = await fetch ("http://localhost:9393/get-types", requestBody);
     let types = await response.json();
     listTypes(types);
+    typesCombo(types);
 
 }
 
@@ -47,6 +48,24 @@ function deleteType(type){
     console.log(type)
 }
 
+function typesCombo(types){
+
+    let list=$("#typesSelect");
+    list.html("");
+    types.forEach((t)=>{ typeOption(list,t);});
+
+}
+
+function typeOption(list, t){
+
+    var opt = $("<option></option>");
+    opt.attr('value', t.id).text(t.id);
+    list.append(opt);
+
+    
+
+
+}
 async function loadPlanes(){
 
     let requestBody = {
