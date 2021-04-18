@@ -18,7 +18,7 @@ public class ScheduleDao {
 
     public List ScheduleList(){
         List<Schedule> list = new ArrayList<>();
-        String sql = "SELECT * FROM Schedules";
+        String sql = "SELECT * FROM schedules";
         try{
             con = db.Connect();
             ps = con.prepareStatement(sql);
@@ -26,9 +26,8 @@ public class ScheduleDao {
             while (rs.next()){
                 Schedule at = new Schedule();
                 at.setId(Integer.parseInt(rs.getString(1)));
-                at.setDay(rs.getString(2));
-                at.setArrivalTime(rs.getString(3));
-                at.setDepartureTime(rs.getString(4));
+                at.setArrivalTime(rs.getString(2));
+                at.setDepartureTime(rs.getString(3));
                 list.add(at);
             }
         }
@@ -67,9 +66,8 @@ public class ScheduleDao {
             rs = ps.executeQuery();
             while (rs.next()){
                 schedule.setId(Integer.parseInt(rs.getString(1)));
-                schedule.setDay(rs.getString(2));
-                schedule.setDepartureTime(rs.getString(3));
-                schedule.setArrivalTime(rs.getString(4));
+                schedule.setDepartureTime(rs.getString(2));
+                schedule.setArrivalTime(rs.getString(3));
             }
         } catch (SQLException ex) {
 
@@ -79,13 +77,12 @@ public class ScheduleDao {
 
     public void updateSchedule(Schedule schedule){
 
-        String updateStatement = "CALL prc_upd_schedule(?,?,?,?)";
+        String updateStatement = "CALL prc_upd_schedule(?,?,?)";
         try{
             con = db.Connect();
             ps = con.prepareStatement(updateStatement);
             ps.setString(1, Integer.toString(schedule.getId()));
-            ps.setString(2, schedule.getDay());
-            ps.setString(3, schedule.getDepartureTime());
+            ps.setString(2, schedule.getDepartureTime());
             ps.setString(3, schedule.getArrivalTime());
             ps.executeUpdate(updateStatement);
 
