@@ -109,8 +109,13 @@ insert into users values (117290193, 'gairaud00', 'chico600', 'Philippe',
                         '8080-0808', 0);
 
 insert into airplane_types values ('Super airplane', 2000, 'Model 0',
-                                  'Brand 0', 330, 6, 55);
+                                  'Brand 0', 132, 6, 22);
+
+insert into airplane_types values ('Airplane type 2', 2000, 'Model 1',
+                                  'Brand 1', 198, 9, 22);
+
 insert into airplanes values ('Avion 1', 'Super airplane');
+insert into airplanes values ('Avion 2', 'Airplane type 2');
 
 insert into countries values ('CR', 'Costa Rica');
 insert into cities values ('SJO', 'San Jose', 'CR');
