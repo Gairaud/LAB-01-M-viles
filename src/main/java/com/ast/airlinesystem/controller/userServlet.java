@@ -51,21 +51,16 @@ public class userServlet extends HttpServlet {
                 break;
             }
             case "/add-user":{
-                User user = new User();
 
-                user.setPassword(request.getParameter("pswrd"));
-                user.setId(Integer.parseInt(request.getParameter("id")));
-                user.setName(request.getParameter("name"));
-                user.setUserName(request.getParameter("user"));
-                user.setLastName(request.getParameter("lastname"));
-                user.setAddress(request.getParameter("address"));
-                user.setPhone(request.getParameter("phone"));
-                user.setEmail(request.getParameter("email"));
+                BufferedReader reader = request.getReader();
+                User user = gsonObject.fromJson(reader, User.class);
+                
                 try {
                     Model.instance().addUser(user);
                 }catch (Exception e){
 
                 }
+                break;
             }
         }
 

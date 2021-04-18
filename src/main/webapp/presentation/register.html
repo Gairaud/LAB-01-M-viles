@@ -2,9 +2,28 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="../css/regStyle.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../js/register.js"></script>
     <meta charset="UTF-8">
     <title>Registro</title>
-
+    <style>
+        input[type="button"]{
+            margin-top: 40px;
+            margin-bottom: 40px;
+            width: 130px;
+            height: 45px;
+            color: white;
+            cursor: pointer;
+            line-height: 45px;
+            border-radius: 45px;
+            border-radius: 5px;
+            background: #fb8500;
+        }
+        input[type="button"]:hover{
+            background: #fb8500;
+            transition: .5s;
+        }
+    </style>
 
 
 </head>
@@ -13,17 +32,17 @@
     <div class="header">
         Registro</div>
     <form action="../add-user" method="POST">
-        <input type="text" placeholder="Cedula" name="id">
-        <input type="text" placeholder="username" name="user">
-        <input type="text" placeholder="Nombre" name="name">
-        <input type="text" placeholder="Apellidos" name="lastname">
-        <input type="text" placeholder="Direccion" name="address">
-        <input type="text" placeholder="Telefono" name="phone">
-        <input type="text" placeholder="Correo electrónico" name="email">
+        <input type="text" placeholder="Cedula" id="id">
+        <input type="text" placeholder="username" id="username">
+        <input type="text" placeholder="Nombre" id="name">
+        <input type="text" placeholder="Apellidos" id="lastname">
+        <input type="text" placeholder="Direccion" id="address">
+        <input type="text" placeholder="Telefono" id="phone">
+        <input type="text" placeholder="Correo electrónico" id="email">
         <i class="far fa-envelope"></i>
-        <input name="pswrd" type="password" placeholder="Contraseña">
+        <input id="pswrd" type="password" placeholder="Contraseña">
         <i class="fas fa-lock" onclick="show()"></i>
-        <input type="submit" value="Entrar">
+        <input type="button" value="Entrar" id ="btn">
 
     </form>
 </div>
