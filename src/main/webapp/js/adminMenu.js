@@ -1,5 +1,7 @@
 function loaded(){
     $("#planes").hide();
+    $("#schedulesTables").hide();
+    $("#routesTable").hide();
     $("#types").on("click", airplaneTypesTable);
     $("#airplanes").on("click", planesTable);
     $("#schedules").on("click", scheduleTable);
@@ -131,11 +133,11 @@ function routeRow(list, r){
     let tr =$("<tr class='d-flex' />");
     tr.html(
         "<td class='col-1'>"+r.id+"</td>"+
-        "<td class='col-1'>"+r.duration+"</td>"+
-        "<td class='col-1'>"+r.origin.id+","+r.origin.country.id+"</td>"+
-        "<td class='col-1'>"+r.destination.id+","+r.destination.country.id+"</td>"+
-        "<td class='col-1'>"+r.schedule.departureTime.substring(0,10)+"</td>"+
-        "<td class='col-1'>"+r.schedule.arrivalTime.substring(0,10)+"</td>"+
+        "<td class='col-2'>"+r.duration+"</td>"+
+        "<td class='col-2'>"+r.origin.id+","+r.origin.country.id+"</td>"+
+        "<td class='col-2'>"+r.destination.id+","+r.destination.country.id+"</td>"+
+        "<td class='col-2'>"+r.schedule.departureTime.substring(0,10)+"</td>"+
+        "<td class='col-2'>"+r.schedule.arrivalTime.substring(0,10)+"</td>"+
         "<td class=\"col-1\" id='delete'><i style='cursor: pointer;' class='fas fa-trash-alt'></i></td>"
     );
     tr.find("#delete").on("click", () => { deleteRoute(r); });
@@ -171,9 +173,9 @@ function scheduleRow(list, s){
 
     let tr =$("<tr class='d-flex' />");
     tr.html(
-        "<td class='col-1'>"+s.id+"</td>"+
-        "<td class='col-3'>"+s.departureTime.substring(0,10)+"</td>"+
-        "<td class='col-3'>"+s.arrivalTime.substring(0,10)+"</td>"+
+        "<td class='col-3'>"+s.id+"</td>"+
+        "<td class='col-4'>"+s.departureTime.substring(0,10)+"</td>"+
+        "<td class='col-4'>"+s.arrivalTime.substring(0,10)+"</td>"+
         "<td class=\"col-1\" id='delete'><i style='cursor: pointer;' class='fas fa-trash-alt'></i></td>"
     );
     tr.find("#delete").on("click", () => { deleteSchedule(s); });
@@ -187,30 +189,32 @@ function deleteSchedule(schedule){
 
 
 function airplaneTypesTable(){
+    
     $("#planes").hide();      
+    $("#schedulesTables").hide();
+    $("#routesTable").hide();
     $("#airplaneTypes").show();
-    $("#schedules").hide();
-    $("#routes").hide();
+    
 }
 function planesTable(){
     $("#airplaneTypes").hide();    
     $("#planes").show();
-    $("#schedules").hide();
-    $("#routes").hide();
+    $("#schedulesTables").hide();
+    $("#routesTable").hide();
       
 }
 function scheduleTable(){
     $("#airplaneTypes").hide();   
     $("#planes").hide();   
-    $("#schedules").show();
-    $("#routes").hide();
+    $("#schedulesTables").show();
+    $("#routesTable").hide();
       
 }
 function RoutesTable(){
     $("#airplaneTypes").hide();   
     $("#planes").hide();   
-    $("#schedules").hide();
-    $("#routes").show();
+    $("#schedulesTables").hide();
+    $("#routesTable").show();
       
 }
 $(loaded);

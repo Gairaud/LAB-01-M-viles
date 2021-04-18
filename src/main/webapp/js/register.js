@@ -1,6 +1,7 @@
 function loaded(){
     show();
     $("#btn").on("click", ()=>{registerService();});
+    $("#redirect").on("click", ()=>{confirmationModal();});
 }
 
 async function registerService(){
@@ -25,23 +26,17 @@ async function registerService(){
     }
 
     await fetch("http://localhost:9393/add-user", requestBody);
-    //let logSuccess = await response.json();
-    //logSuccess?getUserData(requestBody):loginError();
+    $("#confirmRegister").modal('show');
+    
 
 }
-async function getUserData(requestBody){
 
-    response = await fetch("http://localhost:9393/get-user", requestBody);
-    let user = await response.json();
-    sessionStorage.setItem("logedUser", user.userName);
-    sessionStorage.setItem("isAdmin", user.isAdmin);
-    sessionStorage.setItem("userId", user.id);
-    console.log(user);
-    location.href="userMenu.html";
+function confirmationModal(){
+
+    
+    location.href="login.html";
 }
-function loginError(){
-    $("#loginErrorModal").modal('show');
-}
+
 function show(){
     var pswrd = document.getElementById('pswrd');
     var icon = document.querySelector('.fas');
