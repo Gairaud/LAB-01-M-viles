@@ -77,27 +77,30 @@ async function loadFlights(){
 function listFlights(flight){
     let list=$("#fList");
     list.html("");
-    flight.forEach((t)=>{ ticketRow(list,t);});
+    flight.forEach((f)=>{ flightRow(list,f);});
 }
 function flightRow(list, f){
     let tr =$("<tr class='d-flex' />");
     tr.html(
         "<th scope=\"col\" class=\"col-1\">"+f.id+"</th>"+
-        "<th scope=\"col\" class=\"col-2\"></th>"+
-        "<th scope=\"col\" class=\"col-1\">"+f.route+"</th>"+
-        "<th scope=\"col\" class=\"col-2\"></th>"+
+        
+        "<th scope=\"col\" class=\"col-1\">"+f.route.id+"</th>"+
+        
         "<th scope=\"col\" class=\"col-1\">"+f.departureDate+"</th>"+
-        "<th scope=\"col\" class=\"col-2\"></th>"+
+        
         "<th scope=\"col\" class=\"col-1\">"+f.returnDate+"</th>"+
-        "<th scope=\"col\" class=\"col-2\"></th>"+
+        
         "<th scope=\"col\" class=\"col-1\">"+f.price+"</th>"+
-        "<th scope=\"col\" class=\"col-2\"></th>"+
-        "<th scope=\"col\" class=\"col-1\">"+f.price+"</th>"+
-        "<th scope=\"col\" class=\"col-2\"></th>"+
-        "<td class=\"col-1\" id='delete'><i style='cursor: pointer;' class='fas fa-plane-departure'></i></td>"
+        
+        "<td class=\"col-1\" id='buy'><i style='cursor: pointer;' class='fas fa-plane-departure'></i></td>"
         );
-        tr.find("#delete").on("click", () => { deletePlane(p); });
+        tr.find("#buy").on("click", () => { buyticket(f); });
     list.append(tr);
+}
+
+function buyticket(flight){
+    sessionStorage.setItem("flight", flight.id);
+    location.href="teste.html";
 }
 
 $(loaded);
