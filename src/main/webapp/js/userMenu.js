@@ -84,13 +84,13 @@ function flightRow(list, f){
     tr.html(
         "<th scope=\"col\" class=\"col-1\">"+f.id+"</th>"+
         
-        "<th scope=\"col\" class=\"col-1\">"+f.route.id+"</th>"+
+        "<th scope=\"col\" class=\"col-2\">"+f.route.id+"</th>"+
         
-        "<th scope=\"col\" class=\"col-1\">"+f.departureDate+"</th>"+
+        "<th scope=\"col\" class=\"col-3\">"+f.departureDate+"</th>"+
         
-        "<th scope=\"col\" class=\"col-1\">"+f.returnDate+"</th>"+
+        "<th scope=\"col\" class=\"col-3\">"+f.returnDate+"</th>"+
         
-        "<th scope=\"col\" class=\"col-1\">"+f.price+"</th>"+
+        "<th scope=\"col\" class=\"col-2\">"+f.price+"</th>"+
         
         "<td class=\"col-1\" id='buy'><i style='cursor: pointer;' class='fas fa-plane-departure'></i></td>"
         );
@@ -99,7 +99,7 @@ function flightRow(list, f){
 }
 
 function buyticket(flight){
-    sessionStorage.setItem("flight", flight.id);
+    sessionStorage.setItem("flightId", flight.id);
     location.href="teste.html";
 }
 
