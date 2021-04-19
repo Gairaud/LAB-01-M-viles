@@ -6,12 +6,31 @@ function loaded(){
     $("#airplanes").on("click", planesTable);
     $("#schedules").on("click", scheduleTable);
     $("#routes").on("click", RoutesTable);
+    $("#typeAdd").on("click", ()=>{addType();});
+    $("#planeAdd").on("click", ()=>{addPlane();});
     loadTypes();
     loadPlanes();
     loadSchedules();
     loadRoutes();
+    loadCities();
+    loadCountries();
+    
 }
 
+
+async function loadCountries(){
+
+    let requestBody = {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'}
+    }
+    let response = await fetch ("http://localhost:9393/get-country", requestBody);
+    let countries = await response.json();
+    //countriesCombo(countries);
+
+}
+
+async function loadCities(){}
 async function loadTypes(){
 
     let requestBody = {
@@ -37,11 +56,12 @@ function typeRow(list, t){
 
     let tr =$("<tr class='d-flex' />");
     tr.html(
+        "<td class='col-2'>"+t.id+"</td>"+
         "<td class='col-2'>"+t.year+"</td>"+
         "<td class='col-2'>"+t.brand+"</td>"+
         "<td class='col-2'>"+t.model+"</td>"+
-        "<td class='col-2'>"+t.rowsNumber+"</td>"+
-        "<td class='col-2'>"+t.columnsNumber+"</td>"+
+        "<td class='col-1'>"+t.rowsNumber+"</td>"+
+        "<td class='col-1'>"+t.columnsNumber+"</td>"+
         "<td class='col-1'>"+t.passengersQuantity+"</td>"+
         "<td class=\"col-1\" id='delete'><i style='cursor: pointer;' class='fas fa-trash-alt'></i></td>"
     );
@@ -71,6 +91,81 @@ function typeOption(list, t){
     
 
 
+}
+async function addType(){
+
+    
+    let type =  {
+
+        id : $("#typeId").val(),
+        year : $("#typeYear").val(),
+        model : $("#typeModel").val(),
+        brand : $("#typeBrand").val(),
+        passengersQuantity : $("#typeQ").val(),
+        rowsNumber : $("#typeRows").val(),
+        columnsNumber : $("#typeColumns").val(),
+       
+    }
+    let requestBody = {
+        method: "POST",
+        body: JSON.stringify(type),
+        headers: {'Content-Type': 'application/json'}
+    }
+    console.log(type);
+    console.log(requestBody);
+  
+    await fetch("http://localhost:9393/add-type", requestBody);
+    clearTypes();
+    loadTypes();
+}
+
+async function addPlane(){
+
+    alert( $("#typesSelect").val());
+    let type_response
+    let type =  {
+
+        id : $("#typesSelect").val(),
+       
+    }
+    let requestBody_1 = {
+        method: "POST",
+        body: JSON.stringify(type),
+        headers: {'Content-Type': 'application/json'}
+    }
+    type_response = await fetch("http://localhost:9393/get-type", requestBody_1);
+    let airplaneType = await type_response.json();
+
+    let plane =  {
+
+        id : $("#planeName").val(),
+        type: airplaneType
+       
+    }
+    let requestBody_2 = {
+        method: "POST",
+        body: JSON.stringify(plane),
+        headers: {'Content-Type': 'application/json'}
+    }
+    console.log(plane);
+    
+    await fetch("http://localhost:9393/add-planes", requestBody_2);
+    //clearTypes();
+    loadPlanes();
+
+
+
+}
+function clearTypes(){
+
+
+    $("#typeId").val("");
+    $("#typeYear").val("");
+    $("#typeModel").val("");
+    $("#typeBrand").val("");
+    $("#typeQ").val("");
+    $("#typeRows").val("");
+    $("#typeColumns").val("");
 }
 async function loadPlanes(){
 

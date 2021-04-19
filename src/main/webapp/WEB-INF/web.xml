@@ -38,6 +38,8 @@
     <servlet-mapping>
         <servlet-name>AirplaneTypeServlet</servlet-name>
         <url-pattern>/get-types</url-pattern>
+        <url-pattern>/get-type</url-pattern>
+        <url-pattern>/add-type</url-pattern>
     </servlet-mapping>
             <!-- Country Servlet -->
     <servlet>

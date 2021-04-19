@@ -43,7 +43,7 @@ public class AirplaneTypeDao {
     }
 
     public int addType (AirplaneType type) throws  Exception{
-        String insertStatement = "EXECUTE PRC_INS_AVIONTYPE (?,?,?,?,?,?,?)";
+        String insertStatement = "CALL PRC_INS_AVIONTYPE (?,?,?,?,?,?,?)";
         int count = 0;
         try{
             con = db.Connect();
@@ -92,13 +92,13 @@ public class AirplaneTypeDao {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()){
-                at.setId(rs.getString("at.at_id"));
-                at.setYear(Integer.parseInt(rs.getString("at.year")));
-                at.setModel(rs.getString("at.model"));
-                at.setBrand(rs.getString("at.brand"));
-                at.setPassengersQuantity(Integer.parseInt(rs.getString("at.passengers_quantity")));
-                at.setRowsNumber(Integer.parseInt(rs.getString("at.rows_number")));
-                at.setColumnsNumber(Integer.parseInt(rs.getString("at.columns_number")));
+                at.setId(rs.getString("at_id"));
+                at.setYear(Integer.parseInt(rs.getString("year")));
+                at.setModel(rs.getString("model"));
+                at.setBrand(rs.getString("brand"));
+                at.setPassengersQuantity(Integer.parseInt(rs.getString("passengers_quantity")));
+                at.setRowsNumber(Integer.parseInt(rs.getString("rows_number")));
+                at.setColumnsNumber(Integer.parseInt(rs.getString("columns_number")));
             }
         }
         catch (Exception e) {

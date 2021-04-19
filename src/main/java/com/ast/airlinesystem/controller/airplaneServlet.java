@@ -29,6 +29,7 @@ public class airplaneServlet  extends HttpServlet {
                     PrintWriter out = response.getWriter();
                     out.print(planes);
                     out.flush();
+                    break;
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 } catch (Exception e) {
@@ -36,13 +37,14 @@ public class airplaneServlet  extends HttpServlet {
                 break;
                 }
             case "/add-planes":{
-                try{
-                    Airplane airplane = new Airplane();
-                    airplane.setId(request.getParameter("id"));
-                    airplane.setType(Model.instance().getTypeById(request.getParameter("typeId")));
-                    Model.instance().addAirplane(airplane);
+                BufferedReader reader = request.getReader();
+                Airplane plane = gsonObject.fromJson(reader, Airplane.class);
+                
+                try {
+                    Model.instance().addAirplane(plane);
+                    break;
                 }catch (Exception e){
-                    e.printStackTrace();
+
                 }
                 break;
             }

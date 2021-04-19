@@ -41,7 +41,7 @@ public class AirplaneDao {
     }
 
     public int addAirplane(Airplane airplane) throws Exception{
-        String insertStatement = "CALL PROCEDURE PRC_INS_AVION(?,?)";
+        String insertStatement = "CALL PRC_INS_AVION (?,?)";
         int count = 0;
         try{
             con = db.Connect();

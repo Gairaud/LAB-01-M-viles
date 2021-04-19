@@ -144,6 +144,9 @@ public class Model {
     public AirplaneType getTypeById(String id)  throws Exception{
         return type.getTypeById(id);
     }
+    public void addType(AirplaneType t) throws Exception{
+        type.addType(t);
+    }
     //Flight
 
     public List<Flight> getFlights() throws Exception {

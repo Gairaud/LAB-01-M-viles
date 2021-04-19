@@ -45,16 +45,20 @@
                     <thead>
            
                         <tr class="tableTitle d-flex">
+                            <th scope="col" class="col-2">Tipo</th>
                             <th scope="col" class="col-2">Año</th>
                             <th scope="col" class="col-2">Marca</th>
                             <th scope="col" class="col-2">Modelo</th>
-                            <th scope="col" class="col-2">Filas</th>
-                            <th scope="col" class="col-2">Columnas</th>
+                            <th scope="col" class="col-1">Filas</th>
+                            <th scope="col" class="col-1">Columnas</th>
                             <th scope="col" class="col-1">Pasajeros</th>
                             <th scope="col" class="col-1"></th>
                       
                         </tr>
                         <tr class="d-flex">
+                            <th scope="col" class="col-2">
+                                <input class="form-control" type="text" id="typeId">
+                            </th>
                             <th scope="col" class="col-2">
                                 <input class="form-control" type="text" id="typeYear">
                             </th>
@@ -62,19 +66,19 @@
                                 <input class="form-control" type="text" id="typeBrand">
                             </th>
                             <th scope="col" class="col-2">
-                                <input class="form-control" type="text" id="codeSearch">
-                            </th>
-                            <th scope="col" class="col-2">
-                                <input class="form-control" type="text" id="codeSearch">
-                            </th>
-                            <th scope="col" class="col-2">
-                                <input class="form-control" type="text" id="codeSearch">
+                                <input class="form-control" type="text" id="typeModel">
                             </th>
                             <th scope="col" class="col-1">
-                                <input class="form-control" type="text" id="codeSearch">
+                                <input class="form-control" type="text" id="typeRows">
                             </th>
                             <th scope="col" class="col-1">
-                                <button type="button" class="btn btn-success">Agregar</button>
+                                <input class="form-control" type="text" id="typeColumns">
+                            </th>
+                            <th scope="col" class="col-1">
+                                <input class="form-control" type="text" id="typeQ">
+                            </th>
+                            <th scope="col" class="col-1">
+                                <button type="button" class="btn btn-success" id  = "typeAdd">Agregar</button>
                             </th>
                             
                         </tr>
@@ -107,11 +111,11 @@
                         </tr>
                         <tr class="d-flex">
                             <th scope="col" class="col-3">
-                                <input class="form-control" type="text" id="codeSearch">
+                                <input class="form-control" type="text" id="planeName">
                             </th>
                             <th scope="col" class="col-3">
                             </th>
-                            <th scope="col" class="col-4">
+                            <th scope="col" class="col-4" id="typeName">
                                 <select id="typesSelect" class="custom-select">
                                 </select>
                             </th>
@@ -120,7 +124,7 @@
                      
                           
                             <th scope="col" class="col-1">
-                                <button type="button" class="btn btn-success">Agregar</button>
+                                <button type="button" class="btn btn-success" id="planeAdd">Agregar</button>
                             </th>
                             
                         </tr>
@@ -196,16 +200,27 @@
                             <th scope="col" class="col-1"></th>
                         </tr>
                         <tr class="d-flex">
-                            <th scope="col" class="col-3">
-                                <input class="form-control" type="text" id="codeSearch">
-                            </th>
-                            <th scope="col" class="col-3">
-                            </th>
-                            <th scope="col" class="col-4">
-                                <input class="form-control" type="text" id="codeSearch">
-                            </th>
                             <th scope="col" class="col-1">
+                                <input class="form-control" type="text" id="codeSearch">
                             </th>
+                            <th scope="col" class="col-2">
+                                <input class="form-control" type="text" id="codeSearch">
+                            </th>
+                            <th scope="col" class="col-2" id="typeName">
+                                <select id="originSelect" class="custom-select">
+                                </select>
+                            </th>
+                            <th scope="col" class="col-2" id="typeName">
+                                <select id="destinySelect" class="custom-select">
+                                </select>
+                            </th>
+                            <th scope="col" class="col-2">
+                                <input class="form-control" type="text" id="codeSearch">
+                            </th>
+                            <th scope="col" class="col-2">
+                                <input class="form-control" type="text" id="codeSearch">
+                            </th>
+                        
                      
                           
                             <th scope="col" class="col-1">
