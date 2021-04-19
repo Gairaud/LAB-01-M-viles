@@ -58,32 +58,13 @@ public class routesServlet extends HttpServlet{
             }
 
             case "/add-route":{
+                BufferedReader reader = request.getReader();
+                Routes route = gsonObject.fromJson(reader, Routes.class);
+                
                 try {
-                    Routes route = new Routes();
-                    City origin = new City();
-                    City destiny = new City();
-                    Airplane airplane= new Airplane();
-                    Schedule schedule=new Schedule();
-
-                    route.setId(request.getParameter("id"));
-                    route.setDuration(request.getParameter("duration"));
-                    origin.setId(request.getParameter("Oriid"));
-                    destiny.setId(request.getParameter("Desid"));
-                    airplane.setId(request.getParameter("Airid"));
-                    schedule.setId(Integer.parseInt(request.getParameter("Schid")));
-
-                    route.setOrigin(origin);
-                    route.setDestination(destiny);
-                    route.setAirplane(airplane);
-                    route.setSchedule(schedule);
-
                     Model.instance().addRoute(route);
-
-                }catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                } catch (Exception e) {
-                    e.printStackTrace();
                     break;
+                }catch (Exception e){
 
                 }
                 break;
