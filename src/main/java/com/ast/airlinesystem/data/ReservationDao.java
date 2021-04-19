@@ -40,7 +40,7 @@ public class ReservationDao {
         }
         return list;
     }
-
+    //select MAX(RES_ID) from reservation;
     public Reservation getReservationsById(String id){
         Reservation r = new Reservation();
         String sql = "SELECT * FROM RESERVATION R, USERS U WHERE R.res_id = \'"+id+"\'";
@@ -60,7 +60,23 @@ public class ReservationDao {
         }
         return r;
     }
+    public int getReservationId(){
+        String sql = "select nvl(MAX(RES_ID),0) from reservation";
+        try{
+            con = db.Connect();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
 
+            while (rs.next()){
+                return Integer.parseInt(rs.getString(1));
+            }
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
     public int addReservation(Reservation reservation){
         String insertStatement = "CALL PRC_INS_RESERVATION(?,?,?)";
         int count = 0;

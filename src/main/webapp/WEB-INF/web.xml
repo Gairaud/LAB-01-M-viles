@@ -107,6 +107,8 @@
         <servlet-name>TicketServlet</servlet-name>
         <url-pattern>/get-tickets</url-pattern>
         <url-pattern>/add-ticket</url-pattern>
+        <url-pattern>/get-tickets-flight</url-pattern>
+        <url-pattern>/add-tickets</url-pattern>
     </servlet-mapping>
 
     <!-- Reservation Servlet -->

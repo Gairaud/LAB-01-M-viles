@@ -49,7 +49,7 @@ public class TicketDao {
     }
 
     public int addTicket(Ticket ticket){
-        String insertStatement = "CALL PRC_INS_TICKET(?,?,?)";
+        String insertStatement = "CALL PRC_INS_TICKET(?,?,?,?)";
         int count = 0;
         try{
             con = db.Connect();
@@ -57,6 +57,7 @@ public class TicketDao {
             ps.setString(1, String.valueOf(ticket.getRow()));
             ps.setString(2, String.valueOf(ticket.getCol()));
             ps.setString(3, String.valueOf(ticket.getReservation().getId()));
+            ps.setString(4, String.valueOf(ticket.getFlight().getId()));
             count = ps.executeUpdate();
             if(count == 0){
                 throw new Exception("El ticket ya existe");
@@ -67,5 +68,29 @@ public class TicketDao {
 
         }
         return count;
+    }
+
+    public List flightTickets(String f_id){
+        List<Ticket> list = new ArrayList<>();
+        String sql = "select * from ticket where flight = \'"+f_id+"\'";
+        try{
+            con = db.Connect();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                Ticket t = new Ticket();
+                //Routes r = new Routes();
+                t.setId(Integer.parseInt(rs.getString(1)));
+                t.setRow(Integer.parseInt(rs.getString(2)));
+                t.setCol(Integer.parseInt(rs.getString(3)));
+                list.add(t);
+
+
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }
