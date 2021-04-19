@@ -216,7 +216,7 @@ show error
 
 create or replace procedure prc_ins_avion(Pid in varchar2, Pairplane_type in varchar2) is 
 begin
-  insert into airplanes (id, airplane_type)
+  insert into airplanes(id, airplane_type)
   values (Pid, Pairplane_type);
   commit;
   exception
@@ -348,10 +348,10 @@ end prc_upd_route;
 show error
 
 create or replace procedure prc_ins_ticket(Pfila in number, 
-                                            Pcol in number, Preservation in varchar2) is 
+                                            Pcol in number, Preservation in varchar2, Pflight in number) is 
 begin
-  insert into ticket (ticket_id, fila, col, reservation )
-  values (seq_id_ticket.nextval, Pfila, Pcol, Preservation);
+  insert into ticket (ticket_id, fila, col, reservation, flight)
+  values (seq_id_ticket.nextval, Pfila, Pcol, Preservation, Pflight);
   commit;
   exception
 --UK o PK

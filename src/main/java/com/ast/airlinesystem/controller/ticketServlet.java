@@ -4,10 +4,8 @@ import java.io.*;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.ast.airlinesystem.logic.Ticket;
-import com.ast.airlinesystem.logic.Model;
-import com.ast.airlinesystem.logic.Reservation;
-import com.ast.airlinesystem.logic.User;
+import com.ast.airlinesystem.logic.*;
+import com.google.gson.reflect.TypeToken;
 import jakarta.servlet.http.*;
 import com.google.gson.*;
 
@@ -56,7 +54,72 @@ public class ticketServlet extends HttpServlet{
                 }
                 break;
             }
-            
+
+            case "/add-tickets":{
+
+                try {
+                    Ticket ticket = new Ticket();
+                    try {
+                        BufferedReader reader = request.getReader();
+                        // convert JSON array to Java List
+                        List<Ticket> tickets = new Gson().fromJson(reader, new TypeToken<List<Ticket>>() {}.getType());
+                        int i = 0;
+                        Reservation res = new Reservation();
+
+                        User user = new User();
+                        user.setId(Integer.parseInt(request.getParameter("id")));
+
+                        res.setUser(user);
+                        res.setId(Integer.parseInt(request.getParameter("id")));
+                        res.setSeatQuantity(Integer.parseInt(request.getParameter("seats")));
+                        res.setTotalPrice(Float.parseFloat(request.getParameter("price")));
+
+                        Model.instance().addReservation(res);
+
+                        int res_id = Model.instance().getReservationId();
+
+                        res.setId(res_id);
+                        while (i < tickets.size()) {
+
+                            tickets.get(i).setReservation(res);
+                            Model.instance().addTicket(tickets.get(i));
+                            // Increase variable count by 1
+                            i++;
+                        }
+                        PrintWriter out = response.getWriter();
+                        out.print(tickets);
+                        out.flush();
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+
+                }
+                break;
+            }
+
+            case "/get-tickets-flight":{
+                try {
+
+
+
+                    BufferedReader reader = request.getReader();
+                    Flight f = gsonObject.fromJson(reader, Flight.class);
+                    List<Ticket> ticketsList = Model.instance().flightTickets(Integer.toString(f.getId()));
+                    String allTickets = gsonObject.toJson(ticketsList);
+                    PrintWriter out = response.getWriter();
+                    out.print(allTickets);
+                    out.flush();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    break;
+
+                }
+                break;
+            }
            
     }
 

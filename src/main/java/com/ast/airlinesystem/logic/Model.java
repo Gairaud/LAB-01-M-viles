@@ -152,7 +152,16 @@ public class Model {
     public List<Flight> getFlights() throws Exception {
         return flight.flightsList();
     }
+
+    public List<Ticket> flightTickets(String id) throws Exception {
+        return ticket.flightTickets(id);
+    }
+
     public void addFlight(Flight f) throws Exception {
         flight.addFlight(f);
+    }
+
+    public int getReservationId() throws Exception{
+        return reservation.getReservationId();
     }
 }
