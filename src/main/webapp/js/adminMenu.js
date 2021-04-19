@@ -5,32 +5,36 @@ function loaded(){
     $("#types").on("click", airplaneTypesTable);
     $("#airplanes").on("click", planesTable);
     $("#schedules").on("click", scheduleTable);
+    $("#logout").on("click", logout);
     $("#routes").on("click", RoutesTable);
     $("#typeAdd").on("click", ()=>{addType();});
     $("#planeAdd").on("click", ()=>{addPlane();});
+    $("#routeAdd").on("click", ()=>{addRoute();});
     loadTypes();
     loadPlanes();
     loadSchedules();
     loadRoutes();
     loadCities();
-    loadCountries();
+    //loadCountries();
     
 }
 
-
-async function loadCountries(){
+function logout(){
+    location.href="index.html";
+}
+async function loadCities(){
 
     let requestBody = {
         method: "POST",
         headers: {'Content-Type': 'application/json'}
     }
-    let response = await fetch ("http://localhost:9393/get-country", requestBody);
-    let countries = await response.json();
-    //countriesCombo(countries);
+    let response = await fetch ("http://localhost:9393/get-cities", requestBody);
+    let cities = await response.json();
+    citiesCombo(cities);
 
 }
 
-async function loadCities(){}
+//async function loadCities(){}
 async function loadTypes(){
 
     let requestBody = {
@@ -82,10 +86,19 @@ function typesCombo(types){
 
 }
 
+function citiesCombo(cities){
+    let list_1=$("#originSelect");
+    list_1.html("");
+    let list_2=$("#destinySelect");
+    list_2.html("");
+    cities.forEach((c)=>{ typeOption(list_1,c);});
+    cities.forEach((c)=>{ typeOption(list_2,c);});
+}
+
 function typeOption(list, t){
 
     var opt = $("<option></option>");
-    opt.attr('value', t.id).text(t.id);
+    opt.attr('value', t.id).text(t.name);
     list.append(opt);
 
     
@@ -121,7 +134,6 @@ async function addType(){
 
 async function addPlane(){
 
-    alert( $("#typesSelect").val());
     let type_response
     let type =  {
 
@@ -154,6 +166,58 @@ async function addPlane(){
     loadPlanes();
 
 
+
+}
+/*async function getCity(cityId){
+
+    let response;
+    let city = {
+        id : cityId
+    }
+    let requestBody = {
+        method: "POST",
+        body: JSON.stringify(city),
+        headers: {'Content-Type': 'application/json'}
+    }
+    response  = await fetch ("http://localhost:9393/get-city", requestBody); 
+    let finalCity = await response.json();
+    console.log(finalCity);
+    return finalCity;
+}*/
+async function addRoute(){
+
+    let destiny = {
+
+        id:$("#destinySelect").val(),
+        name : "",
+        country: null
+
+    }
+    let origin = {
+
+        id:$("#originSelect").val(),
+        name : "",
+        country: null
+
+    }
+
+    let route = {
+        id: $("#rId").val(),
+        duration: $("#rDuration").val(),
+        origin: origin,
+        destination: destiny,
+        airplane: null,
+        schedule: null
+    }
+    let requestBody = {
+        method: "POST",
+        body: JSON.stringify(route),
+        headers: {'Content-Type': 'application/json'}
+    }
+    await fetch("http://localhost:9393//add-route", requestBody);
+    
+
+    console.log(route);
 
 }
 function clearTypes(){
@@ -229,8 +293,8 @@ function routeRow(list, r){
     tr.html(
         "<td class='col-1'>"+r.id+"</td>"+
         "<td class='col-2'>"+r.duration+"</td>"+
-        "<td class='col-2'>"+r.origin.id+","+r.origin.country.id+"</td>"+
-        "<td class='col-2'>"+r.destination.id+","+r.destination.country.id+"</td>"+
+        "<td class='col-2'>"+r.origin.id+"</td>"+
+        "<td class='col-2'>"+r.destination.id+"</td>"+
         "<td class='col-2'>"+r.schedule.departureTime.substring(0,10)+"</td>"+
         "<td class='col-2'>"+r.schedule.arrivalTime.substring(0,10)+"</td>"+
         "<td class=\"col-1\" id='delete'><i style='cursor: pointer;' class='fas fa-trash-alt'></i></td>"

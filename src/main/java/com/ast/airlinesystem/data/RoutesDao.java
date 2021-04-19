@@ -41,7 +41,7 @@ public class RoutesDao {
         return list;
     }
     public int addRoute (Routes route) throws  Exception{
-        String insertStatement = "CALL PRC_INS_route(?,?,?,?,?,?)";
+        String insertStatement = "CALL PRC_INS_ROUTE(?,?,?,?,?,?)";
         int count = 0;
         try{
             con = db.Connect();
@@ -50,8 +50,8 @@ public class RoutesDao {
             ps.setString(2, route.getDuration());
             ps.setString(3, route.getOrigin().getId());
             ps.setString(4, route.getDestination().getId());
-            ps.setString(5, route.getAirplane().getId());
-            ps.setString(6, Integer.toString(route.getSchedule().getId()));
+            ps.setString(5, "Avion 1");
+            ps.setString(6, "1");
             count = ps.executeUpdate();
             if(count == 0){
                 throw new Exception("La ruta ya existe");
