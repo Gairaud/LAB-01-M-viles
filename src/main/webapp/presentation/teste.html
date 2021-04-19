@@ -13,10 +13,10 @@
 
 <div class="inputForm">
     <center>
-        Name *: <input type="text" id="Username" required>
-        Number of Seats *: <input type="number" id="Numseats" required>
+        Nombre *: <input type="text" id="Username" required>
+        Numero de Asientos *: <input type="number" id="Numseats" required>
         <br /><br />
-        <button onclick="takeData()">Start Selecting</button>
+        <button onclick="takeData()">Seleccione</button>
     </center>
 </div>
 
@@ -27,12 +27,12 @@
             <p id="notification"></p>
             <tr>
                 <td colspan="14">
-                    <div class="screen">SCREEN</div>
+                    <div class="screen">Avion</div>
                 </td>
                 <td rowspan="20">
-                    <div class="smallBox greenBox">Selected Seat</div> <br />
-                    <div class="smallBox redBox">Reserved Seat</div><br />
-                    <div class="smallBox emptyBox">Empty Seat</div><br />
+                    <div class="smallBox greenBox">Asiento Seleccionado</div> <br />
+                    <div class="smallBox redBox">Asiento Reservado</div><br />
+                    <div class="smallBox emptyBox">Asiento Vacio</div><br />
                 </td>
 
                 <br />
@@ -106,6 +106,8 @@
                 <td><input type="checkbox" class="seats" value="C12"></td>
             </tr>
 
+            <tr class="seatVGap"></tr>
+
             <tr>
                 <td>D</td>
                 <td><input type="checkbox" class="seats" value="D1"></td>
@@ -140,7 +142,7 @@
                 <td><input type="checkbox" class="seats" value="E12"></td>
             </tr>
 
-            <tr class="seatVGap"></tr>
+
 
             <tr>
                 <td>F</td>
@@ -161,7 +163,7 @@
 
         </table>
 
-        <br /><button onclick="addTickets()">Confirm Selection</button>
+        <br /><button onclick="addTickets()">Confirmar Seleccion</button>
     </center>
 </div>
 
@@ -171,9 +173,9 @@
     <center>
         <table class="Displaytable">
             <tr>
-                <th>Name</th>
-                <th>Number of Seats</th>
-                <th>Seats</th>
+                <th>Nombre</th>
+                <th>Numero de asientos</th>
+                <th>Asientos</th>
             </tr>
             <tr>
                 <td><textarea id="nameDisplay"></textarea></td>
@@ -201,16 +203,17 @@
         var asiento;
         asiento = getLetter(t.row)+t.col;
         $('.seats').filter(function(){return this.value==asiento}).prop("id", "taken");
+        $('.seats').filter(function(){return this.value==asiento}).prop("disabled", true);
     }
 
     function takeData() {
         if ($("#Username").val().length == 0 || $("#Numseats").val().length == 0) {
-            alert("Please Enter your Name and Number of Seats");
+            alert("Favor de ingresar su nombre y la cantidad de asientos.");
         } else {
             $(".inputForm *").prop("disabled", true);
             $(".seatStructure *").prop("disabled", false);
             document.getElementById("notification").innerHTML =
-                "<b style='margin-bottom:0px;background:yellow;'>Please Select your Seats NOW!</b>";
+                "<b style='margin-bottom:0px;background:yellow;'>Seleccione los asientos!</b>";
         }
     }
 
@@ -249,7 +252,7 @@
 
             return alltickets;
         } else {
-            alert("Please select " + $("#Numseats").val() + " seats");
+            alert("Favor de seleccionar " + $("#Numseats").val() + " asientos");
         }
     }
 
@@ -257,7 +260,7 @@
     async function getTickets(){
         let userId = sessionStorage.getItem("userId");
         let Flight = {
-            id : 1
+            id : sessionStorage.getItem("flightId")
         }
         let requestBody = {
             method: "POST",

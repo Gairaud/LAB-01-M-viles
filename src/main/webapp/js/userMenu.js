@@ -1,6 +1,7 @@
 function loaded(){
    isAdmin()
    loadMyTrips();
+   loadFlights();
    $("#showTrips").on("click", tripsTable);
    $("#showSearch").on("click", searchTripsTables);
    $("#searchTrips").hide();  
@@ -56,6 +57,47 @@ function searchTripsTables(){
     $("#trips").hide();    
     $("#searchTrips").show();
       
+}
+
+
+async function loadFlights(){
+
+    let requestBody = {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'}
+    }
+    let response = await fetch("http://localhost:9393/get-flights", requestBody);
+    let flights = await response.json()
+    console.log(flights);
+    listFlights(flights);
+    
+
+}
+
+function listFlights(flight){
+    let list=$("#fList");
+    list.html("");
+    flight.forEach((t)=>{ ticketRow(list,t);});
+}
+function flightRow(list, f){
+    let tr =$("<tr class='d-flex' />");
+    tr.html(
+        "<th scope=\"col\" class=\"col-1\">"+f.id+"</th>"+
+        "<th scope=\"col\" class=\"col-2\"></th>"+
+        "<th scope=\"col\" class=\"col-1\">"+f.route+"</th>"+
+        "<th scope=\"col\" class=\"col-2\"></th>"+
+        "<th scope=\"col\" class=\"col-1\">"+f.departureDate+"</th>"+
+        "<th scope=\"col\" class=\"col-2\"></th>"+
+        "<th scope=\"col\" class=\"col-1\">"+f.returnDate+"</th>"+
+        "<th scope=\"col\" class=\"col-2\"></th>"+
+        "<th scope=\"col\" class=\"col-1\">"+f.price+"</th>"+
+        "<th scope=\"col\" class=\"col-2\"></th>"+
+        "<th scope=\"col\" class=\"col-1\">"+f.price+"</th>"+
+        "<th scope=\"col\" class=\"col-2\"></th>"+
+        "<td class=\"col-1\" id='delete'><i style='cursor: pointer;' class='fas fa-plane-departure'></i></td>"
+        );
+        tr.find("#delete").on("click", () => { deletePlane(p); });
+    list.append(tr);
 }
 
 $(loaded);
