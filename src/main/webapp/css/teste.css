@@ -37,6 +37,18 @@ body
     content:"";
     background:Green;
 }
+.box {
+    position:absolute;
+    background:#ffffff;
+    top:100px;
+    bottom:10px;
+    width: 1200px;
+    height: 600px;
+    margin-left: 15%;
+    padding: 10px;
+}
+
+
 .redBox::before
 {
     content:"";
