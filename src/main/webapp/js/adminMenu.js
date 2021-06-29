@@ -67,22 +67,24 @@ function typeRow(list, t){
         "<td class='col-1'>"+t.rowsNumber+"</td>"+
         "<td class='col-1'>"+t.columnsNumber+"</td>"+
         "<td class='col-1'>"+t.passengersQuantity+"</td>"+
-        "<td class=\"col-1\" id='delete'><i style='cursor: pointer;' class='fas fa-trash-alt'></i></td>"
+        "<td class=\"col-1\" id='deleteType'><i style='cursor: pointer;' class='fas fa-trash-alt'></i></td>"
     );
-    tr.find("#delete").on("click", () => { deleteType(t); });
+    tr.find("#deleteType").on("click", () => { deleteType(t); });
     list.append(tr);
 
 
-}
-function deleteType(type){
-    console.log(type)
 }
 
 function typesCombo(types){
 
     let list=$("#typesSelect");
-    list.html("");
-    types.forEach((t)=>{ typeOption(list,t);});
+    
+    types.forEach((t)=>{ 
+        let option =$("<option />");
+        option.val(t.id);
+        option.html(t.id);
+        list.append(option);
+    });
 
 }
 
@@ -95,16 +97,6 @@ function citiesCombo(cities){
     cities.forEach((c)=>{ typeOption(list_2,c);});
 }
 
-function typeOption(list, t){
-
-    var opt = $("<option></option>");
-    opt.attr('value', t.id).text(t.name);
-    list.append(opt);
-
-    
-
-
-}
 async function addType(){
 
     
@@ -129,6 +121,19 @@ async function addType(){
   
     await fetch("http://localhost:9393/add-type", requestBody);
     clearTypes();
+    loadTypes();
+}
+
+async function deleteType(type){
+
+    
+    let requestBody = {
+        method: "POST",
+        body: JSON.stringify(type),
+        headers: {'Content-Type': 'application/json'}
+    }
+
+    await fetch("http://localhost:9393/delete-type", requestBody);
     loadTypes();
 }
 
@@ -256,17 +261,25 @@ function planeRow(list, p){
     tr.html(
         "<td class='col-6'>"+p.id+"</td>"+
         "<td class='col-5'>"+p.type.id+"</td>"+
-        "<td class=\"col-1\" id='delete'><i style='cursor: pointer;' class='fas fa-trash-alt'></i></td>"
+        "<td class=\"col-1\" id='deletePlane'><i style='cursor: pointer;' class='fas fa-trash-alt'></i></td>"
     );
-    tr.find("#delete").on("click", () => { deletePlane(p); });
+    tr.find("#deletePlane").on("click", () => { deletePlane(p); });
     list.append(tr);
 
 }
 
-function deletePlane(plane){
+async function deletePlane(p){
 
+    
+    let requestBody = {
+        method: "POST",
+        body: JSON.stringify(p),
+        headers: {'Content-Type': 'application/json'}
+    }
+
+    await fetch("http://localhost:9393/delete-planes", requestBody);
+    loadPlanes();
 }
-
 
 async function loadRoutes(){
 
@@ -291,13 +304,10 @@ function routeRow(list, r){
 
     let tr =$("<tr class='d-flex' />");
     tr.html(
-        "<td class='col-1'>"+r.id+"</td>"+
-        "<td class='col-2'>"+r.duration+"</td>"+
-        "<td class='col-2'>"+r.origin.id+"</td>"+
-        "<td class='col-2'>"+r.destination.id+"</td>"+
-        "<td class='col-2'>"+r.schedule.departureTime.substring(0,10)+"</td>"+
-        "<td class='col-2'>"+r.schedule.arrivalTime.substring(0,10)+"</td>"+
-        "<td class=\"col-1\" id='delete'><i style='cursor: pointer;' class='fas fa-trash-alt'></i></td>"
+        "<td class='col-4'>"+r.id+"</td>"+
+        "<td class='col-3'>"+r.origin.id+"</td>"+
+        "<td class='col-3'>"+r.destination.id+"</td>"+
+        "<td class=\"col-2\" id='deleteRoute'><i style='cursor: pointer;' class='fas fa-trash-alt'></i></td>"
     );
     tr.find("#delete").on("click", () => { deleteRoute(r); });
     list.append(tr);

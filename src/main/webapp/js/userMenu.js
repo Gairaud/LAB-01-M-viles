@@ -38,8 +38,8 @@ function ticketRow(list, t){
         "<td class='col-3'>"+t.flight.departureDate.substring(0,10)+"</td>"+
         "<td class='col-3'>"+t.flight.returnDate.substring(0,10)+"</td>"+
         "<td class='col-1'>"+t.flight.price+"</td>"+
-        "<td class='col-1'>"+t.row+"</td>"+
-        "<td class='col-1'>"+t.row+"</td>"
+        "<td class=\"col-1\" id='details'><i style='cursor: pointer;' class='fas fa-info'></i></td>"+
+        "<td class=\"col-1\" id='delete'><i style='cursor: pointer;' class='fas fa-trash-alt'></i></td>"
     );
     list.append(tr);
 }

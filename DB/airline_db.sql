@@ -56,8 +56,7 @@ create table schedules (id number not null,
                         departure_time date, arrival_time date) tablespace system;
 
 
-create table routes (r_id varchar2(20), duration varchar2(25), origin varchar2(5), destination varchar2(5),
-                     airplane varchar2(20), schedule number ) tablespace system;
+create table routes (r_id varchar2(100),  origin varchar2(45), destination varchar2(45)) tablespace system;
 
 create table ticket(ticket_id number not null, fila number, col number, reservation number, flight number) tablespace system;
 
@@ -88,12 +87,12 @@ alter table reservation add constraint reservation_pk primary key(res_id) using 
 alter table flights add constraint flights_pk primary key(f_id) using index tablespace system;
 
 --==================== FKs =====================
-alter table airplanes add constraint type_fk foreign key (airplane_type) references airplane_types;  
+alter table airplanes add constraint type_fk foreign key (airplane_type) references airplane_types on delete cascade;  
 alter table cities add constraint country_fk foreign key (country) references countries;
 alter table routes add constraint origin_fk foreign key (origin) references cities;
 alter table routes add constraint destination_fk foreign key (destination) references cities;
-alter table routes add constraint airplane_fk foreign key (airplane) references airplanes;
-alter table routes add constraint schedule_fk foreign key (schedule) references schedules;
+--alter table routes add constraint airplane_fk foreign key (airplane) references airplanes;
+--alter table routes add constraint schedule_fk foreign key (schedule) references schedules;
 alter table ticket add constraint reservation_fk foreign key (reservation) references reservation;
 alter table ticket add constraint fligth_fk foreign key (flight) references flights;
 alter table flights add constraint route_fk foreign key (ruta) references routes;
@@ -125,7 +124,7 @@ insert into cities values ('ATL', 'ATLANTA', 'USA');
 
 insert into schedules values (seq_id_schedules.nextval, TO_DATE('2021/12/19', 'yyyy/mm/dd'), 
                                 TO_DATE('2021/12/25', 'yyyy/mm/dd'));
-insert into routes values ('SJO-ATL', '12 HORAS', 'SJO', 'ATL', 'Avion 1', 1);
+insert into routes values ('SJO-ATL', 'SJO', 'ATL');
 
 insert into reservation values(seq_id_reservation.nextval, 123456789, 1000, 3);
 insert into reservation values(seq_id_reservation.nextval, 117290193, 1000, 3);
@@ -303,49 +302,49 @@ end prc_ins_schedule;
 /
 show error
 
-create or replace procedure prc_upd_schedule(Pid in number,
-                                            Pdeparture_time in date, Parrival_time in date) is
-begin
-update schedules
-   set
-    departure_time = Pdeparture_time, 
-    arrival_time = Parrival_time
+--create or replace procedure prc_upd_schedule(Pid in number,
+--                                            Pdeparture_time in date, Parrival_time in date) is
+--begin
+--update schedules
+--   set
+--    departure_time = Pdeparture_time, 
+--    arrival_time = Parrival_time
 
- where 
- id = Pid;
-end prc_upd_schedule;
-/
-show error
+-- where 
+-- id = Pid;
+--end prc_upd_schedule;
+--/
+--show error
 
-create or replace procedure prc_ins_route(Pid in varchar2, Pduration in date, Porigin in varchar2, 
-                                Pdestination in varchar2, Pairplane in varchar2, Pschedule in number ) is 
-begin
-  insert into routes (r_id, duration, origin, destination, airplane, schedule)
-  values (Pid, Pduration, Porigin, Pdestination, Pairplane, Pschedule);
-  commit;
-  exception
+--create or replace procedure prc_ins_route(Pid in varchar2, Pduration in date, Porigin in varchar2, 
+            --                    Pdestination in varchar2, Pairplane in varchar2, Pschedule in number ) is 
+--begin
+  --insert into routes (r_id, duration, origin, destination, airplane, schedule)
+  --values (Pid, Pduration, Porigin, Pdestination, Pairplane, Pschedule);
+  --commit;
+  --exception
 --UK o PK
-    when dup_val_on_index then
-    null;
-end prc_ins_route;
-/
-show error
+    --when dup_val_on_index then
+    --null;
+--end prc_ins_route;
+--/
+--show error
 
-create or replace procedure prc_upd_route(Pid in varchar2, Pduration in date, Porigin in varchar2, 
-                                Pdestination in varchar2, Pairplane in varchar2, Pschedule in number) is
-begin
-update routes
-   set 
-    duration = Pduration,
-    origin = Porigin,
-    destination = Pdestination,
-    airplane = Pairplane,
-    schedule = Pschedule
- where 
- r_id = Pid;
-end prc_upd_route;
-/
-show error
+--create or replace procedure prc_upd_route(Pid in varchar2, Pduration in date, Porigin in varchar2, 
+  --                              Pdestination in varchar2, Pairplane in varchar2, Pschedule in number) is
+--begin
+--update routes
+  -- set 
+    --duration = Pduration,
+    --origin = Porigin,
+    --destination = Pdestination,
+   -- airplane = Pairplane,
+    --schedule = Pschedule
+ --where 
+ --r_id = Pid;
+--end prc_upd_route;
+--/
+--show error*/
 
 create or replace procedure prc_ins_ticket(Pfila in number, 
                                             Pcol in number, Preservation in varchar2, Pflight in number) is 

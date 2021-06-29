@@ -67,6 +67,25 @@ public class AirplaneTypeDao {
         return count;
     }
 
+    public int deleteType (AirplaneType type) throws  Exception{
+        String insertStatement = "delete from airplane_types where at_id = ?";
+        int count = 0;
+        try{
+            con = db.Connect();
+            ps = con.prepareStatement(insertStatement);
+            ps.setString(1, type.getId());
+            count = ps.executeUpdate();
+            if(count == 0){
+                throw new Exception("El tipo no existe");
+            }
+
+        }
+        catch (Exception e){
+
+        }
+        return count;
+    }
+
     public static AirplaneType toType(ResultSet rs) throws Exception{
         try{
             AirplaneType at = new AirplaneType();

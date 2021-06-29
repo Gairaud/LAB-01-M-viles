@@ -27,11 +27,8 @@ public class RoutesDao {
             while (rs.next()){
                 Routes at = new Routes();
                 at.setId(rs.getString(1));
-                at.setDuration(rs.getString(2));
-                at.setOrigin(Model.instance().getCity(rs.getString(3)));
-                at.setDestination(Model.instance().getCity(rs.getString(4)));
-                //at.setAirplane();
-                at.setSchedule(Model.instance().getSchedule(rs.getString(6)));
+                at.setOrigin(Model.instance().getCity(rs.getString(2)));
+                at.setDestination(Model.instance().getCity(rs.getString(3)));
                 list.add(at);
             }
         }
@@ -41,17 +38,14 @@ public class RoutesDao {
         return list;
     }
     public int addRoute (Routes route) throws  Exception{
-        String insertStatement = "CALL PRC_INS_ROUTE(?,?,?,?,?,?)";
+        String insertStatement = "CALL PRC_INS_ROUTE(?,?,?)";
         int count = 0;
         try{
             con = db.Connect();
             ps = con.prepareStatement(insertStatement);
             ps.setString(1, route.getId());
-            ps.setString(2, route.getDuration());
-            ps.setString(3, route.getOrigin().getId());
-            ps.setString(4, route.getDestination().getId());
-            ps.setString(5, "Avion 1");
-            ps.setString(6, "1");
+            ps.setString(2, route.getOrigin().getId());
+            ps.setString(3, route.getDestination().getId());
             count = ps.executeUpdate();
             if(count == 0){
                 throw new Exception("La ruta ya existe");
@@ -74,11 +68,8 @@ public class RoutesDao {
             while (rs.next()){
                 try{
                     route.setId(rs.getString(1));
-                    route.setDuration(rs.getString(2));
-                    route.setOrigin(Model.instance().getCity(rs.getString(3)));
-                    route.setDestination(Model.instance().getCity(rs.getString(4)));
-                    //route.setAirplane();
-                    route.setSchedule(Model.instance().getSchedule(rs.getString(6)));
+                    route.setOrigin(Model.instance().getCity(rs.getString(2)));
+                    route.setDestination(Model.instance().getCity(rs.getString(3)));
                 }catch (Exception e){}
 
             }

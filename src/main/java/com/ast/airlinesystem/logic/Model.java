@@ -60,6 +60,9 @@ public class Model {
     public void addAirplane(Airplane a) throws Exception{
         airplane.addAirplane(a);
     }
+    public void deleteAirplane(Airplane a) throws Exception{
+        airplane.deleteAirplane(a);
+    }
 
     // Country
     public  List<Country> getCountries() throws Exception{
@@ -146,6 +149,9 @@ public class Model {
     }
     public void addType(AirplaneType t) throws Exception{
         type.addType(t);
+    }
+    public void deleteType(AirplaneType t) throws Exception{
+        type.deleteType(t);
     }
     //Flight
 

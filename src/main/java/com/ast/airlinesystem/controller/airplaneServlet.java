@@ -49,6 +49,18 @@ public class airplaneServlet  extends HttpServlet {
                 break;
             }
 
+            case "/delete-planes":{
+                BufferedReader reader = request.getReader();
+                Airplane plane = gsonObject.fromJson(reader, Airplane.class);
+
+                try {
+                    Model.instance().deleteAirplane(plane);
+                    break;
+                }catch (Exception e){
+
+                }
+                break;
+            }
         }
 
 

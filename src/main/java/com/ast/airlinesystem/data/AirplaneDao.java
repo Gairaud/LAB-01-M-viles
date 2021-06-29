@@ -57,4 +57,21 @@ public class AirplaneDao {
         }
         return count;
     }
+
+    public int deleteAirplane(Airplane airplane) throws Exception{
+        String deleteStatement = "delete from airplanes where id = ?";
+        int count = 0;
+        try{
+            con = db.Connect();
+            ps = con.prepareStatement(deleteStatement);
+            ps.setString(1, airplane.getId());
+            count = ps.executeUpdate();
+            if(count == 0){
+                throw new Exception("El tipo no existe");
+            }
+        }catch (Exception e){
+
+        }
+        return count;
+    }
 }

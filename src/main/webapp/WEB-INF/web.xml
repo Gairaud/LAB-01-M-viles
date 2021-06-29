@@ -28,6 +28,7 @@
         <servlet-name>AirplaneServlet</servlet-name>
         <url-pattern>/get-planes</url-pattern>
         <url-pattern>/add-planes</url-pattern>
+        <url-pattern>/delete-planes</url-pattern>
     </servlet-mapping>
                 <!-- ........ -->
             <!-- Airplanetype Servlet -->
@@ -40,6 +41,7 @@
         <url-pattern>/get-types</url-pattern>
         <url-pattern>/get-type</url-pattern>
         <url-pattern>/add-type</url-pattern>
+        <url-pattern>/delete-type</url-pattern>
     </servlet-mapping>
             <!-- Country Servlet -->
     <servlet>

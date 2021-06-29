@@ -70,6 +70,21 @@ public class airplaneTypeServlet extends HttpServlet {
                 break;
             }
 
+            case "/delete-type":{
+
+                BufferedReader reader = request.getReader();
+                AirplaneType type = gsonObject.fromJson(reader, AirplaneType.class);
+
+                try {
+                    Model.instance().deleteType(type);
+                    break;
+                }catch (Exception e){
+
+                }
+                break;
+            }
+
+
 
         }
     }
