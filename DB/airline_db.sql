@@ -316,35 +316,29 @@ show error
 --/
 --show error
 
---create or replace procedure prc_ins_route(Pid in varchar2, Pduration in date, Porigin in varchar2, 
-            --                    Pdestination in varchar2, Pairplane in varchar2, Pschedule in number ) is 
---begin
-  --insert into routes (r_id, duration, origin, destination, airplane, schedule)
-  --values (Pid, Pduration, Porigin, Pdestination, Pairplane, Pschedule);
-  --commit;
-  --exception
---UK o PK
-    --when dup_val_on_index then
-    --null;
---end prc_ins_route;
---/
---show error
+create or replace procedure prc_ins_route(Pid in varchar2, Porigin in varchar2, Pdestination in varchar2) is 
+begin
+  insert into routes (r_id, origin, destination)
+  values (Pid, Porigin, Pdestination);
+  commit;
+  exception
+    when dup_val_on_index then
+    null;
+end prc_ins_route;
+/
+show error
 
---create or replace procedure prc_upd_route(Pid in varchar2, Pduration in date, Porigin in varchar2, 
-  --                              Pdestination in varchar2, Pairplane in varchar2, Pschedule in number) is
---begin
---update routes
-  -- set 
-    --duration = Pduration,
-    --origin = Porigin,
-    --destination = Pdestination,
-   -- airplane = Pairplane,
-    --schedule = Pschedule
- --where 
- --r_id = Pid;
---end prc_upd_route;
---/
---show error*/
+create or replace procedure prc_upd_route(Pid in varchar2, Porigin in varchar2, Pdestination in varchar2) is
+begin
+update routes
+  set 
+    origin = Porigin,
+    destination = Pdestination
+ where 
+ r_id = Pid;
+end prc_upd_route;
+/
+show error
 
 create or replace procedure prc_ins_ticket(Pfila in number, 
                                             Pcol in number, Preservation in varchar2, Pflight in number) is 
