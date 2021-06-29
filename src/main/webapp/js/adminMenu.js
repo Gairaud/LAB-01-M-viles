@@ -89,12 +89,12 @@ function typesCombo(types){
 }
 
 function citiesCombo(cities){
-    let list_1=$("#originSelect");
+    /*let list_1=$("#originSelect");
     list_1.html("");
     let list_2=$("#destinySelect");
     list_2.html("");
     cities.forEach((c)=>{ typeOption(list_1,c);});
-    cities.forEach((c)=>{ typeOption(list_2,c);});
+    cities.forEach((c)=>{ typeOption(list_2,c);});*/
 }
 
 async function addType(){
