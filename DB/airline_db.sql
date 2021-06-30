@@ -430,10 +430,10 @@ end prc_upd_reservation;
 show error
 
 create or replace procedure PRC_INS_FLIGHTS( Pruta in varchar2, Pdeparture_date in date,
-Preturn_date in date, Pprice in number, Pavailable_seats in number) is 
+Preturn_date in date, Pprice in number, Pavailable_seats in number, Pairplane in varchar2) is 
 begin
-  insert into flights (f_id, ruta, departure_date, return_date, price, available_seats)
-  values (seq_id_flights.nextval, Pruta, Pdeparture_date, Preturn_date, Pprice, Pavailable_seats);
+  insert into flights (f_id, ruta, departure_date, return_date, price, available_seats, airplane)
+  values (seq_id_flights.nextval, Pruta, Pdeparture_date, Preturn_date, Pprice, Pavailable_seats, Pairplane);
 
   commit;
   exception
