@@ -2,13 +2,17 @@ package com.ast.airlinesystem.logic;
 
 public class Flight {
 
-    public Flight(int id, Routes route, String departureDate, String returnDate, float price, int availableSeats) {
+
+
+    public Flight(int id, Routes route, String departureDate, String returnDate, float price, int availableSeats
+    , Airplane plane) {
         this.id = id;
         this.route = route;
         this.departureDate = departureDate;
         this.returnDate = returnDate;
         this.price = price;
         this.availableSeats = availableSeats;
+        this.plane = plane;
     }
     public Flight() {
     }
@@ -67,6 +71,16 @@ public class Flight {
     private String returnDate;
     private float price;
     private int availableSeats;
+
+    public Airplane getPlane() {
+        return plane;
+    }
+
+    public void setPlane(Airplane plane) {
+        this.plane = plane;
+    }
+
+    private Airplane  plane;
 
     
 

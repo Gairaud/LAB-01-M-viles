@@ -40,6 +40,29 @@ public class AirplaneDao {
         return list;
     }
 
+    public Airplane getAirplaneById(String id)  {
+        Airplane plane  = new Airplane();
+
+        String getStatement = "SELECT * from airplanes a, airplane_types x where a.id =\'"+id+"\'" +
+                "and a.airplane_type = x.at_id";
+        try{
+            con = db.Connect();
+            ps = con.prepareStatement(getStatement);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                try{
+                    plane.setId(rs.getString(1));
+                    plane.setType(toType(rs));
+                }catch (Exception e){}
+
+            }
+        } catch (SQLException ex) {
+
+        }
+
+        return plane;
+    }
+
     public int addAirplane(Airplane airplane) throws Exception{
         String insertStatement = "CALL PRC_INS_AVION (?,?)";
         int count = 0;

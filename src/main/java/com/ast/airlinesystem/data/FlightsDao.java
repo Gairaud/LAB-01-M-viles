@@ -32,6 +32,7 @@ public class FlightsDao {
                 f.setReturnDate(rs.getString(4));
                 f.setprice(Float.parseFloat(rs.getString(5)));
                 f.setAvailableSeats(Integer.parseInt(rs.getString(6)));
+                f.setPlane(Model.instance().getAirplaneById(rs.getString(7)));
                 list.add(f);
             }
         }

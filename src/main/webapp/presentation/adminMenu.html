@@ -29,7 +29,7 @@
             <li>
                 <a href="#" id="airplanes">Aviones</a>
                 <a href="#" id="routes">Rutas</a>
-                <a href="#" id="schedules">Horarios</a>
+                <a href="#" id="schedules">Vuelos</a>
                 <a href="#" id="logout">Logout</a>
             </li>
         </ul>
@@ -75,7 +75,7 @@
                                 <input class="form-control" type="text" id="typeColumns" placeholder="C">
                             </th>
                             <th scope="col" class="col-1">
-                                <input class="form-control" type="text" id="typeQ" placeholder="N.p">
+                                <input class="form-control" type="text" id="typeQ" placeholder="Num">
                             </th>
                             <th scope="col" class="col-1">
                                 <button type="button" class="btn btn-success" id  = "typeAdd">Agregar</button>
@@ -142,33 +142,29 @@
             </div>
 
             <div class = "box" id="schedulesTables">
-                <div class="title container-fluid">Horarios</div>
+                <div class="title container-fluid">Vuelos</div>
                 <div class="table-responsive " style="max-height: 600px; overflow: auto">
                 <table class="table tableHeader" id="contentTable">
                     <thead>
             
                         <tr class="tableTitle d-flex">
-                            <th scope="col" class="col-3">ID</th>
-                            <th scope="col" class="col-4">Fecha Salida</th>
-                            <th scope="col" class="col-4">Fecha Llegada</th>
-                            <th scope="col" class="col-1"></th>
+                            <th scope="col" class="col-3">Ruta</th>
+                            <th scope="col" class="col-3">Avion</th>
+                            <th scope="col" class="col-2">Fecha Salida</th>
+                            <th scope="col" class="col-2">Fecha Llegada</th>
+                            <th scope="col" class="col-2">Precio</th>
                         </tr>
                         <tr class="d-flex">
-                            <th scope="col" class="col-3">
-                                <input class="form-control" type="text" id="codeSearch">
-                            </th>
-                            <th scope="col" class="col-4">
-                                <input class="form-control" type="text" id="codeSearch">
-                            </th>
-                            <th scope="col" class="col-4">
-                                <input class="form-control" type="text" id="codeSearch">
-                            </th>
-               
+                            <th scope="col" class="col-3"></th>
+                            <th scope="col" class="col-3"></th>
+                            <th scope="col" class="col-2"></th>
+                            <th scope="col" class="col-2"></th>
+  
                      
                      
                           
-                            <th scope="col" class="col-1">
-                                <button type="button" class="btn btn-success">Agregar</button>
+                            <th scope="col" class="col-2">
+                                <button type="button" class="btn btn-success" id = "addBtn">Agregar Vuelo</button>
                             </th>
                             
                         </tr>
@@ -178,7 +174,7 @@
                 <!-- Table Content -->
                 <div class="tableContent">
                     <table class="table table-hover table-bordered">
-                        <tbody class="tableBody" id="scheduleList">
+                        <tbody class="tableBody" id="flightsList">
             
                         </tbody>
                     </table>
@@ -244,6 +240,37 @@
             </div>
 
         </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="addModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Creacion de Vuelos</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <label for="routesSelect">Seleccione una ruta:</label><br>
+                    <select id="routesSelect" class="custom-select">
+                    </select>
+                    <label for="planesSelect">Seleccione un Avion:</label><br>
+                    <select id="planesSelect" class="custom-select">
+                    </select>
+                    <label for="departureDSelect">Fecha de salida:</label><br>
+                    <input type="date" id="departureDSelect"><br>
+                    <label for="returnDSelect">Fecha de regreso:</label><br>
+                    <input type="date" id="returnDSelect"><br>
+                    <label for="fPrice">Precio:</label><br>
+                    <input class="form-control" type="text" id="fPrice" placeholder="Digite un precio">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success" id ="saveFlight">Guardar vuelo</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
 
 </div>
 </body>

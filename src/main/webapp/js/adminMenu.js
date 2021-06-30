@@ -7,12 +7,14 @@ function loaded(){
     $("#schedules").on("click", scheduleTable);
     $("#logout").on("click", logout);
     $("#routes").on("click", RoutesTable);
+    $("#addBtn").on("click", showModal);
     $("#typeAdd").on("click", ()=>{addType();});
     $("#planeAdd").on("click", ()=>{addPlane();});
     $("#routeAdd").on("click", ()=>{addRoute();});
+    $("#saveFlight").on("click", ()=>{addFlight();});
     loadTypes();
     loadPlanes();
-    loadSchedules();
+    loadFlights();
     loadRoutes();
     loadCities();
     //loadCountries();
@@ -191,38 +193,54 @@ async function addPlane(){
 }*/
 async function addRoute(){
 
-    let destiny = {
-
-        id:$("#destinySelect").val(),
-        name : "",
-        country: null
-
-    }
-    let origin = {
-
-        id:$("#originSelect").val(),
-        name : "",
-        country: null
-
-    }
+    let destiny = $("#destinySelect").val();
+    let origin = $("#originSelect").val();
+  
 
     let route = {
-        id: $("#rId").val(),
-        duration: $("#rDuration").val(),
+        id: $("#routeName").val(),
         origin: origin,
         destination: destiny,
-        airplane: null,
-        schedule: null
     }
     let requestBody = {
         method: "POST",
         body: JSON.stringify(route),
         headers: {'Content-Type': 'application/json'}
     }
-    await fetch("http://localhost:9393//add-route", requestBody);
+    await fetch("http://localhost:9393/add-route", requestBody);
     
-
+    loadRoutes();
     console.log(route);
+
+}
+async function addFlight(){
+
+    
+    let route = {
+        id : $("#routesSelect").val()
+    }
+    let plane = {
+        id : $("#planesSelect").val()
+    }
+    
+  
+
+    let flight = {
+        route: route,
+        departureDate: $("#departureDSelect").val(),
+        returnDate: $("#returnDSelect").val(),
+        price: $("#fPrice").val(),
+        availableSeats: 200
+    }
+    let requestBody = {
+        method: "POST",
+        body: JSON.stringify(flight),
+        headers: {'Content-Type': 'application/json'}
+    }
+    await fetch("http://localhost:9393/add-flight", requestBody);
+    
+    loadRoutes();
+    console.log(flight);
 
 }
 function clearTypes(){
@@ -246,6 +264,7 @@ async function loadPlanes(){
     let planes = await response.json();
     console.log(planes);
     listPlanes(planes);
+    comboPlanes(planes);
 }
 
 function listPlanes(planes){
@@ -291,6 +310,33 @@ async function loadRoutes(){
     let route = await response.json();
     console.log(route);
     listRoutes(route);
+    comboRoutes(route)
+}
+
+function comboRoutes(route){
+
+    let list=$("#routesSelect");
+    
+    route.forEach((t)=>{ 
+        let option =$("<option />");
+        option.val(t.id);
+        option.html(t.id);
+        list.append(option);
+    });
+
+}
+
+function comboPlanes(plane){
+
+    let list=$("#planesSelect");
+    
+    plane.forEach((t)=>{ 
+        let option =$("<option />");
+        option.val(t.id);
+        option.html(t.id);
+        list.append(option);
+    });
+
 }
 
 function listRoutes(route){
@@ -305,8 +351,8 @@ function routeRow(list, r){
     let tr =$("<tr class='d-flex' />");
     tr.html(
         "<td class='col-4'>"+r.id+"</td>"+
-        "<td class='col-3'>"+r.origin.id+"</td>"+
-        "<td class='col-3'>"+r.destination.id+"</td>"+
+        "<td class='col-3'>"+r.origin+"</td>"+
+        "<td class='col-3'>"+r.destination+"</td>"+
         "<td class=\"col-2\" id='deleteRoute'><i style='cursor: pointer;' class='fas fa-trash-alt'></i></td>"
     );
     tr.find("#delete").on("click", () => { deleteRoute(r); });
@@ -319,39 +365,44 @@ function deleteRoute(route){
 }
 
 
-async function loadSchedules(){
+async function loadFlights(){
 
     let requestBody = {
         method: "POST",
         headers: {'Content-Type': 'application/json'}
     }
-    let response = await fetch ("http://localhost:9393/get-schedules", requestBody);
-    let schedule = await response.json();
-    console.log(schedule);
-    listSchedules(schedule);
+    let response = await fetch ("http://localhost:9393/get-flights", requestBody);
+    let flights = await response.json();
+    console.log(flights);
+    listFlights(flights);
 }
 
-function listSchedules(schedule){
+function listFlights(flights){
 
-    let list=$("#scheduleList");
+    let list=$("#flightsList");
     list.html("");
-    schedule.forEach((s)=>{ scheduleRow(list,s);});
+    flights.forEach((f)=>{ flightRow(list,f);});
 }
 
-function scheduleRow(list, s){
+function flightRow(list, f){
 
     let tr =$("<tr class='d-flex' />");
     tr.html(
-        "<td class='col-3'>"+s.id+"</td>"+
-        "<td class='col-4'>"+s.departureTime.substring(0,10)+"</td>"+
-        "<td class='col-4'>"+s.arrivalTime.substring(0,10)+"</td>"+
-        "<td class=\"col-1\" id='delete'><i style='cursor: pointer;' class='fas fa-trash-alt'></i></td>"
+        "<td class='col-3'>"+f.route.id+"</td>"+
+        "<td class='col-3'>"+f.plane.id+"</td>"+
+        "<td class='col-2'>"+f.departureDate+"</td>"+
+        "<td class='col-2'>"+f.returnDate+"</td>"+
+        "<td class='col-2'>"+"$"+f.price+"</td>"
+        
     );
     tr.find("#delete").on("click", () => { deleteSchedule(s); });
     list.append(tr);
 
 }
 
+function showModal(){
+    $("#addModal").modal('show');
+}
 function deleteSchedule(schedule){
 
 }

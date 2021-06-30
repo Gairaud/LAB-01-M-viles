@@ -69,16 +69,12 @@ public class routesServlet extends HttpServlet{
                 }
                 break;
             }
-            case "/upd-route":{
+            /*case "/upd-route":{
                 try {
                     Routes route = new Routes();
-                    City origin = new City();
-                    City destiny = new City();
-                    Airplane airplane= new Airplane();
-                    Schedule schedule=new Schedule();
+
 
                     route.setId(request.getParameter("id"));
-                    route.setDuration(request.getParameter("duration"));
                     origin.setId(request.getParameter("Oriid"));
                     destiny.setId(request.getParameter("Desid"));
                     airplane.setId(request.getParameter("Airid"));
@@ -92,7 +88,7 @@ public class routesServlet extends HttpServlet{
                 }catch (Exception e){
                     e.printStackTrace();
                 }
-            }
+            }*/
         }
     }
 }

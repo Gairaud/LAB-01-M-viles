@@ -57,6 +57,9 @@ public class Model {
     public List<Airplane> getAirplanes() throws Exception{
         return airplane.getAirplanesList();
     }
+    public Airplane getAirplaneById(String id) throws Exception {
+        return airplane.getAirplaneById(id);
+    }
     public void addAirplane(Airplane a) throws Exception{
         airplane.addAirplane(a);
     }

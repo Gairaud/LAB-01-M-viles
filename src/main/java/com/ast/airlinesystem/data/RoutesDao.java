@@ -27,8 +27,8 @@ public class RoutesDao {
             while (rs.next()){
                 Routes at = new Routes();
                 at.setId(rs.getString(1));
-                at.setOrigin(Model.instance().getCity(rs.getString(2)));
-                at.setDestination(Model.instance().getCity(rs.getString(3)));
+                at.setOrigin(rs.getString(2));
+                at.setDestination(rs.getString(3));
                 list.add(at);
             }
         }
@@ -44,8 +44,8 @@ public class RoutesDao {
             con = db.Connect();
             ps = con.prepareStatement(insertStatement);
             ps.setString(1, route.getId());
-            ps.setString(2, route.getOrigin().getId());
-            ps.setString(3, route.getDestination().getId());
+            ps.setString(2, route.getOrigin());
+            ps.setString(3, route.getDestination());
             count = ps.executeUpdate();
             if(count == 0){
                 throw new Exception("La ruta ya existe");
@@ -68,8 +68,8 @@ public class RoutesDao {
             while (rs.next()){
                 try{
                     route.setId(rs.getString(1));
-                    route.setOrigin(Model.instance().getCity(rs.getString(2)));
-                    route.setDestination(Model.instance().getCity(rs.getString(3)));
+                    route.setOrigin(rs.getString(2));
+                    route.setDestination(rs.getString(3));
                 }catch (Exception e){}
 
             }
@@ -81,16 +81,13 @@ public class RoutesDao {
 
     public void updateRoute(Routes route){
 
-        String updateStatement = "CALL prc_upd_route(?,?,?,?,?,?)";
+        String updateStatement = "CALL prc_upd_route(?,?,?)";
         try{
             con = db.Connect();
             ps = con.prepareStatement(updateStatement);
             ps.setString(1,route.getId());
-            ps.setString(2,route.getDuration() );
-            ps.setString(3,route.getOrigin().getId() );
-            ps.setString(4,route.getDestination().getId() );
-            ps.setString(5,route.getAirplane().getId() );
-            ps.setString(6, Integer.toString(route.getSchedule().getId()) );
+            ps.setString(2,route.getOrigin());
+            ps.setString(3,route.getDestination());
             ps.executeUpdate(updateStatement);
 
         }
