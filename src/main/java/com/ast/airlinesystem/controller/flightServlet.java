@@ -4,6 +4,7 @@ import java.io.*;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.ast.airlinesystem.logic.AirplaneType;
 import com.ast.airlinesystem.logic.Flight;
 import com.ast.airlinesystem.logic.Model;
 import com.ast.airlinesystem.logic.Routes;
@@ -39,13 +40,17 @@ public class flightServlet  extends HttpServlet {
         case "/add-flight":{
             try{
                 Flight f = new Flight();
-                f.setId(Integer.parseInt(request.getParameter("id")));
-                f.setRoute(Model.instance().getRoute(request.getParameter("route")));
+                BufferedReader reader = request.getReader();
+                Flight type = gsonObject.fromJson(reader, Flight.class);
+
+/*              f.setRoute(Model.instance().getRoute(request.getParameter("route")));
                 f.setDepartureDate(request.getParameter("departureDate"));
                 f.setReturnDate(request.getParameter("returnDate"));
                 f.setprice(Float.parseFloat(request.getParameter("price")));              
-                f.setAvailableSeats(Integer.parseInt(request.getParameter("seats")));              
-                Model.instance().addFlight(f);
+                f.setAvailableSeats(Integer.parseInt(request.getParameter("seats")));
+                f.setPlane(Model.instance().getAirplaneById(request.getParameter("airplane")));*/
+
+                Model.instance().addFlight(type);
             }catch (Exception e){
                 e.printStackTrace();
             }

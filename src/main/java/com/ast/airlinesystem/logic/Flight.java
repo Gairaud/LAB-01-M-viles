@@ -4,8 +4,8 @@ public class Flight {
 
 
 
-    public Flight(int id, Routes route, String departureDate, String returnDate, float price, int availableSeats
-    , Airplane plane) {
+    public Flight(int id, Routes route, String departureDate, String returnDate, int price, int availableSeats
+            , Airplane plane) {
         this.id = id;
         this.route = route;
         this.departureDate = departureDate;
@@ -14,6 +14,18 @@ public class Flight {
         this.availableSeats = availableSeats;
         this.plane = plane;
     }
+
+    public Flight(Routes route, String departureDate, String returnDate, int price, int availableSeats
+            , Airplane plane) {
+        this.id = 0;
+        this.route = route;
+        this.departureDate = departureDate;
+        this.returnDate = returnDate;
+        this.price = price;
+        this.availableSeats = availableSeats;
+        this.plane = plane;
+    }
+
     public Flight() {
     }
 
@@ -49,11 +61,11 @@ public class Flight {
         this.returnDate = returnDate;
     }
 
-    public float getprice() {
+    public int getprice() {
         return price;
     }
 
-    public void setprice(float price) {
+    public void setprice(int price) {
         this.price = price;
     }
 
@@ -69,8 +81,9 @@ public class Flight {
     private Routes route; 
     private String departureDate;
     private String returnDate;
-    private float price;
+    private int price;
     private int availableSeats;
+    private Airplane  plane;
 
     public Airplane getPlane() {
         return plane;
@@ -80,7 +93,7 @@ public class Flight {
         this.plane = plane;
     }
 
-    private Airplane  plane;
+
 
     
 

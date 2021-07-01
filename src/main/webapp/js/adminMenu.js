@@ -230,7 +230,8 @@ async function addFlight(){
         departureDate: $("#departureDSelect").val(),
         returnDate: $("#returnDSelect").val(),
         price: $("#fPrice").val(),
-        availableSeats: 200
+        availableSeats: 200,
+        plane: plane
     }
     let requestBody = {
         method: "POST",

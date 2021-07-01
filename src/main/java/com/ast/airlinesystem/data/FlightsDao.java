@@ -30,7 +30,7 @@ public class FlightsDao {
                 f.setRoute(Model.instance().getRoute(rs.getString(2)));
                 f.setDepartureDate(rs.getString(3));
                 f.setReturnDate(rs.getString(4));
-                f.setprice(Float.parseFloat(rs.getString(5)));
+                f.setprice(Integer.parseInt(rs.getString(5)));
                 f.setAvailableSeats(Integer.parseInt(rs.getString(6)));
                 f.setPlane(Model.instance().getAirplaneById(rs.getString(7)));
                 list.add(f);
@@ -43,7 +43,7 @@ public class FlightsDao {
     }
 
     public int addFlight (Flight flight) throws Exception{
-        String insertStatement = "CALL PRC_INS_FLIGHTS(?,?,?,?,?)";
+        String insertStatement = "CALL PRC_INS_FLIGHTS(?,?,?,?,?,?)";
         int count = 0;
         try{
             con = db.Connect();
@@ -51,8 +51,9 @@ public class FlightsDao {
             ps.setString(1, flight.getRoute().getId());
             ps.setString(2, flight.getDepartureDate());
             ps.setString(3, flight.getReturnDate());
-            ps.setString(4, Float.toString(flight.getprice()));
+            ps.setString(4, Integer.toString(flight.getprice()));
             ps.setString(5, Integer.toString(flight.getAvailableSeats()));
+            ps.setString(6, flight.getPlane().getId());
             count = ps.executeUpdate();
             if(count == 0){
                 throw new Exception("El vuelo ya existe");
@@ -74,7 +75,7 @@ public class FlightsDao {
                 f.setRoute(Model.instance().getRoute(rs.getString("ruta")));
                 f.setDepartureDate(rs.getString("departure_date"));
                 f.setReturnDate(rs.getString("return_date"));
-                f.setprice(Float.parseFloat(rs.getString("price")));
+                f.setprice(Integer.parseInt(rs.getString("price")));
                 f.setAvailableSeats(Integer.parseInt(rs.getString("available_seats")));
      
                 return f;
