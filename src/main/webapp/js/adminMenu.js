@@ -1,3 +1,4 @@
+
 function loaded(){
     $("#planes").hide();
     $("#schedulesTables").hide();
@@ -12,11 +13,12 @@ function loaded(){
     $("#planeAdd").on("click", ()=>{addPlane();});
     $("#routeAdd").on("click", ()=>{addRoute();});
     $("#saveFlight").on("click", ()=>{addFlight();});
-    loadTypes();
-    loadPlanes();
-    loadFlights();
-    loadRoutes();
-    loadCities();
+    //loadTypes();
+    
+    //loadPlanes();
+    //loadFlights();
+    //loadRoutes();
+    //loadCities();
     //loadCountries();
     
 }
@@ -51,7 +53,7 @@ async function loadTypes(){
 }
 
 function listTypes(types){
-
+    console.log(types);
     let list=$("#typeList");
     list.html("");
     types.forEach((t)=>{ typeRow(list,t);});
@@ -438,4 +440,6 @@ function RoutesTable(){
     $("#routesTable").show();
       
 }
+export {listTypes, typesCombo, listPlanes,comboPlanes, listRoutes,comboRoutes,
+        listFlights} ;
 $(loaded);
