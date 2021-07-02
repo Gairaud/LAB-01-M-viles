@@ -5,8 +5,8 @@
     <link rel="stylesheet" href="../css/adminStyle.css">
     <link rel="stylesheet" href="../css/tablesStyle.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../js/userMenu.js"></script>
-
+    <script type = "module" src="../js/userMenu.js"></script>  
+    <script type = "module" src="../js/reservationsSocket.js"></script>  
     <link href="https://fonts.googleapis.com/css2?family=Muli:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -36,20 +36,19 @@
   <div class="d-flex justify-content-center">
   <!-- Types table  -->
             <div class = "box" id="trips">
-                <div class="title container-fluid">Mis Tickets</div>
+                <div class="title container-fluid">Mis Reservaciones</div>
                 <div class="table-responsive " style="max-height: 600px; overflow: auto">
                 <table class="table tableHeader" id="contentTable">
                     <thead>
            
                         <tr class="tableTitle d-flex">
                             <th scope="col" class="col-1">N.Reserva</th>
-                            <th scope="col" class="col-2">Ruta</th>
-                            <th scope="col" class="col-3">Fecha de salida</th>
-                            <th scope="col" class="col-3">Fecha de llegada</th>
+                            <th scope="col" class="col-3">Ruta</th>
+                            <th scope="col" class="col-2">Fecha de salida</th>
+                            <th scope="col" class="col-2">Fecha de llegada</th>
+                            <th scope="col" class="col-2">N.Tickets</th>
                             <th scope="col" class="col-1">Precio</th>
                             <th scope="col" class="col-1">Detalles</th>
-                            <th scope="col" class="col-1">Eliminar</th>
-                      
                         </tr>
                     </thead>
                 </table>

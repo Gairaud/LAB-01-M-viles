@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.ast.airlinesystem.data.ReservationDao.toReservation;
-import static com.ast.airlinesystem.data.FlightsDao.toFlight;;;
+import static com.ast.airlinesystem.data.FlightsDao.toFlight;
 
 public class TicketDao {
 

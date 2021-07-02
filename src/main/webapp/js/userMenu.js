@@ -1,7 +1,11 @@
+
+let userId;
 function loaded(){
    isAdmin()
-   loadMyTrips();
+   //loadMyTrips();
    loadFlights();
+   userId = sessionStorage.getItem("userId");
+   console.log(userId);
    $("#showTrips").on("click", tripsTable);
    $("#showSearch").on("click", searchTripsTables);
    $("#searchTrips").hide();  
@@ -20,26 +24,27 @@ async function loadMyTrips(){
     let response = await fetch("http://localhost:9393/get-tickets", requestBody);
     let tickets = await response.json()
     console.log(tickets);
-    listTickets(tickets);
+    //listTickets(tickets);
     
 
 }
 
-function listTickets(tickets){
+function listReservations(reservations){
     let list=$("#tList");
     list.html("");
-    tickets.forEach((t)=>{ ticketRow(list,t);});
+    reservations.forEach((t)=>{ if(t.user.id.toString() === userId){reservationRow(list,t);}});
 }
-function ticketRow(list, t){
+function reservationRow(list, t){
     let tr =$("<tr class='d-flex' />");
     tr.html(
-        "<td class='col-1'>"+t.reservation.id+"</td>"+
-        "<td class='col-2'>"+t.flight.route.id+"</td>"+
-        "<td class='col-3'>"+t.flight.departureDate.substring(0,10)+"</td>"+
-        "<td class='col-3'>"+t.flight.returnDate.substring(0,10)+"</td>"+
+        "<td class='col-1'>"+t.id+"</td>"+
+        "<td class='col-3'>"+t.flight.route.id+"</td>"+
+        "<td class='col-2'>"+t.flight.departureDate+"</td>"+
+        "<td class='col-2'>"+t.flight.returnDate+"</td>"+
+        "<td class='col-2'>"+t.seatQuantity+"</td>"+
         "<td class='col-1'>"+t.flight.price+"</td>"+
-        "<td class=\"col-1\" id='details'><i style='cursor: pointer;' class='fas fa-info'></i></td>"+
-        "<td class=\"col-1\" id='delete'><i style='cursor: pointer;' class='fas fa-trash-alt'></i></td>"
+        "<td class=\"col-1\" id='details'><i style='cursor: pointer;' class='fas fa-info'></i></td>"
+        
     );
     list.append(tr);
 }
@@ -102,5 +107,7 @@ function buyticket(flight){
     sessionStorage.setItem("flightId", flight.id);
     location.href="teste.html";
 }
+
+export {listReservations};
 
 $(loaded);

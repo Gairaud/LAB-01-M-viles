@@ -60,7 +60,7 @@ create table routes (r_id varchar2(100),  origin varchar2(45), destination varch
 
 create table ticket(ticket_id number not null, fila number, col number, reservation number, flight number) tablespace system;
 
-create table reservation(res_id number not null, userid number, totalPrice number, seatQuantity number) tablespace system; 
+create table reservation(res_id number not null, userid number, totalPrice number, seatQuantity number, flight_id number not null) tablespace system; 
 
 create table flights(f_id number not null, ruta varchar2(100), departure_date varchar2(50), 
                       return_date varchar2(50), price number, available_seats number, airplane varchar2(20));
@@ -96,6 +96,7 @@ alter table flights add constraint airplane_fk foreign key (airplane) references
 alter table ticket add constraint reservation_fk foreign key (reservation) references reservation;
 alter table ticket add constraint fligth_fk foreign key (flight) references flights;
 alter table flights add constraint route_fk foreign key (ruta) references routes;
+alter table reservation add constraint f_fk foreign key (flight_id) references flights;
 
 --==================== Inserts =====================    
 
@@ -133,14 +134,6 @@ insert into airplanes values ('AVN-04', 'Boeing 737');
 insert into airplanes values ('AVN-05', 'Boeing 747');
 
 
---insert into countries values ('CR', 'Costa Rica');
---insert into cities values ('SJO', 'San Jose', 'CR');
-
---insert into countries values ('USA', 'Estados Unidos');
---insert into cities values ('ATL', 'ATLANTA', 'USA');
-
---insert into schedules values (seq_id_schedules.nextval, TO_DATE('2021/12/19', 'yyyy/mm/dd'), 
-                                ---TO_DATE('2021/12/25', 'yyyy/mm/dd'));
 insert into routes values ('Costa Rica-Alemania', 'Costa Rica', 'Alemania');
 insert into routes values ('Costa Rica-Rusia', 'Costa Rica', 'Rusia');
 insert into routes values ('Estados Unidos-China', 'Estados Unidos', 'China');
@@ -148,8 +141,7 @@ insert into routes values ('Estados Unidos-Japon', 'Estados Unidos', 'Japon');
 insert into routes values ('Estados Unidos-Grecia', 'Estados Unidos', 'Grecia');
 insert into routes values ('Costa Rica-China', 'Costa Rica', 'China');
 
-insert into reservation values(seq_id_reservation.nextval, 123456789, 1000, 3);
-insert into reservation values(seq_id_reservation.nextval, 117290193, 1000, 3);
+
 
 insert into flights values (seq_id_flights.nextval, 'Costa Rica-Alemania', '2021/11/19 20:00',
                             '2021/11/30 08:00', 1200, 200, 'AVN-01');
@@ -162,6 +154,8 @@ insert into flights values (seq_id_flights.nextval, 'Estados Unidos-Japon', '202
 insert into flights values (seq_id_flights.nextval, 'Estados Unidos-Grecia', '2021/07/15 20:00',
                             '2021/07/30 08:00', 1200, 200, 'AVN-05');
 
+insert into reservation values(seq_id_reservation.nextval, 123456789, 1000, 2, 1);
+insert into reservation values(seq_id_reservation.nextval, 117290193, 1000, 2, 1);
 --insert into flights values (seq_id_flights.nextval, 'SJO-ATL', TO_DATE('2021/12/19', 'yyyy/mm/dd'),
                             --TO_DATE('2021/12/19', 'yyyy/mm/dd'), 300,   120);
 

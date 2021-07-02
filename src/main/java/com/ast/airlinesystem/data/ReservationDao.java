@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.ast.airlinesystem.data.FlightsDao.toFlight;
+
 import static com.ast.airlinesystem.data.UserDao.toUser;
 
 public class ReservationDao {
@@ -32,6 +34,28 @@ public class ReservationDao {
                 r.setTotalPrice(Float.parseFloat(rs.getString(3)));
                 r.setSeatQuantity(Integer.parseInt(rs.getString(4)));
                 r.setUser(toUser(rs));
+                list.add(r);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    public List getReservations(){
+        List<Reservation> list = new ArrayList<>();
+        String sql = "select * from reservation r, users u, flights f where r.userid = u.user_id and r.flight_id = f.f_id";
+        try{
+            con = db.Connect();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                Reservation r = new Reservation();
+                r.setId(Integer.parseInt(rs.getString(1)));
+                r.setTotalPrice(Float.parseFloat(rs.getString(3)));
+                r.setSeatQuantity(Integer.parseInt(rs.getString(4)));
+                r.setUser(toUser(rs));
+                r.setFlight(toFlight(rs));
                 list.add(r);
             }
         }

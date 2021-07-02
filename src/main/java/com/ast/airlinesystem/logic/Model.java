@@ -127,6 +127,9 @@ public class Model {
     public List<Reservation> getReservationsByUser(String id){
         return reservation.getReservationsByUser(id);
     }
+    public List<Reservation> getReservations(){
+        return reservation.getReservations();
+    }
     public void addReservation(Reservation res) throws Exception{
         reservation.addReservation(res);
     }

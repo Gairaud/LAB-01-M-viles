@@ -7,6 +7,16 @@ public class Reservation {
     private float totalPrice;
     private int seatQuantity;
 
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
+
+    private Flight flight;
+
 
     public float getTotalPrice() {
         return totalPrice;
@@ -25,11 +35,12 @@ public class Reservation {
     }
 
    
-    public Reservation(int id, User user,float totalPrice , int seatQuantity) {
+    public Reservation(int id, User user,float totalPrice , int seatQuantity, Flight flight) {
         this.id = id;
         this.user = user;
         this.totalPrice = totalPrice;
         this.seatQuantity = seatQuantity;
+        this.flight = flight;
     }
     public Reservation(){}
 
