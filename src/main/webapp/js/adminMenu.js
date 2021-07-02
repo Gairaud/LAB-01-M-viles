@@ -125,7 +125,8 @@ async function addType(){
   
     await fetch("http://localhost:9393/add-type", requestBody);
     clearTypes();
-    loadTypes();
+    //loadTypes();
+    getFlights();
 }
 
 async function deleteType(type){
@@ -140,6 +141,8 @@ async function deleteType(type){
     await fetch("http://localhost:9393/delete-type", requestBody);
     loadTypes();
 }
+    
+
 
 async function addPlane(){
 
@@ -242,7 +245,7 @@ async function addFlight(){
     }
     await fetch("http://localhost:9393/add-flight", requestBody);
     
-    loadRoutes();
+    loadFlights();
     console.log(flight);
 
 }
@@ -363,7 +366,7 @@ function routeRow(list, r){
 
 }
 
-function deleteRoute(route){
+async function deleteRoute(route){
 
 }
 
@@ -391,24 +394,36 @@ function flightRow(list, f){
 
     let tr =$("<tr class='d-flex' />");
     tr.html(
-        "<td class='col-3'>"+f.route.id+"</td>"+
-        "<td class='col-3'>"+f.plane.id+"</td>"+
+        "<td class='col-2'>"+f.route.id+"</td>"+
+        "<td class='col-2'>"+f.plane.id+"</td>"+
         "<td class='col-2'>"+f.departureDate+"</td>"+
         "<td class='col-2'>"+f.returnDate+"</td>"+
-        "<td class='col-2'>"+"$"+f.price+"</td>"
+        "<td class='col-2'>"+"$"+f.price+"</td>"+
+        "<td class=\"col-1\" id='editF'><i style='cursor: pointer;' class='fas fa-edit'></i></td>"+
+        "<td class=\"col-1\" id='deleteF'><i style='cursor: pointer;' class='fas fa-trash-alt'></i></td>"
         
     );
-    tr.find("#delete").on("click", () => { deleteSchedule(s); });
+    tr.find("#deleteF").on("click", () => { deleteF(f); });
     list.append(tr);
 
 }
 
+async function deleteF(f){
+
+    let requestBody = {
+        method: "POST",
+        body: JSON.stringify(f),
+        headers: {'Content-Type': 'application/json'}
+    }
+
+    await fetch("http://localhost:9393/delete-flight", requestBody);
+    loadFlights();
+    
+}
 function showModal(){
     $("#addModal").modal('show');
 }
-function deleteSchedule(schedule){
 
-}
 
 
 function airplaneTypesTable(){

@@ -1,5 +1,5 @@
 import {listTypes, typesCombo} from "./adminMenu.js"
-
+export {getFlights}
 
 const typeSocket = new WebSocket("ws://localhost:9393/controllertypes");
 

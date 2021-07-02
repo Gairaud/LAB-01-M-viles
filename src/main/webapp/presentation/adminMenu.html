@@ -152,11 +152,13 @@
                     <thead>
             
                         <tr class="tableTitle d-flex">
-                            <th scope="col" class="col-3">Ruta</th>
-                            <th scope="col" class="col-3">Avion</th>
+                            <th scope="col" class="col-2">Ruta</th>
+                            <th scope="col" class="col-2">Avion</th>
                             <th scope="col" class="col-2">Fecha Salida</th>
                             <th scope="col" class="col-2">Fecha Llegada</th>
                             <th scope="col" class="col-2">Precio</th>
+                            <th scope="col" class="col-1">Editar</th>
+                            <th scope="col" class="col-1">Eliminar</th>
                         </tr>
                         <tr class="d-flex">
                             <th scope="col" class="col-3"></th>
@@ -269,7 +271,7 @@
                     <input class="form-control" type="text" id="fPrice" placeholder="Digite un precio">
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-success" id ="saveFlight">Guardar vuelo</button>
+                  <button type="button" class="btn btn-success" id ="saveFlight" data-dismiss="modal">Guardar vuelo</button>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 </div>
               </div>

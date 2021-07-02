@@ -13,6 +13,8 @@ flightsSocket.onmessage = function (event) {
     getMessageData(event)
 };
 
+
+
 function onOpen(event) {
     console.log(event);
     console.log("Abierto")
@@ -31,6 +33,7 @@ function getFlights(){
     }
     flightsSocket.send(JSON.stringify(action));
 }
+
 
 
 

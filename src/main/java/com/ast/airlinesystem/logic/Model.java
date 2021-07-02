@@ -172,7 +172,10 @@ public class Model {
     public void addFlight(Flight f) throws Exception {
         flight.addFlight(f);
     }
+    public void deleteF(Flight f) throws Exception {
+        flight.deleteF(f);
 
+    }
     public int getReservationId() throws Exception{
         return reservation.getReservationId();
     }

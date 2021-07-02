@@ -1,5 +1,6 @@
 package com.ast.airlinesystem.data;
 
+import com.ast.airlinesystem.logic.Airplane;
 import com.ast.airlinesystem.logic.Flight;
 import com.ast.airlinesystem.logic.Model;
 
@@ -83,6 +84,23 @@ public class FlightsDao {
         } catch (SQLException ex) {
                 return null;
         }
+    }
+
+    public int deleteF(Flight f) throws Exception{
+        String deleteStatement = "delete from flights where f_id = ?";
+        int count = 0;
+        try{
+            con = db.Connect();
+            ps = con.prepareStatement(deleteStatement);
+            ps.setString(1, String.valueOf(f.getId()));
+            count = ps.executeUpdate();
+            if(count == 0){
+                throw new Exception("El tipo no existe");
+            }
+        }catch (Exception e){
+
+        }
+        return count;
     }
 }
 

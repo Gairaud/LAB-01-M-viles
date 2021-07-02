@@ -36,6 +36,10 @@ public class flightsController {
                 String allF= gsonObject.toJson(flist);
                 session.getBasicRemote().sendText(allF);
                 break;
+            case "delete":
+                String id = json.get("id").getAsString();
+                //Model.instance().deleteF(id);
+                break;
             default:
                 System.out.println("Mapping Error");
         }
